@@ -4,10 +4,10 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-<!--        <item-->
-<!--            android:id="@+id/nav_home"-->
-<!--            android:icon="@drawable/ic_baseline_assistant_24"-->
-<!--            android:title="@string/menu_rides" />-->
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_baseline_assistant_24"
+            android:title="@string/menu_rides" />
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_baseline_collections_bookmark_24"

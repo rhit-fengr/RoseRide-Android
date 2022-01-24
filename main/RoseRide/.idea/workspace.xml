@@ -24,6 +24,15 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="resourceFile" />
+        <option value="Kotlin Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
@@ -36,6 +45,10 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android-custom-viewC:/Users/fengr/Documents/GitHub/RoseRide-Android/main/RoseRide/app/src/main/java/edu/rosehulman/roseride/MovableFloatingActionButton.kt_MovableFloatingActionButton_DIMENSIONS" value="1080&#10;1920" />
+    <property name="android-custom-viewC:/Users/fengr/Documents/GitHub/RoseRide-Android/main/RoseRide/app/src/main/java/edu/rosehulman/roseride/MovableFloatingActionButton.kt_SELECTED" value="MovableFloatingActionButton" />
+    <property name="android-custom-viewC:/Users/fengr/Documents/GitHub/RoseRide-Android/main/RoseRide/app/src/main/java/edu/rosehulman/roseride/a.kt_MovableFloatingActionButton_DIMENSIONS" value="1080&#10;1920" />
+    <property name="android-custom-viewC:/Users/fengr/Documents/GitHub/RoseRide-Android/main/RoseRide/app/src/main/java/edu/rosehulman/roseride/a.kt_SELECTED" value="MovableFloatingActionButton" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>

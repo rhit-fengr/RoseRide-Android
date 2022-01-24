@@ -19,4 +19,7 @@
     <string name="user_icon_description">user icon description</string>
     <string name="edit">edit</string>
     <string name="logout">logout</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_requests">Requests</string>
+    <string name="menu_rides">Rides</string>
 </resources>

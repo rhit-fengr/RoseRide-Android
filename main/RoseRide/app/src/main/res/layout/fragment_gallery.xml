@@ -13,15 +13,17 @@
         android:background="#FFcccccc"
         />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <edu.rosehulman.roseride.MovableFloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:src="@android:drawable/ic_input_add"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="48dp"
-        />
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="75dp"
+        android:src="@android:drawable/ic_input_add" />
+    <!--        android:layout_alignParentEnd="true"-->
+    <!--        android:layout_marginEnd="7dp"-->
+    <!--        android:layout_marginRight="4dp"-->
+
 
 </RelativeLayout>
