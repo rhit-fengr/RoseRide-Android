@@ -1,0 +1,91 @@
+package edu.rosehulman.roseride.ui
+
+import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
+import edu.rosehulman.roseride.R
+import edu.rosehulman.roseride.databinding.FragmentRequestEditBinding
+import edu.rosehulman.roseride.ui.model.RequestViewModel
+
+
+class RequestEditFragment : Fragment(){
+    private lateinit var model: RequestViewModel
+    private lateinit var binding: FragmentRequestEditBinding
+
+//    // This property is only valid between onCreateView and
+//    // onDestroyView.
+//    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        model =
+            ViewModelProvider(requireActivity()).get(RequestViewModel::class.java)
+
+        binding = FragmentRequestEditBinding.inflate(inflater, container, false)
+        setupButtons()
+        updateView()
+        return binding.root
+    }
+
+    private fun setupButtons() {
+        binding.requestEditSubmit
+            .setOnClickListener(){
+                var title = binding.requestName.text.toString()
+                val pAddr = binding.pickUpAddressAnswer.text.toString()
+                var dAddr = binding.destinationAddressAnswer.text.toString()
+                var date = binding.dateAnswer.text.toString()
+                var time = binding.timeAnswer.text.toString() // might consider to add a timepicker here instead
+                var minPrice = binding.minPrice.text.toString()
+                var maxPrice = binding.maxPrice.text.toString()
+
+                // TODO: Consturct fields to pass in updateCurrentRequest
+//                model.updateCurrentRequest()
+
+                updateView()
+                // navigate to detail screen
+
+                val picker =
+                    MaterialTimePicker.Builder()
+                        .setTimeFormat(TimeFormat.CLOCK_12H)
+                        .setHour(12)
+                        .setMinute(10)
+                        .setTitleText("Select Set-off time")
+                        .build()
+                picker.addOnPositiveButtonClickListener{
+                    val s = String.format("Time: %d:%2d", picker.hour, picker.minute)
+//                    Toast.makeText(requireContext(), s, Toast.LENGTH_LONG).show()
+                    Snackbar.make(requireView(), s, Snackbar.LENGTH_SHORT).setAction("continue"){
+                        findNavController().navigate(R.id.navigation_request_detail)
+                    }.setAnchorView(requireActivity().findViewById(R.id.nav_view))
+                        .show()
+                    // Consider: navigating away from fragment is troublesome.
+                }
+
+                picker.show(parentFragmentManager, "tag");
+            }
+
+    }
+
+    private fun updateView() {
+        Log.d("MQ","in detail update view")
+        binding.requestName.setText(model.getCurrentRequest().title)
+        binding.pickUpAddressAnswer.setText(model.getCurrentRequest().pickUpAddr.toString())
+        binding.destinationAddressAnswer.setText(model.getCurrentRequest().destinationAddr.toString())
+        binding.dateAnswer.setText(model.getCurrentRequest().setOffTime.toString())
+//        binding.timeAnswer.setText(model.getCurrentRequest().title)
+        binding.minPrice.setText(model.getCurrentRequest().minPrice.toString())
+        binding.maxPrice.setText(model.getCurrentRequest().maxPrice.toString())
+    }
+}

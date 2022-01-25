@@ -38,21 +38,21 @@
         />
 
     <TextView
-        android:id="@+id/profile_age"
+        android:id="@+id/profile_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/center_image"
-        android:text="19 years old"
+        android:text="812-223-7777"
         android:textSize="20sp"
         android:layout_centerHorizontal="true"
         />
 
     <TextView
-        android:id="@+id/profile_major"
+        android:id="@+id/profile_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/profile_age"
-        android:text="MA Major"
+        android:layout_below="@id/profile_phone"
+        android:text="fengr@rose-hulman.edu"
         android:textSize="20sp"
         android:layout_centerHorizontal="true"
         />
@@ -61,7 +61,7 @@
         android:id="@+id/edit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/profile_major"
+        android:layout_below="@id/profile_email"
         android:layout_alignParentRight="true"
         android:layout_marginRight="20dp"
         android:text="@string/edit" />
@@ -70,7 +70,7 @@
         android:id="@+id/logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/profile_major"
+        android:layout_below="@id/profile_email"
         android:layout_marginLeft="20dp"
         android:text="@string/logout" />
 

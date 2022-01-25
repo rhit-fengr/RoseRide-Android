@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:layout_margin="4dp">
+
+
+    <TextView
+        android:id="@+id/row_request_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="24sp"
+        android:text="Indiana State University" />
+
+    <RelativeLayout
+        android:id="@+id/row_request_leftText"
+        android:layout_width="337dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/row_request_title"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/row_request_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="Address: 200 N 7th St, Terre Haute, IN 47809"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/row_request_set_off_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/row_request_address"
+            android:layout_alignParentLeft="true"
+            android:text="Set-off Time: 14:00 AM, 02-17-2022"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/row_request_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/row_request_set_off_time"
+            android:layout_alignParentLeft="true"
+            android:text="Price($): 20 ~ 40"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/row_request_rightImage"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:contentDescription="@string/user_icon_description"
+        android:src="@drawable/ic_baseline_edit_24" />
+
+
+</RelativeLayout>

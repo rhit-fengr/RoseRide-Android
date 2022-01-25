@@ -9,12 +9,24 @@
 <!--            android:icon="@drawable/ic_baseline_assistant_24"-->
 <!--            android:title="@string/menu_rides" />-->
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_baseline_collections_bookmark_24"
-            android:title="@string/menu_requests" />
+            android:id="@+id/nav_switch_mode"
+            android:icon="@drawable/ic_baseline_switch_account_24"
+            android:title="@string/drawer_switch_mode" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_baseline_person_24"
-            android:title="@string/menu_profile" />
+            android:id="@+id/nav_appointments"
+            android:icon="@drawable/ic_baseline_edit_calendar_24"
+            android:title="@string/drawer_review_appointments" />
+        <item
+            android:id="@+id/nav_requests"
+            android:icon="@drawable/ic_baseline_bookmarks_24"
+            android:title="@string/drawer_review_requests" />
+        <item
+            android:id="@+id/nav_location"
+            android:icon="@drawable/ic_baseline_location_on_24"
+            android:title="@string/drawer_location" />
+        <item
+            android:id="@+id/nav_favorites"
+            android:icon="@drawable/ic_baseline_favorite_24"
+            android:title="@string/drawer_favorites" />
     </group>
 </menu>

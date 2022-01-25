@@ -3,23 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_slideshow">
+    app:startDestination="@+id/nav_profile">
 
     <fragment
-        android:id="@+id/nav_home"
+        android:id="@+id/nav_ride"
         android:name="edu.rosehulman.roseride.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_rides"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="edu.rosehulman.roseride.ui.gallery.GalleryFragment"
+        android:id="@+id/nav_request"
+        android:name="edu.rosehulman.roseride.ui.requestList.RequestListFragment"
         android:label="@string/menu_requests"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_request_list" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
+        android:id="@+id/nav_profile"
         android:name="edu.rosehulman.roseride.ui.user.UserFragment"
         android:label="@string/menu_profile"
         tools:layout="@layout/fragment_slideshow" />
+
+    //new
+    <fragment
+        android:id="@+id/navigation_request_edit"
+        android:name="edu.rosehulman.roseride.ui.RequestEditFragment"
+        android:label="@string/menu_requests"
+        tools:layout="@layout/fragment_request_edit" />
+
+    <fragment
+        android:id="@+id/navigation_request_detail"
+        android:name="edu.rosehulman.roseride.ui.RequestDetailFragment"
+        android:label="@string/menu_requests"
+        tools:layout="@layout/fragment_request_edit" />
+
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_ride_edit"-->
+<!--        android:name="edu.rosehulman.roseride.ui.RideEditFragment"-->
+<!--        android:label="@string/menu_rides"-->
+<!--        tools:layout="@layout/fragment_ride_edit" />-->
+
 </navigation>

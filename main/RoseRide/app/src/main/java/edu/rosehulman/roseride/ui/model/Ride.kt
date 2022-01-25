@@ -2,7 +2,7 @@ package edu.rosehulman.roseride.ui.model
 
 import java.sql.Time
 
-data class Ride(var title: String="", var driver: User, var addr: Address, var setOffTime: Time, var pickUpAddr: Address, var returnTime: Time, var passengers: List<User>, var numOfSlots: Int=1, var isSelected: Boolean = false) {
+data class Ride(var title: String="", var driver: User, var setOffTime: Time, var pickUpAddr: Address, var returnTime: Time, var addr: Address, var passengers: List<User>, var numOfSlots: Int=1, var isSelected: Boolean = false) {
 
 //    @get:Exclude
 //    var id = ""
@@ -11,7 +11,7 @@ data class Ride(var title: String="", var driver: User, var addr: Address, var s
 //    var created: Timestamp? = null
 
     override fun toString(): String {
-        return if (title.isNotBlank()) "'$title', driver: '$driver'" else ""
+        return if (title.isNotBlank()) "$title, driver: $driver" else ""
     }
 
 //    companion object {

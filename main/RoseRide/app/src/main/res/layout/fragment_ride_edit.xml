@@ -15,9 +15,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:text="Ride Name"
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:text="Request Name"/>
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/request_name"
@@ -29,7 +29,7 @@
 
     <TextView
         android:layout_below="@id/request_name"
-        android:id="@+id/request_address"
+        android:id="@+id/ride_request_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Address Information"
@@ -42,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="100"
-        android:layout_below="@+id/request_address"
+        android:layout_below="@+id/ride_request_title"
         android:layout_marginBottom="20dp">
         <RelativeLayout
             android:layout_margin="5dp"
@@ -132,7 +132,6 @@
                 android:layout_height="wrap_content"
                 android:text="Time(24hr)" />
             <EditText
-                android:id="@+id/time_answer"
                 android:layout_below="@id/time_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -162,11 +161,11 @@
         android:id="@+id/price_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pricing Information"
+        android:layout_below="@+id/double_date"
         android:layout_centerHorizontal="true"
-        android:textStyle="bold"
+        android:text="Riders Information"
         android:textSize="20sp"
-        android:layout_below="@+id/double_date"/>
+        android:textStyle="bold" />
 
     <LinearLayout
         android:id="@+id/double_price"
@@ -184,7 +183,7 @@
                 android:id="@+id/min_price_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="From ($)"/>
+                android:text="Cost/Person ($)"/>
 
             <EditText
                 android:id="@+id/min_price"
@@ -203,7 +202,7 @@
                 android:id="@+id/max_price_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="To ($)"/>
+                android:text="Max Number of Riders"/>
             <EditText
                 android:id="@+id/max_price"
                 android:layout_width="match_parent"
@@ -216,7 +215,6 @@
 
     <Button
         android:paddingHorizontal="50dp"
-        android:id="@+id/request_edit_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit"

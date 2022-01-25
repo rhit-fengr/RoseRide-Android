@@ -18,16 +18,21 @@
         <entry key="..\:/Users/fengr/AndroidStudioProjects/RoseRide/app/src/main/res/layout/row_quote.xml" value="0.1757852077001013" />
         <entry key="..\:/Users/fengr/Documents/GitHub/RoseRide-Android/RoseRide/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.20364583333333333" />
         <entry key="..\:/Users/fengr/Documents/GitHub/RoseRide-Android/main/RoseRide/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.225" />
+        <entry key="..\:/Users/fengr/Documents/GitHub/RoseRide-Android/main/RoseRide/app/src/main/res/layout/activity_main.xml" value="0.23697916666666666" />
         <entry key="..\:/Users/fengr/Documents/GitHub/RoseRide-Android/main/RoseRide/app/src/main/res/layout/app_bar_main.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/fengr/Documents/GitHub/RoseRide-Android/main/RoseRide/app/src/main/res/layout/content_main.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/fengr/Documents/GitHub/RoseRide-Android/main/RoseRide/app/src/main/res/layout/fragment_gallery.xml" value="0.20199275362318841" />
         <entry key="..\:/Users/fengr/Documents/GitHub/RoseRide-Android/main/RoseRide/app/src/main/res/layout/fragment_home.xml" value="0.20199275362318841" />
         <entry key="..\:/Users/fengr/Documents/GitHub/RoseRide-Android/main/RoseRide/app/src/main/res/layout/fragment_photo_detail.xml" value="0.20199275362318841" />
+        <entry key="..\:/Users/fengr/Documents/GitHub/RoseRide-Android/main/RoseRide/app/src/main/res/layout/fragment_request_detail.xml" value="0.23645833333333333" />
         <entry key="..\:/Users/fengr/Documents/GitHub/RoseRide-Android/main/RoseRide/app/src/main/res/layout/fragment_request_edit.xml" value="0.33" />
+        <entry key="..\:/Users/fengr/Documents/GitHub/RoseRide-Android/main/RoseRide/app/src/main/res/layout/fragment_request_list.xml" value="0.23645833333333333" />
+        <entry key="..\:/Users/fengr/Documents/GitHub/RoseRide-Android/main/RoseRide/app/src/main/res/layout/fragment_ride_edit.xml" value="0.5086050724637681" />
         <entry key="..\:/Users/fengr/Documents/GitHub/RoseRide-Android/main/RoseRide/app/src/main/res/layout/fragment_slideshow.xml" value="0.20199275362318841" />
         <entry key="..\:/Users/fengr/Documents/GitHub/RoseRide-Android/main/RoseRide/app/src/main/res/layout/fragment_user.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/fengr/Documents/GitHub/RoseRide-Android/main/RoseRide/app/src/main/res/layout/nav_header_main.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/fengr/Documents/GitHub/RoseRide-Android/main/RoseRide/app/src/main/res/layout/row_photo.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/fengr/Documents/GitHub/RoseRide-Android/main/RoseRide/app/src/main/res/layout/row_request.xml" value="0.36597938144329895" />
         <entry key="..\:/Users/fengr/Documents/GitHub/RoseRide-Android/main/RoseRide/app/src/main/res/menu/activity_bottom_navigation.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/fengr/Documents/GitHub/RoseRide-Android/main/RoseRide/app/src/main/res/menu/activity_main_drawer.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/fengr/Documents/GitHub/RoseRide-Android/main/RoseRide/app/src/main/res/menu/main.xml" value="0.17552083333333332" />
