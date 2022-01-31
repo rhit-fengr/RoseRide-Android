@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.timepicker.MaterialTimePicker
@@ -15,6 +16,8 @@ import com.google.android.material.timepicker.TimeFormat
 import edu.rosehulman.roseride.R
 import edu.rosehulman.roseride.databinding.FragmentRequestEditBinding
 import edu.rosehulman.roseride.ui.model.RequestViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class RequestEditFragment : Fragment(){
@@ -55,7 +58,9 @@ class RequestEditFragment : Fragment(){
 
                 updateView()
                 // navigate to detail screen
-
+            }
+        binding.timeButton
+            .setOnClickListener(){
                 val picker =
                     MaterialTimePicker.Builder()
                         .setTimeFormat(TimeFormat.CLOCK_12H)
@@ -64,15 +69,33 @@ class RequestEditFragment : Fragment(){
                         .setTitleText("Select Set-off time")
                         .build()
                 picker.addOnPositiveButtonClickListener{
-                    val s = String.format("Time: %d:%2d", picker.hour, picker.minute)
+                    val s = String.format(" %2d:%2d", picker.hour, picker.minute)
 //                    Toast.makeText(requireContext(), s, Toast.LENGTH_LONG).show()
                     Snackbar.make(requireView(), s, Snackbar.LENGTH_SHORT).setAction("continue"){
                         findNavController().navigate(R.id.navigation_request_detail)
                     }.setAnchorView(requireActivity().findViewById(R.id.nav_view))
                         .show()
-                    // Consider: navigating away from fragment is troublesome.
+                    binding.timeAnswer.text = s
                 }
+                picker.show(parentFragmentManager, "tag");
+            }
 
+        binding.dateButton
+            .setOnClickListener(){
+                val picker =
+                    MaterialDatePicker.Builder.datePicker()
+                        .setTitleText("Select Set-off date")
+                        .build()
+                picker.addOnPositiveButtonClickListener{
+                    val dateFormatter = SimpleDateFormat("dd-MM-yyyy")
+                    val s = dateFormatter.format(Date(it))
+//                    Toast.makeText(requireContext(), s, Toast.LENGTH_LONG).show()
+                    Snackbar.make(requireView(), s, Snackbar.LENGTH_SHORT).setAction("continue"){
+                        findNavController().navigate(R.id.navigation_request_detail)
+                    }.setAnchorView(requireActivity().findViewById(R.id.nav_view))
+                        .show()
+                    binding.dateAnswer.text = s
+                }
                 picker.show(parentFragmentManager, "tag");
             }
 

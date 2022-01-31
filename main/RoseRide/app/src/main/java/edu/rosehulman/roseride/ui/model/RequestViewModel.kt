@@ -2,6 +2,7 @@ package edu.rosehulman.roseride.ui.model
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import java.sql.Date
 import java.sql.Time
 import kotlin.random.Random
 
@@ -44,23 +45,41 @@ class RequestViewModel : ViewModel(){
 
     fun addRequest(request: Request?){
         val random = getRandom()
-        val newRequest = request ?: Request("Request$random",User("Steven","812-223-7777", "fengr@rose-hulman.edu"), Time(0),
-            Address("200 N 7th St","Terre Haute", "47809", "IN"), Time(0), 1, "JP BBQ",
-            Address("210 E Ohio St","Chicago", "60611", "IL"), false,-1.0,-1.0,false)
+        val newRequest = request ?: Request(
+            "Request$random",
+            User("Steven","812-223-7777", "fengr@rose-hulman.edu"),
+            Time(0),
+            Date(0),
+            Address("200 N 7th St","Terre Haute", "47809", "IN"),
+//            Time(0),
+            1,
+            Address("210 E Ohio St","Chicago", "60611", "IL"),
+            false,
+            -1.0,
+            -1.0,
+            false)
 //        ref.add(newQuote)
         requests.add(newRequest)
     }
 
-    fun updateCurrentRequest(title: String="", setOffTime: Time, pickUpAddr: Address,
-                             returnTime: Time, numOfPassengers: Int, destinationName: String="",
-                             destinationAddr: Address, sharable: Boolean = false, minPrice: Double,
-                             maxPrice: Double){
+    fun updateCurrentRequest(
+            title: String="",
+            setOffTime: Time,
+            setOffDate: Date,
+            pickUpAddr: Address,
+            returnTime: Time,
+            numOfPassengers: Int,
+            destinationAddr: Address,
+            sharable: Boolean = false,
+            minPrice: Double,
+            maxPrice: Double)
+        {
         requests[currentPos].title = title
         requests[currentPos].setOffTime = setOffTime
+        requests[currentPos].setOffDate = setOffDate
         requests[currentPos].pickUpAddr = pickUpAddr
-        requests[currentPos].returnTime = returnTime
+//        requests[currentPos].returnTime = returnTime
         requests[currentPos].numOfPassengers = numOfPassengers
-        requests[currentPos].destinationName = destinationName
         requests[currentPos].destinationAddr = destinationAddr
         requests[currentPos].sharable = sharable
         requests[currentPos].minPrice = minPrice

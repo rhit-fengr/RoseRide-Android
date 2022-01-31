@@ -44,6 +44,7 @@
         android:weightSum="100"
         android:layout_below="@+id/request_address"
         android:layout_marginBottom="20dp">
+
         <RelativeLayout
             android:layout_margin="5dp"
             android:layout_width="0dp"
@@ -112,12 +113,24 @@
                 android:layout_height="wrap_content"
                 android:text="@string/date_title" />
 
-            <EditText
+            <TextView
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
                 android:id="@+id/date_answer"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/date_title"
-                android:hint="00/00/00" />
+                android:hint="00-00-00" />
+
+            <ImageButton
+                android:id="@+id/date_button"
+                android:layout_width="24dp"
+                android:layout_height="26dp"
+                android:layout_below="@id/date_title"
+                android:layout_alignParentRight="true"
+                android:layout_marginVertical="8dp"
+                android:src="@drawable/ic_baseline_edit_calendar_24"/>
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -131,12 +144,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Time(24hr)" />
-            <EditText
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
                 android:id="@+id/time_answer"
-                android:layout_below="@id/time_title"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="00:00"/>
+                android:layout_below="@+id/time_title"
+                android:hint="00:00" />
+
+            <ImageButton
+                android:id="@+id/time_button"
+                android:layout_width="24dp"
+                android:layout_height="26dp"
+                android:layout_below="@id/time_title"
+                android:layout_alignParentRight="true"
+                android:layout_marginVertical="8dp"
+                android:src="@drawable/ic_baseline_access_time_24"/>
         </RelativeLayout>
 
         <!--        <RelativeLayout-->
