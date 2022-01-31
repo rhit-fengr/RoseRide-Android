@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import edu.rosehulman.roseride.R
 import edu.rosehulman.roseride.RequestAdapter
 import edu.rosehulman.roseride.databinding.FragmentRequestListBinding
 import edu.rosehulman.roseride.ui.model.Request
@@ -41,7 +43,7 @@ class RequestListFragment : Fragment() {
         binding.recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
 
         binding.fab.setOnClickListener{
-            adapter.addRequest(null)
+            findNavController().navigate(R.id.navigation_request_add)
         }
 
 

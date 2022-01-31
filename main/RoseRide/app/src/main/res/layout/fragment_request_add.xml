@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="20dp"
+    tools:context=".ui.RequestAddFragment">
+
+    <TextView
+        android:id="@+id/request_name_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="Request Name"/>
+
+    <EditText
+        android:id="@+id/request_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/request_name_title"
+        android:hint="Enter name"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:layout_below="@id/request_name"
+        android:id="@+id/request_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address Information"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"/>
+
+    <LinearLayout
+        android:id="@+id/double_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="100"
+        android:layout_below="@+id/request_address"
+        android:layout_marginBottom="20dp">
+
+        <RelativeLayout
+            android:layout_margin="5dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="50">
+            <TextView
+                android:id="@+id/pick_up_address_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pick Up Address"/>
+
+            <EditText
+                android:id="@+id/pick_up_address_answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pick_up_address_title"
+                android:hint="Enter address" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_margin="5dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="50">
+            <TextView
+                android:id="@+id/destination_address_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Destination Address"/>
+            <EditText
+                android:id="@+id/destination_address_answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/destination_address_title"
+                android:hint="Enter address"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/date_info_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date Information"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_below="@+id/double_address"/>
+
+    <LinearLayout
+        android:id="@+id/double_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="100"
+        android:layout_below="@+id/date_info_title"
+        android:layout_marginBottom="20dp">
+
+        <RelativeLayout
+            android:layout_margin="5dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="50">
+            <TextView
+                android:id="@+id/date_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/date_title" />
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
+                android:id="@+id/date_answer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/date_title"
+                android:hint="00-00-00" />
+
+            <ImageButton
+                android:id="@+id/date_button"
+                android:layout_width="24dp"
+                android:layout_height="26dp"
+                android:layout_below="@id/date_title"
+                android:layout_alignParentRight="true"
+                android:layout_marginVertical="8dp"
+                android:src="@drawable/ic_baseline_edit_calendar_24"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_margin="5dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="50">
+
+            <TextView
+                android:id="@+id/time_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time(24hr)" />
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
+                android:id="@+id/time_answer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/time_title"
+                android:hint="00:00" />
+
+            <ImageButton
+                android:id="@+id/time_button"
+                android:layout_width="24dp"
+                android:layout_height="26dp"
+                android:layout_below="@id/time_title"
+                android:layout_alignParentRight="true"
+                android:layout_marginVertical="8dp"
+                android:src="@drawable/ic_baseline_access_time_24"/>
+        </RelativeLayout>
+
+        <!--        <RelativeLayout-->
+        <!--            android:layout_margin="5dp"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_weight="25">-->
+        <!--            <TextView-->
+        <!--                android:id="@+id/zone_title"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="Zone"/>-->
+        <!--            <EditText-->
+        <!--                android:layout_below="@+id/zone_title"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:hint="CST"/>-->
+        <!--        </RelativeLayout>-->
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/price_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pricing Information"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_below="@+id/double_date"/>
+
+    <LinearLayout
+        android:id="@+id/double_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="100"
+        android:layout_below="@+id/price_title"
+        android:layout_marginBottom="20dp">
+        <RelativeLayout
+            android:layout_margin="5dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="50">
+            <TextView
+                android:id="@+id/min_price_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="From ($)"/>
+
+            <EditText
+                android:id="@+id/min_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/min_price_title"
+                android:hint="0" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_margin="5dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="50">
+            <TextView
+                android:id="@+id/max_price_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="To ($)"/>
+            <EditText
+                android:id="@+id/max_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/max_price_title"
+                android:hint="0"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:paddingHorizontal="50dp"
+        android:id="@+id/request_edit_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:layout_below="@id/double_price"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

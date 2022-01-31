@@ -25,6 +25,12 @@
 
     //new
     <fragment
+        android:id="@+id/navigation_request_add"
+        android:name="edu.rosehulman.roseride.ui.RequestAddFragment"
+        android:label="Add"
+        tools:layout="@layout/fragment_request_add" />
+
+    <fragment
         android:id="@+id/navigation_request_edit"
         android:name="edu.rosehulman.roseride.ui.RequestEditFragment"
         android:label="@string/menu_requests"

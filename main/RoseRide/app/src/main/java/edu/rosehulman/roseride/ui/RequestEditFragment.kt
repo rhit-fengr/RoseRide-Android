@@ -15,9 +15,12 @@ import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import edu.rosehulman.roseride.R
 import edu.rosehulman.roseride.databinding.FragmentRequestEditBinding
+import edu.rosehulman.roseride.ui.model.Address
 import edu.rosehulman.roseride.ui.model.RequestViewModel
 import java.text.SimpleDateFormat
-import java.util.*
+import java.sql.Time
+import java.sql.Date
+
 
 
 class RequestEditFragment : Fragment(){
@@ -53,8 +56,18 @@ class RequestEditFragment : Fragment(){
                 var minPrice = binding.minPrice.text.toString()
                 var maxPrice = binding.maxPrice.text.toString()
 
-                // TODO: Consturct fields to pass in updateCurrentRequest
-//                model.updateCurrentRequest()
+                // TODO: Construct fields to pass in updateCurrentRequest
+                model.updateCurrentRequest(
+                    title,
+                    Time.valueOf(time + ":00"),
+                    Date.valueOf(date),
+                    Address(pAddr),
+                    1,
+                    Address(dAddr),
+                    false,
+                    minPrice.toDouble(),
+                    maxPrice.toDouble()
+                )
 
                 updateView()
                 // navigate to detail screen
@@ -69,7 +82,7 @@ class RequestEditFragment : Fragment(){
                         .setTitleText("Select Set-off time")
                         .build()
                 picker.addOnPositiveButtonClickListener{
-                    val s = String.format(" %2d:%2d", picker.hour, picker.minute)
+                    val s = String.format("%2d:%2d", picker.hour, picker.minute)
 //                    Toast.makeText(requireContext(), s, Toast.LENGTH_LONG).show()
                     Snackbar.make(requireView(), s, Snackbar.LENGTH_SHORT).setAction("continue"){
                         findNavController().navigate(R.id.navigation_request_detail)
@@ -87,7 +100,7 @@ class RequestEditFragment : Fragment(){
                         .setTitleText("Select Set-off date")
                         .build()
                 picker.addOnPositiveButtonClickListener{
-                    val dateFormatter = SimpleDateFormat("dd-MM-yyyy")
+                    val dateFormatter = SimpleDateFormat("yyyy-MM-dd")
                     val s = dateFormatter.format(Date(it))
 //                    Toast.makeText(requireContext(), s, Toast.LENGTH_LONG).show()
                     Snackbar.make(requireView(), s, Snackbar.LENGTH_SHORT).setAction("continue"){
@@ -106,8 +119,8 @@ class RequestEditFragment : Fragment(){
         binding.requestName.setText(model.getCurrentRequest().title)
         binding.pickUpAddressAnswer.setText(model.getCurrentRequest().pickUpAddr.toString())
         binding.destinationAddressAnswer.setText(model.getCurrentRequest().destinationAddr.toString())
-        binding.dateAnswer.setText(model.getCurrentRequest().setOffTime.toString())
-//        binding.timeAnswer.setText(model.getCurrentRequest().title)
+        binding.dateAnswer.setText(model.getCurrentRequest().setOffDate.toString())
+        binding.timeAnswer.setText(model.getCurrentRequest().setOffTime.toString().substring(0,model.getCurrentRequest().setOffTime.toString().length-3))
         binding.minPrice.setText(model.getCurrentRequest().minPrice.toString())
         binding.maxPrice.setText(model.getCurrentRequest().maxPrice.toString())
     }

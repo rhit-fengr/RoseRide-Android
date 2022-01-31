@@ -67,7 +67,7 @@ class RequestAdapter(fragment: RequestListFragment) : RecyclerView.Adapter<Reque
         fun bind(r: Request) {
             title.text = r.title
             address.text = "Address: "+r.destinationAddr.toString()
-            time.text = "Set-off Time: "+ r.setOffDate.toString() + " " + r.setOffTime.toString()
+            time.text = "Set-off Time: "+ r.setOffDate.toString() + " " + r.setOffTime.toString().substring(0, r.setOffTime.toString().length-3)
             price.text = "Price($): "+r.minPrice+" ~ "+r.maxPrice
             Log.d("RR","isSelected: ${r.isSelected}")
 

@@ -67,7 +67,7 @@ class RequestViewModel : ViewModel(){
             setOffTime: Time,
             setOffDate: Date,
             pickUpAddr: Address,
-            returnTime: Time,
+//            returnTime: Time,
             numOfPassengers: Int,
             destinationAddr: Address,
             sharable: Boolean = false,
