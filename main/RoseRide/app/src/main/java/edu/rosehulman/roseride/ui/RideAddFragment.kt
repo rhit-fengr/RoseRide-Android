@@ -17,6 +17,7 @@ import edu.rosehulman.roseride.ui.model.*
 import java.sql.Date
 import java.sql.Time
 import java.text.SimpleDateFormat
+import java.util.*
 
 class RideAddFragment : Fragment() {
     private lateinit var model: RideViewModel
@@ -96,8 +97,8 @@ class RideAddFragment : Fragment() {
                         .setTitleText("Select Set-off date")
                         .build()
                 picker.addOnPositiveButtonClickListener {
-                    val dateFormatter = SimpleDateFormat("yyyy-MM-dd")
-                    val s = dateFormatter.format(Date(it))
+                    val dateFormatter = SimpleDateFormat("yyyy/MM/dd", Locale.US)
+                    val s = dateFormatter.format(Date(it+86400000))
                     binding.dateAnswer.text = s
                 }
                 picker.show(parentFragmentManager, "tag")

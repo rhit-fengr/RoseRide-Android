@@ -20,6 +20,7 @@ import edu.rosehulman.roseride.ui.model.User
 import java.sql.Date
 import java.sql.Time
 import java.text.SimpleDateFormat
+import java.util.*
 
 class RequestAddFragment : Fragment() {
     private lateinit var model: RequestViewModel
@@ -27,7 +28,7 @@ class RequestAddFragment : Fragment() {
     private var title = ""
     private var pAddr = "street, city, zip, state"
     private var dAddr = "street, city, zip, state"
-    private var date = "000-00-00"
+    private var date = "2022-02-01"
     private var time = "00:00"
     private var minPrice = "-1"
     private var maxPrice = "-1"
@@ -99,11 +100,11 @@ class RequestAddFragment : Fragment() {
                         .setTitleText("Select Set-off date")
                         .build()
                 picker.addOnPositiveButtonClickListener{
-                    val dateFormatter = SimpleDateFormat("yyyy-MM-dd")
-                    val s = dateFormatter.format(Date(it))
+                    val dateFormatter = SimpleDateFormat("yyyy/MM/dd", Locale.US)
+                    val s = dateFormatter.format(Date(it+86400000))
                     binding.dateAnswer.text = s
                 }
-                picker.show(parentFragmentManager, "tag");
+                picker.show(parentFragmentManager, "tag")
             }
 
     }

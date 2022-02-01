@@ -19,7 +19,7 @@ import edu.rosehulman.roseride.ui.model.RequestViewModel
 import java.text.SimpleDateFormat
 import java.sql.Time
 import java.sql.Date
-
+import java.util.*
 
 
 class RequestEditFragment : Fragment(){
@@ -99,8 +99,8 @@ class RequestEditFragment : Fragment(){
                         .setTitleText("Select Set-off date")
                         .build()
                 picker.addOnPositiveButtonClickListener{
-                    val dateFormatter = SimpleDateFormat("yyyy-MM-dd")
-                    val s = dateFormatter.format(Date(it))
+                    val dateFormatter = SimpleDateFormat("yyyy/MM/dd", Locale.US)
+                    val s = dateFormatter.format(Date(it+86400000))
 //                    Toast.makeText(requireContext(), s, Toast.LENGTH_LONG).show()
                     Snackbar.make(requireView(), s, Snackbar.LENGTH_SHORT).setAction("continue"){
                         findNavController().navigate(R.id.navigation_request_detail)

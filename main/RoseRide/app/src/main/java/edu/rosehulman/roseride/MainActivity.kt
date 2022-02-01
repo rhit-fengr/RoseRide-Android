@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+//    private lateinit var binding2: Activi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +48,9 @@ class MainActivity : AppCompatActivity() {
 
        val bottom_nav_view:BottomNavigationView = findViewById(R.id.bottom_nav_view)
         bottom_nav_view.setupWithNavController(navController)
+
+
+
 
 
     }
