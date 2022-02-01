@@ -18,7 +18,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\imabi\.android\avd\Pixel_5_API_29.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\fengr\.android\avd\Pixel_3a_API_30.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -29,8 +29,8 @@
       <list>
         <option value="resourceFile" />
         <option value="Class" />
-        <option value="layoutResourceFile" />
         <option value="Kotlin Class" />
+        <option value="layoutResourceFile" />
       </list>
     </option>
   </component>
@@ -62,6 +62,11 @@
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\fengr\Documents\GitHub\RoseRide-Android\main\RoseRide\app\src\main\res\layout" />
+    </key>
+    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="edu.rosehulman.roseride" />
+      <recent name="edu.rosehulman.roseride.ui" />
+      <recent name="edu.rosehulman.roseride.ui.request" />
     </key>
   </component>
   <component name="RunManager">

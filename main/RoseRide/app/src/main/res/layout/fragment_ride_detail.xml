@@ -6,23 +6,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".ui.request.RequestDetailFragment"
+    tools:context=".ui.RideDetailFragment"
     android:background="@color/light">
 
     <TextView
-        android:id="@+id/request_detail_title"
+        android:id="@+id/ride_detail_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:text="Request Name"/>
+        android:text="Ride Name"/>
 
     <TextView
-        android:id="@+id/request_detail_title_text"
+        android:id="@+id/ride_detail_title_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/request_detail_title"
+        android:layout_below="@id/ride_detail_title"
         android:hint="Enter name"
         android:layout_marginBottom="20dp"/>
 

@@ -1,4 +1,4 @@
-package edu.rosehulman.roseride.ui
+package edu.rosehulman.roseride.ui.request
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import edu.rosehulman.roseride.databinding.FragmentRequestDetailBinding
-import edu.rosehulman.roseride.ui.model.Request
 import edu.rosehulman.roseride.ui.model.RequestViewModel
 
 

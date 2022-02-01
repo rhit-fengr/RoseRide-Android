@@ -13,11 +13,17 @@
         android:textSize="24sp"
         android:text="Deming Park" />
 
+    <RelativeLayout
+        android:id="@+id/row_ride_leftText"
+        android:layout_width="337dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/row_ride_title"
+        android:layout_marginTop="10dp">
+
     <TextView
         android:id="@+id/row_ride_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/row_ride_title"
         android:layout_alignParentLeft="true"
         android:textSize="16sp"
         android:text="Address: 500 S Fruitridge Ave, Terre Haute, IN 47803"
@@ -34,14 +40,45 @@
         android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/row_ride_return_time"
+        android:id="@+id/row_ride_set_off_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/row_ride_set_off_time"
         android:layout_alignParentLeft="true"
         android:textSize="16sp"
-        android:text="Return Time: TBD, 02/23/2022"
+        android:text="Set-off Address: TBD"
         android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/row_ride_cost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/row_ride_set_off_address"
+        android:layout_alignParentLeft="true"
+        android:textSize="16sp"
+        android:text="Cost/Person ($): TBD"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/row_ride_num_of_slots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/row_ride_cost"
+        android:layout_alignParentLeft="true"
+        android:textSize="16sp"
+        android:text="Available slots: 1"
+        android:textStyle="bold"/>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/row_ride_rightImage"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:contentDescription="@string/user_icon_description"
+        android:src="@drawable/ic_baseline_edit_24" />
 
 
 </RelativeLayout>

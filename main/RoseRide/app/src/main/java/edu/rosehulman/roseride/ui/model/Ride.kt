@@ -1,10 +1,20 @@
 package edu.rosehulman.roseride.ui.model
 
+import java.sql.Date
 import java.sql.Time
 
-data class Ride(var title: String="", var driver: User, var setOffTime: Time,
-                var pickUpAddr: Address, var returnTime: Time, var addr: Address,
-                var passengers: List<User>, var numOfSlots: Int=1, var isSelected: Boolean = false) {
+data class Ride(
+    var title: String="",
+    var driver: User,
+    var setOffTime: Time,
+    var setOffDate: Date,
+    var pickUpAddr: Address,
+    var returnTime: Time,
+    var addr: Address,
+    var passengers: List<User>,
+    var costPerPerson: Double = 0.0,
+    var numOfSlots: Int=1,
+    var isSelected: Boolean = false) {
 
 //    @get:Exclude
 //    var id = ""

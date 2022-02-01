@@ -1,6 +1,7 @@
 package edu.rosehulman.roseride.ui.model
 
 import androidx.lifecycle.ViewModel
+import java.sql.Date
 import java.sql.Time
 import kotlin.random.Random
 
@@ -46,24 +47,28 @@ class RideViewModel : ViewModel() {
         val newRide = ride ?: Ride("Ride$random",
             User("Steven","812-223-7777", "fengr@rose-hulman.edu"),
             Time(0),
+            Date(0),
             Address("200 N 7th St","Terre Haute", "47809", "IN"),
             Time(0),
             Address("210 E Ohio St","Chicago", "60611", "IL"),
-            listOf<User>(),
+            listOf(),
+            -1.0,
             1,
-            false)
-//        ref.add(newQuote)
+        false)
+//        ref.add(newRide)
         rides.add(newRide)
     }
 
-    fun updateCurrentRide(title: String="", setOffTime: Time, pickUpAddr: Address, returnTime: Time,
-                          addr: Address, passengers: List<User>, numOfSlots: Int, isSelected: Boolean){
+    fun updateCurrentRide(title: String="", setOffTime: Time, setOffDate: Date, pickUpAddr: Address,
+                          addr: Address, passengers: List<User>, cost: Double = -1.0, numOfSlots: Int, isSelected: Boolean){
         rides[currentPos].title = title
         rides[currentPos].setOffTime = setOffTime
+        rides[currentPos].setOffDate = setOffDate
         rides[currentPos].pickUpAddr = pickUpAddr
-        rides[currentPos].returnTime = returnTime
+//        rides[currentPos].returnTime = returnTime
         rides[currentPos].addr = addr
         rides[currentPos].passengers = passengers
+        rides[currentPos].costPerPerson = cost
         rides[currentPos].numOfSlots = numOfSlots
         rides[currentPos].isSelected = isSelected
 
@@ -71,7 +76,7 @@ class RideViewModel : ViewModel() {
         // or use .update() if only want to overwrite specific field(s)
     }
 
-    fun removeCurrentRie(){
+    fun removeCurrentRide(){
         rides.removeAt(currentPos)
 //        ref.document(getCurrentRequest().id).delete()
         currentPos = 0

@@ -11,7 +11,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/request_name_title"
+        android:id="@+id/ride_name_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -20,16 +20,16 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/request_name"
+        android:id="@+id/ride_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/request_name_title"
+        android:layout_below="@id/ride_name_title"
         android:hint="Enter name"
         android:layout_marginBottom="20dp"/>
 
     <TextView
-        android:layout_below="@id/request_name"
-        android:id="@+id/ride_request_title"
+        android:layout_below="@id/ride_name"
+        android:id="@+id/ride_address_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Address Information"
@@ -42,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="100"
-        android:layout_below="@+id/ride_request_title"
+        android:layout_below="@+id/ride_address_title"
         android:layout_marginBottom="20dp">
         <RelativeLayout
             android:layout_margin="5dp"
@@ -106,18 +106,30 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="50">
+
             <TextView
                 android:id="@+id/date_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/date_title" />
 
-            <EditText
+            <TextView
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
                 android:id="@+id/date_answer"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/date_title"
-                android:hint="00/00/00" />
+                android:hint="00-00-00" />
+
+            <ImageButton
+                android:id="@+id/date_button"
+                android:layout_width="24dp"
+                android:layout_height="26dp"
+                android:layout_below="@id/date_title"
+                android:layout_alignParentRight="true"
+                android:layout_marginVertical="8dp"
+                android:src="@drawable/ic_baseline_edit_calendar_24"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -131,11 +143,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Time(24hr)" />
-            <EditText
-                android:layout_below="@id/time_title"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
+                android:id="@+id/time_answer"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="00:00"/>
+                android:layout_below="@+id/time_title"
+                android:hint="00:00" />
+
+            <ImageButton
+                android:id="@+id/time_button"
+                android:layout_width="24dp"
+                android:layout_height="26dp"
+                android:layout_below="@id/time_title"
+                android:layout_alignParentRight="true"
+                android:layout_marginVertical="8dp"
+                android:src="@drawable/ic_baseline_access_time_24"/>
         </RelativeLayout>
 
         <!--        <RelativeLayout-->
@@ -180,16 +204,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="50">
             <TextView
-                android:id="@+id/min_price_title"
+                android:id="@+id/cost_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cost/Person ($)"/>
 
             <EditText
-                android:id="@+id/min_price"
+                android:id="@+id/cost_per_person"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/min_price_title"
+                android:layout_below="@id/cost_title"
                 android:hint="0" />
         </RelativeLayout>
 
@@ -199,21 +223,22 @@
             android:layout_height="wrap_content"
             android:layout_weight="50">
             <TextView
-                android:id="@+id/max_price_title"
+                android:id="@+id/num_of_slots_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Max Number of Riders"/>
+                android:text="Number of Slots"/>
             <EditText
-                android:id="@+id/max_price"
+                android:id="@+id/num_of_slots"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/max_price_title"
-                android:hint="0"/>
+                android:layout_below="@+id/num_of_slots_title"
+                android:hint="1"/>
         </RelativeLayout>
 
     </LinearLayout>
 
     <Button
+        android:id="@+id/ride_edit_submit"
         android:paddingHorizontal="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

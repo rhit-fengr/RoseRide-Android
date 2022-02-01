@@ -2,36 +2,32 @@ package edu.rosehulman.roseride.ui
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import edu.rosehulman.roseride.R
-import edu.rosehulman.roseride.databinding.FragmentRequestEditBinding
-import edu.rosehulman.roseride.ui.model.Address
-import edu.rosehulman.roseride.ui.model.Request
-import edu.rosehulman.roseride.ui.model.RequestViewModel
-import edu.rosehulman.roseride.ui.model.User
+import edu.rosehulman.roseride.databinding.FragmentRideAddBinding
+import edu.rosehulman.roseride.ui.model.*
 import java.sql.Date
 import java.sql.Time
 import java.text.SimpleDateFormat
 
-class RequestAddFragment : Fragment() {
-    private lateinit var model: RequestViewModel
-    private lateinit var binding: FragmentRequestEditBinding
+class RideAddFragment : Fragment() {
+    private lateinit var model: RideViewModel
+    private lateinit var binding: FragmentRideAddBinding
     private var title = ""
     private var pAddr = "street, city, zip, state"
     private var dAddr = "street, city, zip, state"
     private var date = "000-00-00"
     private var time = "00:00"
-    private var minPrice = "-1"
-    private var maxPrice = "-1"
+    private var cost = "-1"
+    private var numOfSlots = "1"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,46 +35,46 @@ class RequestAddFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         model =
-            ViewModelProvider(requireActivity()).get(RequestViewModel::class.java)
+            ViewModelProvider(requireActivity()).get(RideViewModel::class.java)
 
-        binding = FragmentRequestEditBinding.inflate(inflater, container, false)
+        binding = FragmentRideAddBinding.inflate(inflater, container, false)
         setupButtons()
         updateView()
         return binding.root
     }
 
     private fun setupButtons() {
-        binding.requestEditSubmit
-            .setOnClickListener(){
-                title = binding.requestName.text.toString()
+        binding.rideAddSubmit
+            .setOnClickListener() {
+                title = binding.rideName.text.toString()
                 pAddr = binding.pickUpAddressAnswer.text.toString()
                 dAddr = binding.destinationAddressAnswer.text.toString()
                 date = binding.dateAnswer.text.toString()
                 time = binding.timeAnswer.text.toString() // might consider to add a timepicker here instead
-                minPrice = binding.minPrice.text.toString()
-                maxPrice = binding.maxPrice.text.toString()
+                cost = binding.costPerPerson.text.toString()
+                numOfSlots = binding.numOfSlots.text.toString()
 
-                model.addRequest(
-                    Request(
+                model.addRide(
+                    Ride(
                         title,
-                        User("Steven","812-223-7777", "fengr@rose-hulman.edu"),
+                        User("Steven", "812-223-7777", "fengr@rose-hulman.edu"),
                         Time.valueOf(time + ":00"),
                         Date.valueOf(date),
                         Address(pAddr),
-                        1,
+                        Time(0),
                         Address(dAddr),
-                        false,
-                        minPrice.toDouble(),
-                        maxPrice.toDouble(),
+                        listOf(),
+                        cost.toDouble(),
+                        numOfSlots.toInt(),
                         false
                     )
                 )
 
                 updateView()
-                findNavController().navigate(R.id.nav_request)
+                findNavController().navigate(R.id.nav_ride)
             }
         binding.timeButton
-            .setOnClickListener(){
+            .setOnClickListener() {
                 val picker =
                     MaterialTimePicker.Builder()
                         .setTimeFormat(TimeFormat.CLOCK_12H)
@@ -86,38 +82,38 @@ class RequestAddFragment : Fragment() {
                         .setMinute(10)
                         .setTitleText("Select Set-off time")
                         .build()
-                picker.addOnPositiveButtonClickListener{
+                picker.addOnPositiveButtonClickListener {
                     val s = String.format("%2d:%2d", picker.hour, picker.minute)
                     binding.timeAnswer.text = s
                 }
-                picker.show(parentFragmentManager, "tag");
+                picker.show(parentFragmentManager, "tag")
             }
 
         binding.dateButton
-            .setOnClickListener(){
+            .setOnClickListener() {
                 val picker =
                     MaterialDatePicker.Builder.datePicker()
                         .setTitleText("Select Set-off date")
                         .build()
-                picker.addOnPositiveButtonClickListener{
+                picker.addOnPositiveButtonClickListener {
                     val dateFormatter = SimpleDateFormat("yyyy-MM-dd")
                     val s = dateFormatter.format(Date(it))
                     binding.dateAnswer.text = s
                 }
-                picker.show(parentFragmentManager, "tag");
+                picker.show(parentFragmentManager, "tag")
             }
 
     }
 
     private fun updateView() {
-        Log.d("MQ","in detail update view")
-        binding.requestName.setText(title)
+        Log.d("RR", "Add Ride update view")
+        binding.rideName.setText(title)
         binding.pickUpAddressAnswer.setText(pAddr)
         binding.destinationAddressAnswer.setText(dAddr)
         binding.dateAnswer.setText(date)
         binding.timeAnswer.setText(time)
-        binding.minPrice.setText(minPrice)
-        binding.maxPrice.setText(maxPrice)
+        binding.costPerPerson.setText(cost)
+        binding.numOfSlots.setText(numOfSlots)
     }
 
 }
