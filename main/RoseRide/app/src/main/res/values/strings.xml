@@ -22,7 +22,7 @@
     <string name="menu_profile">Profile</string>
     <string name="menu_requests">Requests</string>
     <string name="menu_rides">Rides</string>
-    <string name="drawer_switch_mode">Switch Mode</string>
+    <string name="drawer_switch_mode">Switch to Driver Mode</string>
     <string name="drawer_review_appointments">My Appointments</string>
     <string name="drawer_review_requests">My Requests</string>
     <string name="drawer_favorites">My Favorites</string>
