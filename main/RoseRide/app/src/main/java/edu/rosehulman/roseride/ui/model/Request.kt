@@ -9,7 +9,6 @@ data class Request(
     var setOffTime: Time,
     var setOffDate: Date,
     var pickUpAddr: Address,
-//    var returnTime: Time,
     var numOfPassengers: Int=1,
     var destinationAddr: Address,
     var sharable: Boolean = false,

@@ -13,4 +13,8 @@ data class Address(
     override fun toString(): String {
         return if (streetAddress.isNotBlank()) "$streetAddress, $city, $ZIP, $state" else ""
     }
+
+    fun toStringBeautified(): String {
+        return if (streetAddress.isNotBlank()) "$streetAddress\n$city, $state\n$ZIP" else ""
+    }
 }

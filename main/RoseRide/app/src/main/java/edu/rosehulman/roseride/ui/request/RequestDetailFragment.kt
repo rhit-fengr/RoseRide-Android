@@ -27,6 +27,11 @@ class RequestDetailFragment : Fragment(){
     }
 
     private fun updateView() {
-        binding.requestDetailTitleText.text = model.getCurrentRequest().title
+        binding.requestDetailTitle.text = model.getCurrentRequest().title
+        binding.pickUpAddressAnswer.text = model.getCurrentRequest().pickUpAddr.toStringBeautified()
+        binding.setOffTime.text = model.getCurrentRequest().setOffDate.toString() + "   " + model.getCurrentRequest().setOffTime.toString().substring(0,  model.getCurrentRequest().setOffTime.toString().length-3)
+        binding.destinationAddressAnswer.text = model.getCurrentRequest().destinationAddr.toStringBeautified()
+        binding.priceRangeAnswer.text = "$" + model.getCurrentRequest().minPrice + " ~ " + model.getCurrentRequest().maxPrice
+        binding.driverAnswer.text = "TBA"
     }
 }

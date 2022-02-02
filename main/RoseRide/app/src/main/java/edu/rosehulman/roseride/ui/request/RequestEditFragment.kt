@@ -69,7 +69,7 @@ class RequestEditFragment : Fragment(){
                 )
 
                 updateView()
-                // navigate to detail screen
+                findNavController().navigate(R.id.navigation_request_detail)
             }
         binding.timeButton
             .setOnClickListener(){

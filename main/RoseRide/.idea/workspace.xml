@@ -18,7 +18,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\fengr\.android\avd\Pixel_3a_API_30.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\imabi\.android\avd\Pixel_5_API_29.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -52,7 +52,7 @@
     <property name="android-custom-viewC:/Users/fengr/Documents/GitHub/RoseRide-Android/main/RoseRide/app/src/main/java/edu/rosehulman/roseride/a.kt_SELECTED" value="MovableFloatingActionButton" />
     <property name="android-custom-viewC:/Users/imabi/AndroidStudioProjects/RoseRide Project/RoseRide-Android/main/RoseRide/app/src/main/java/edu/rosehulman/roseride/MovableFloatingActionButton.kt_MovableFloatingActionButton_DIMENSIONS" value="1080&#10;1920" />
     <property name="android-custom-viewC:/Users/imabi/AndroidStudioProjects/RoseRide Project/RoseRide-Android/main/RoseRide/app/src/main/java/edu/rosehulman/roseride/MovableFloatingActionButton.kt_SELECTED" value="MovableFloatingActionButton" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../AndroidClass/MovieQuotes" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
