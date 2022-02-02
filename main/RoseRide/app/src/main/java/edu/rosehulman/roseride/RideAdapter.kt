@@ -33,6 +33,12 @@ class RideAdapter(fragment: RideListFragment) : RecyclerView.Adapter<RideAdapter
 
 
         init {
+            if(MainActivity.driverMode){
+                editbtn.visibility=View.VISIBLE
+            }else{
+                editbtn.visibility=View.GONE
+            }
+
             itemView.setOnClickListener{
                 // navigate
                 model.updateCurrentPos(adapterPosition)

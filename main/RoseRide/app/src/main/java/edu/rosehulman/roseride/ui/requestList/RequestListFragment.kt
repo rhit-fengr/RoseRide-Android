@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import edu.rosehulman.roseride.MainActivity
+import edu.rosehulman.roseride.MainActivity.Companion.driverMode
 import edu.rosehulman.roseride.R
 import edu.rosehulman.roseride.RequestAdapter
 import edu.rosehulman.roseride.databinding.FragmentRequestListBinding
@@ -42,9 +44,16 @@ class RequestListFragment : Fragment() {
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
 
+        if(driverMode){
+            binding.fab.visibility=View.GONE
+        }else{
+            binding.fab.visibility=View.VISIBLE
+        }
+
         binding.fab.setOnClickListener{
             findNavController().navigate(R.id.navigation_request_add)
         }
+
 
 
         return binding.root

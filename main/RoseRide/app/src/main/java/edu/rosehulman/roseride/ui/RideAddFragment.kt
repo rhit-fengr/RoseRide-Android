@@ -25,7 +25,7 @@ class RideAddFragment : Fragment() {
     private var title = ""
     private var pAddr = "street, city, zip, state"
     private var dAddr = "street, city, zip, state"
-    private var date = "000-00-00"
+    private var date = "2022-02-01"
     private var time = "00:00"
     private var cost = "-1"
     private var numOfSlots = "1"

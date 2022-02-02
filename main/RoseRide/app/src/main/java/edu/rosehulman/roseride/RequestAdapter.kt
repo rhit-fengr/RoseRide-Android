@@ -33,6 +33,12 @@ class RequestAdapter(fragment: RequestListFragment) : RecyclerView.Adapter<Reque
 
 
         init {
+            if(MainActivity.driverMode){
+                editbtn.visibility=View.GONE
+            }else{
+                editbtn.visibility=View.VISIBLE
+            }
+
             itemView.setOnClickListener{
                 // navigate
                 model.updateCurrentPos(adapterPosition)

@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import edu.rosehulman.roseride.MainActivity
 import edu.rosehulman.roseride.R
 import edu.rosehulman.roseride.RideAdapter
 import edu.rosehulman.roseride.databinding.FragmentRideListBinding
@@ -39,6 +40,12 @@ class RideListFragment : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+
+        if(MainActivity.driverMode){
+            binding.fab.visibility=View.VISIBLE
+        }else{
+            binding.fab.visibility=View.GONE
+        }
 
         binding.fab.setOnClickListener{
             findNavController().navigate(R.id.navigation_ride_add)
