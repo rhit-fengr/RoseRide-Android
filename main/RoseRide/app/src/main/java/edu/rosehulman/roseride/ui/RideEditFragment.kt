@@ -86,7 +86,7 @@ class RideEditFragment : Fragment() {
                         .setTitleText("Select Set-off date")
                         .build()
                 picker.addOnPositiveButtonClickListener {
-                    val dateFormatter = SimpleDateFormat("yyyy/MM/dd", Locale.US)
+                    val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.US)
                     val s = dateFormatter.format(Date(it+86400000))
                     binding.dateAnswer.text = s
                 }

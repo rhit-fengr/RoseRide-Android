@@ -26,6 +26,11 @@ class RideDetailFragment : Fragment(){
     }
 
     private fun updateView() {
-        binding.rideDetailTitleText.text = model.getCurrentRide().title
+        binding.rideDetailTitle.text = model.getCurrentRide().title
+        binding.pickUpAddressAnswer.text = model.getCurrentRide().pickUpAddr.toStringBeautified()
+        binding.setOffTime.text = model.getCurrentRide().setOffDate.toString() + "   " + model.getCurrentRide().setOffTime.toString().substring(0,  model.getCurrentRide().setOffTime.toString().length-3)
+        binding.destinationAddressAnswer.text = model.getCurrentRide().addr.toStringBeautified()
+        binding.priceRangeAnswer.text = "$" + model.getCurrentRide().costPerPerson.toString()
+        binding.availableSlots.text = (model.getCurrentRide().numOfSlots - model.getCurrentRide().passengers.size).toString() + "/" + model.getCurrentRide().numOfSlots.toString()
     }
 }
