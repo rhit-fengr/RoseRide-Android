@@ -1,5 +1,6 @@
 package edu.rosehulman.roseride
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -17,17 +18,47 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import edu.rosehulman.roseride.databinding.ActivityMainBinding
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
+import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.NavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.auth.FirebaseUser
+
+import androidx.annotation.NonNull
+
+import com.google.firebase.auth.FirebaseAuth.AuthStateListener
+import edu.rosehulman.rosefire.Rosefire
 
 
 class MainActivity : AppCompatActivity() {
 
+    private val REGISTRY_TOKEN = "e015dafd-140f-4ea7-8b7c-c9a0f26c223f"
+    private var mAuth: FirebaseAuth? = null
+    private var mAuthListener: AuthStateListener? = null
+    private var checker: Boolean = false
+    private var resultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data: Intent? = result.data
+            val rosefireResult = Rosefire.getSignInResultFromIntent(data)
+            if (rosefireResult.isSuccessful) {
+                Firebase.auth.signInWithCustomToken(rosefireResult.token)
+                Log.d(Constants.TAG, "Username: ${rosefireResult.username}")
+                Log.d(Constants.TAG, "Name: ${rosefireResult.name}")
+                Log.d(Constants.TAG, "Email: ${rosefireResult.email}")
+                Log.d(Constants.TAG, "Group: ${rosefireResult.group}")
+            } else {
+                Log.d(Constants.TAG, "Rosefire failed")
+            }
+        }
+        checker = true
+    }
+
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-    private lateinit var authStateListener: FirebaseAuth.AuthStateListener
 
     lateinit var drawerLayout: DrawerLayout
     lateinit var navView: NavigationView
@@ -37,15 +68,17 @@ class MainActivity : AppCompatActivity() {
         var driverMode: Boolean = false
     }
 
-//    override fun onStart() {
-//        super.onStart()
-//        Firebase.auth.addAuthStateListener(authStateListener)
-//    }
-//
-//    override fun onStop() {
-//        super.onStop()
-//        Firebase.auth.removeAuthStateListener(authStateListener)
-//    }
+    override fun onStart() {
+        super.onStart()
+        mAuth!!.addAuthStateListener(mAuthListener!!)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (mAuthListener != null) {
+            mAuth!!.removeAuthStateListener(mAuthListener!!)
+        }
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,6 +93,26 @@ class MainActivity : AppCompatActivity() {
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                .setAction("Action", null).show()
 //        }
+
+        // set up rosefire
+//        val loginButton: View = findViewById(R.id.rosefire_login)
+        mAuth = FirebaseAuth.getInstance()
+        mAuthListener = AuthStateListener { firebaseAuth ->
+            val user = firebaseAuth.currentUser
+            Log.d(Constants.TAG,"user: ${user?.uid}")
+            if(user==null&& !checker){
+                val signInIntent = Rosefire.getSignInIntent(this, REGISTRY_TOKEN);
+                    resultLauncher.launch(signInIntent)
+            }
+//            val username = user?.uid ?: "null"
+//            loginButton.setVisibility(if (user != null) View.GONE else View.VISIBLE)
+        }
+
+//        loginButton.setOnClickListener {
+//                    val signInIntent = Rosefire.getSignInIntent(this, REGISTRY_TOKEN);
+//                    resultLauncher.launch(signInIntent)
+//        }
+
 
         drawerLayout = binding.drawerLayout
         navView = binding.navView

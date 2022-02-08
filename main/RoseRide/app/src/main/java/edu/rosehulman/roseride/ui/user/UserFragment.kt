@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import coil.load
 import coil.transform.CircleCropTransformation
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import edu.rosehulman.roseride.databinding.FragmentUserBinding
 
 
@@ -26,6 +28,10 @@ class UserFragment : Fragment() {
         binding = FragmentUserBinding.inflate(inflater, container, false)
         val root: View = binding.root
         updateView()
+        val logOutbtn = binding.logoutButton
+        logOutbtn.setOnClickListener {
+            Firebase.auth.signOut()
+        }
         return root
     }
 
