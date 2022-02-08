@@ -82,12 +82,21 @@ class RequestEditFragment : Fragment(){
                         .setTitleText("Select Set-off time")
                         .build()
                 picker.addOnPositiveButtonClickListener{
-                    val s = String.format("%2d:%2d", picker.hour, picker.minute)
+                    var s: String
+                    s = if(picker.hour<10){
+                        "0"+picker.hour.toString()+":"
+                    }else picker.hour.toString()+":"
+                    if(picker.minute<10){
+                        s = s+"0"+picker.minute.toString()
+                    }else s += picker.minute.toString()
+
 //                    Toast.makeText(requireContext(), s, Toast.LENGTH_LONG).show()
                     Snackbar.make(requireView(), s, Snackbar.LENGTH_SHORT).setAction("continue"){
                         findNavController().navigate(R.id.navigation_request_detail)
                     }.setAnchorView(requireActivity().findViewById(R.id.nav_view))
                         .show()
+
+
                     binding.timeAnswer.text = s
                 }
                 picker.show(parentFragmentManager, "tag");

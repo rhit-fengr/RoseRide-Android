@@ -50,8 +50,8 @@ class RideEditFragment : Fragment() {
 
                 model.updateCurrentRide(
                         title,
-                        Time.valueOf(time + ":00"),
-                        Date.valueOf(date),
+                        time + ":00",
+                        date,
                         Address(pAddr),
                         Address(dAddr),
                         listOf(),
@@ -73,7 +73,13 @@ class RideEditFragment : Fragment() {
                         .setTitleText("Select Set-off time")
                         .build()
                 picker.addOnPositiveButtonClickListener {
-                    val s = String.format("%2d:%2d", picker.hour, picker.minute)
+                    var s: String
+                    s = if(picker.hour<10){
+                        "0"+picker.hour.toString()+":"
+                    }else picker.hour.toString()+":"
+                    if(picker.minute<10){
+                        s = s+"0"+picker.minute.toString()
+                    }else s += picker.minute.toString()
                     binding.timeAnswer.text = s
                 }
                 picker.show(parentFragmentManager, "tag")
@@ -101,8 +107,8 @@ class RideEditFragment : Fragment() {
         binding.rideName.setText(current.title)
         binding.pickUpAddressAnswer.setText(current.pickUpAddr.toString())
         binding.destinationAddressAnswer.setText(current.addr.toString())
-        binding.dateAnswer.setText(current.setOffDate.toString())
-        binding.timeAnswer.setText(current.setOffTime.toString().substring(0,current.setOffTime.toString().length-3))
+        binding.dateAnswer.setText(current.setOffDate)
+        binding.timeAnswer.setText(current.setOffTime.substring(0,current.setOffTime.length-3))
         binding.costPerPerson.setText(current.costPerPerson.toString())
         binding.numOfSlots.setText(current.numOfSlots.toString())
     }

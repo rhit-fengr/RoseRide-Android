@@ -1,6 +1,14 @@
 package edu.rosehulman.roseride.ui.model
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import edu.rosehulman.roseride.Constants
 import java.sql.Date
 import java.sql.Time
 import kotlin.random.Random
@@ -10,56 +18,57 @@ class RideViewModel : ViewModel() {
     var rides = ArrayList<Ride>()
     var currentPos = 0
 
+    val ref = Firebase.firestore.collection(Ride.COLLECTION_PATH)
+    var subscriptions = HashMap<String, ListenerRegistration>()
+
     fun getRideAt(pos: Int) = rides[pos]
     fun getCurrentRide() = getRideAt(currentPos)
 
-//    val ref = Firebase.firestore.collection(Request.COLLECTION_PATH)
-//    var subscriptions = HashMap<String, ListenerRegistration>()
 
-//    fun addListener(fragmentName: String, observer: () -> Unit) {
-//        Log.d(Constants.TAG, "Adding listener for $fragmentName")
-//        val subscription = ref.orderBy(Request.CREATED_KEY, Query.Direction.ASCENDING)
-//            .addSnapshotListener{ snapshot: QuerySnapshot?, error: FirebaseFirestoreException? ->
-//                error?.let {
-//                    Log.d(Constants.TAG, "Error: $error")
-//                    return@addSnapshotListener
-//                }
-//
-//                requests.clear()
-//                snapshot?.documents?.forEach{
-//                    requests.add(Request.from(it))
-//
-//                }
-//
-//                observer()
-//            }
-//
-//        subscriptions[fragmentName] = subscription
-//    }
+    fun addListener(fragmentName: String, observer: () -> Unit) {
+        Log.d(Constants.TAG, "Adding listener for $fragmentName")
+        val subscription = ref.orderBy(Request.CREATED_KEY, Query.Direction.ASCENDING)
+            .addSnapshotListener{ snapshot: QuerySnapshot?, error: FirebaseFirestoreException? ->
+                error?.let {
+                    Log.d(Constants.TAG, "Error: $error")
+                    return@addSnapshotListener
+                }
 
-//    fun removeListener(fragmentName: String){
-//        subscriptions[fragmentName]?.remove() // tells firebase to stop listening
-//        subscriptions.remove(fragmentName) // removes from map
-//    }
+                rides.clear()
+                snapshot?.documents?.forEach{
+                    rides.add(Ride.from(it))
+
+                }
+
+                observer()
+            }
+
+        subscriptions[fragmentName] = subscription
+    }
+
+    fun removeListener(fragmentName: String){
+        subscriptions[fragmentName]?.remove() // tells firebase to stop listening
+        subscriptions.remove(fragmentName) // removes from map
+    }
 
     fun addRide(ride: Ride?){
         val random = getRandom()
         val newRide = ride ?: Ride("Ride$random",
             User("Steven","812-223-7777", "fengr@rose-hulman.edu"),
-            Time(0),
-            Date(0),
+            "00:00:00",
+            "2022-02-01",
             Address("200 N 7th St","Terre Haute", "47809", "IN"),
-            Time(0),
+            "00:00:00",
             Address("210 E Ohio St","Chicago", "60611", "IL"),
             listOf(),
             -1.0,
             1,
         false)
-//        ref.add(newRide)
-        rides.add(newRide)
+        ref.add(newRide)
+//        rides.add(newRide)
     }
 
-    fun updateCurrentRide(title: String="", setOffTime: Time, setOffDate: Date, pickUpAddr: Address,
+    fun updateCurrentRide(title: String="", setOffTime: String, setOffDate: String, pickUpAddr: Address,
                           addr: Address, passengers: List<User>, cost: Double = -1.0, numOfSlots: Int, isSelected: Boolean){
         rides[currentPos].title = title
         rides[currentPos].setOffTime = setOffTime
@@ -72,13 +81,13 @@ class RideViewModel : ViewModel() {
         rides[currentPos].numOfSlots = numOfSlots
         rides[currentPos].isSelected = isSelected
 
-//        ref.document(getCurrentQuote().id).set(getCurrentQuote())
+        ref.document(getCurrentRide().id).set(getCurrentRide())
         // or use .update() if only want to overwrite specific field(s)
     }
 
     fun removeCurrentRide(){
-        rides.removeAt(currentPos)
-//        ref.document(getCurrentRequest().id).delete()
+//        rides.removeAt(currentPos)
+        ref.document(getCurrentRide().id).delete()
         currentPos = 0
     }
 

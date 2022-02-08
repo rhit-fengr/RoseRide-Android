@@ -114,15 +114,15 @@ class RideAdapter(fragment: RideListFragment) : RecyclerView.Adapter<RideAdapter
         notifyDataSetChanged()
     }
 
-//    fun addListener(fragmentName: String) {
-//        model.addListener(fragmentName,{
-//            notifyDataSetChanged()
-//        })
-//
-//    }
-//
-//    fun removeListener(fragmentName: String) {
-//        model.removeListener(fragmentName)
-//    }
+    fun addListener(fragmentName: String) {
+        model.addListener(fragmentName,{
+            notifyDataSetChanged()
+        })
+
+    }
+
+    fun removeListener(fragmentName: String) {
+        model.removeListener(fragmentName)
+    }
 
 }
