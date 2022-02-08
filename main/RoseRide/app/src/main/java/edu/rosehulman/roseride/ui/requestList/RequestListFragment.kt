@@ -39,7 +39,7 @@ class RequestListFragment : Fragment() {
         adapter = RequestAdapter(this)
         // set recyclerview and adapter properties
         binding.recyclerView.adapter = adapter
-//        adapter.addListener(fragmentName)
+        adapter.addListener(fragmentName)
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
@@ -59,8 +59,12 @@ class RequestListFragment : Fragment() {
         return binding.root
     }
 
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//        adapter.removeListener(fragmentName)
-//    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        adapter.removeListener(fragmentName)
+    }
+
+    companion object{
+        const val fragmentName = "RequestListFragment"
+    }
 }

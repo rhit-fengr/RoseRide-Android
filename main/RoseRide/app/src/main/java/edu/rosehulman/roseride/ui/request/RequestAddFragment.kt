@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import edu.rosehulman.roseride.Constants
 import edu.rosehulman.roseride.R
 import edu.rosehulman.roseride.databinding.FragmentRequestEditBinding
 import edu.rosehulman.roseride.ui.model.Address
@@ -20,7 +21,6 @@ import edu.rosehulman.roseride.ui.model.User
 import java.sql.Date
 import java.sql.Time
 import java.text.SimpleDateFormat
-import java.util.*
 
 class RequestAddFragment : Fragment() {
     private lateinit var model: RequestViewModel
@@ -58,12 +58,13 @@ class RequestAddFragment : Fragment() {
                 minPrice = binding.minPrice.text.toString()
                 maxPrice = binding.maxPrice.text.toString()
 
+
                 model.addRequest(
                     Request(
                         title,
                         User("Steven","812-223-7777", "fengr@rose-hulman.edu"),
-                        Time.valueOf(time + ":00"),
-                        Date.valueOf(date),
+                        time + ":00",
+                        date,
                         Address(pAddr),
                         1,
                         Address(dAddr),
@@ -87,7 +88,15 @@ class RequestAddFragment : Fragment() {
                         .setTitleText("Select Set-off time")
                         .build()
                 picker.addOnPositiveButtonClickListener{
-                    val s = String.format("%2d:%2d", picker.hour, picker.minute)
+//                    val s = String.format("%2d:%2d", picker.hour, picker.minute)
+
+                    var s: String
+                    s = if(picker.hour<10){
+                        "0"+picker.hour.toString()+":"
+                    }else picker.hour.toString()+":"
+                    if(picker.minute<10){
+                        s = s+"0"+picker.minute.toString()
+                    }else s += picker.minute.toString()
                     binding.timeAnswer.text = s
                 }
                 picker.show(parentFragmentManager, "tag");
@@ -100,7 +109,7 @@ class RequestAddFragment : Fragment() {
                         .setTitleText("Select Set-off date")
                         .build()
                 picker.addOnPositiveButtonClickListener{
-                    val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+                    val dateFormatter = SimpleDateFormat("yyyy-MM-dd")
                     val s = dateFormatter.format(Date(it+86400000))
                     binding.dateAnswer.text = s
                 }
@@ -110,7 +119,7 @@ class RequestAddFragment : Fragment() {
     }
 
     private fun updateView() {
-        Log.d("MQ","in detail update view")
+        Log.d(Constants.TAG,"in detail update view")
         binding.requestName.setText(title)
         binding.pickUpAddressAnswer.setText(pAddr)
         binding.destinationAddressAnswer.setText(dAddr)

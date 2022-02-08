@@ -12,6 +12,7 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import edu.rosehulman.roseride.Constants
 import edu.rosehulman.roseride.R
 import edu.rosehulman.roseride.databinding.FragmentRequestEditBinding
 import edu.rosehulman.roseride.ui.model.Address
@@ -19,7 +20,7 @@ import edu.rosehulman.roseride.ui.model.RequestViewModel
 import java.text.SimpleDateFormat
 import java.sql.Time
 import java.sql.Date
-import java.util.*
+
 
 
 class RequestEditFragment : Fragment(){
@@ -58,8 +59,8 @@ class RequestEditFragment : Fragment(){
                 // TODO: Construct fields to pass in updateCurrentRequest
                 model.updateCurrentRequest(
                     title,
-                    Time.valueOf(time + ":00"),
-                    Date.valueOf(date),
+                    time + ":00",
+                    date,
                     Address(pAddr),
                     1,
                     Address(dAddr),
@@ -99,7 +100,7 @@ class RequestEditFragment : Fragment(){
                         .setTitleText("Select Set-off date")
                         .build()
                 picker.addOnPositiveButtonClickListener{
-                    val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+                    val dateFormatter = SimpleDateFormat("yyyy-MM-dd")
                     val s = dateFormatter.format(Date(it+86400000))
 //                    Toast.makeText(requireContext(), s, Toast.LENGTH_LONG).show()
                     Snackbar.make(requireView(), s, Snackbar.LENGTH_SHORT).setAction("continue"){
@@ -114,12 +115,12 @@ class RequestEditFragment : Fragment(){
     }
 
     private fun updateView() {
-        Log.d("MQ","in detail update view")
+        Log.d(Constants.TAG,"in detail update view")
         binding.requestName.setText(model.getCurrentRequest().title)
         binding.pickUpAddressAnswer.setText(model.getCurrentRequest().pickUpAddr.toString())
         binding.destinationAddressAnswer.setText(model.getCurrentRequest().destinationAddr.toString())
-        binding.dateAnswer.setText(model.getCurrentRequest().setOffDate.toString())
-        binding.timeAnswer.setText(model.getCurrentRequest().setOffTime.toString().substring(0,model.getCurrentRequest().setOffTime.toString().length-3))
+        binding.dateAnswer.setText(model.getCurrentRequest().setOffDate)
+        binding.timeAnswer.setText(model.getCurrentRequest().setOffTime.substring(0,model.getCurrentRequest().setOffTime.length-3))
         binding.minPrice.setText(model.getCurrentRequest().minPrice.toString())
         binding.maxPrice.setText(model.getCurrentRequest().maxPrice.toString())
     }
