@@ -14,8 +14,6 @@ import java.sql.Time
 data class Request(
     var title: String="",
     var user: User=User(),
-//    var setOffTime: Time = Time(1),
-//    var setOffDate: Date = Date(1),
     var setOffTime: String="",
     var setOffDate: String="",
     var pickUpAddr: Address= Address(),

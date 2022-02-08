@@ -62,7 +62,7 @@ class RideAddFragment : Fragment() {
                         time + ":00",
                         date,
                         Address(pAddr),
-                        "00:00:00",
+//                        "00:00:00",
                         Address(dAddr),
                         listOf(),
                         cost.toDouble(),

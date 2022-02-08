@@ -58,7 +58,7 @@ class RideViewModel : ViewModel() {
             "00:00:00",
             "2022-02-01",
             Address("200 N 7th St","Terre Haute", "47809", "IN"),
-            "00:00:00",
+//            "00:00:00",
             Address("210 E Ohio St","Chicago", "60611", "IL"),
             listOf(),
             -1.0,

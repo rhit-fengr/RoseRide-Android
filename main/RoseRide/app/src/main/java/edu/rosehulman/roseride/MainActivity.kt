@@ -18,12 +18,16 @@ import edu.rosehulman.roseride.databinding.ActivityMainBinding
 import android.content.Intent
 import android.net.Uri
 import androidx.navigation.NavController
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var authStateListener: FirebaseAuth.AuthStateListener
 
     lateinit var drawerLayout: DrawerLayout
     lateinit var navView: NavigationView
@@ -32,6 +36,16 @@ class MainActivity : AppCompatActivity() {
     companion object {
         var driverMode: Boolean = false
     }
+
+//    override fun onStart() {
+//        super.onStart()
+//        Firebase.auth.addAuthStateListener(authStateListener)
+//    }
+//
+//    override fun onStop() {
+//        super.onStop()
+//        Firebase.auth.removeAuthStateListener(authStateListener)
+//    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,10 +81,6 @@ class MainActivity : AppCompatActivity() {
 
        val bottom_nav_view:BottomNavigationView = findViewById(R.id.bottom_nav_view)
         bottom_nav_view.setupWithNavController(navController)
-
-
-
-
 
     }
 

@@ -18,7 +18,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\fengr\.android\avd\Pixel_5_API_30.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\imabi\.android\avd\Pixel_5_API_29.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -60,7 +60,8 @@
     <property name="android-custom-viewC:/Users/fengr/Documents/GitHub/RoseRide-Android/main/RoseRide/app/src/main/java/edu/rosehulman/roseride/a.kt_SELECTED" value="MovableFloatingActionButton" />
     <property name="android-custom-viewC:/Users/imabi/AndroidStudioProjects/RoseRide Project/RoseRide-Android/main/RoseRide/app/src/main/java/edu/rosehulman/roseride/MovableFloatingActionButton.kt_MovableFloatingActionButton_DIMENSIONS" value="1080&#10;1920" />
     <property name="android-custom-viewC:/Users/imabi/AndroidStudioProjects/RoseRide Project/RoseRide-Android/main/RoseRide/app/src/main/java/edu/rosehulman/roseride/MovableFloatingActionButton.kt_SELECTED" value="MovableFloatingActionButton" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/java" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../AndroidClass/PhotoBucket" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
@@ -69,11 +70,13 @@
       <recent name="C:\Users\fengr\AndroidStudioProjects\RoseRide\app\src\main\res\drawable-v24" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\imabi\AndroidStudioProjects\RoseRide Project\RoseRide-Android\main\RoseRide\app\src\main\java\edu\rosehulman\roseride" />
+      <recent name="C:\Users\imabi\AndroidStudioProjects\RoseRide Project\RoseRide-Android\main\RoseRide\app\src\main\java\edu\rosehulman\" />
       <recent name="C:\Users\fengr\Documents\GitHub\RoseRide-Android\main\RoseRide\app\src\main\res\layout" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
-      <recent name="edu.rosehulman.roseride" />
       <recent name="edu.rosehulman.roseride.ui" />
+      <recent name="edu.rosehulman.roseride" />
       <recent name="edu.rosehulman.roseride.ui.request" />
     </key>
   </component>

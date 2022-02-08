@@ -13,7 +13,7 @@ data class Ride(
     var setOffTime: String="",
     var setOffDate: String="",
     var pickUpAddr: Address= Address(),
-    var returnTime: String="",
+//    var returnTime: String="",
     var addr: Address= Address(),
     var passengers: List<User> = listOf(),
     var costPerPerson: Double = 0.0,
