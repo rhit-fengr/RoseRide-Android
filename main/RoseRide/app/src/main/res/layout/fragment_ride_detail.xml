@@ -226,10 +226,18 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/ride_request_btn"
         android:layout_marginTop="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Request"/>
+
+    <Button
+        android:id="@+id/ride_delete_btn"
+        android:layout_marginTop="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"/>
 
 
 

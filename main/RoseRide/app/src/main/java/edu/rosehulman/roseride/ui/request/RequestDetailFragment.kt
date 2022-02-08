@@ -31,27 +31,29 @@ class RequestDetailFragment : Fragment(){
         rideModel = ViewModelProvider(requireActivity()).get(RideViewModel::class.java)
 //        return inflater.inflate(R.layout.fragment_quote_detail, container, false)
         updateView()
-        setupButton()
+        setupButtons()
         return binding.root
     }
 
     private fun updateView() {
         if(!MainActivity.driverMode){
-            binding.acceptButton.visibility=View.GONE
+            binding.requestAcceptButton.visibility=View.GONE
+            binding.requestDeleteBtn.visibility=View.VISIBLE
         }
         else{
-            binding.acceptButton.visibility=View.VISIBLE
+            binding.requestAcceptButton.visibility=View.VISIBLE
+            binding.requestDeleteBtn.visibility=View.GONE
         }
         binding.requestDetailTitle.text = model.getCurrentRequest().title
         binding.pickUpAddressAnswer.text = model.getCurrentRequest().pickUpAddr.toStringBeautified()
-        binding.setOffTime.text = model.getCurrentRequest().setOffDate.toString() + "   " + model.getCurrentRequest().setOffTime.toString().substring(0,  model.getCurrentRequest().setOffTime.toString().length-3)
+        binding.setOffTime.text = model.getCurrentRequest().setOffDate + "   " + model.getCurrentRequest().setOffTime.substring(0,  model.getCurrentRequest().setOffTime.length-3)
         binding.destinationAddressAnswer.text = model.getCurrentRequest().destinationAddr.toStringBeautified()
         binding.priceRangeAnswer.text = "$" + model.getCurrentRequest().minPrice + " ~ " + model.getCurrentRequest().maxPrice
         binding.driverAnswer.text = "TBA"
     }
 
-    private fun setupButton() {
-        binding.acceptButton.setOnClickListener {
+    private fun setupButtons() {
+        binding.requestAcceptButton.setOnClickListener {
             val request = model.getCurrentRequest()
             val passengers = listOf(request.user)
             var ride = Ride(
@@ -67,7 +69,12 @@ class RequestDetailFragment : Fragment(){
                 false)
             rideModel.addRide(ride)
             model.removeCurrentRequest()
-            findNavController().navigate(R.id.nav_ride)
+            findNavController().navigate(R.id.nav_request)
+        }
+
+        binding.requestDeleteBtn.setOnClickListener {
+            model.removeCurrentRequest()
+            findNavController().navigate(R.id.nav_request)
         }
     }
 }
