@@ -155,9 +155,11 @@ class MainActivity : AppCompatActivity() {
             if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 drawerLayout.closeDrawer(GravityCompat.START)
             }
+            val my_posts = navView.menu!!.findItem(R.id.nav_my_posts)
 
             if(driverMode) {
                 menuItem!!.title="Switch to Passenger Mode"
+                my_posts.title="My Rides"
                 Toast.makeText(
                     applicationContext,
                     "Switched to Driver Mode!!",
@@ -165,6 +167,7 @@ class MainActivity : AppCompatActivity() {
                 ).show()
             }else{
                 menuItem!!.title="Switch to Driver Mode"
+                my_posts.title="My Requests"
                 Toast.makeText(
                     applicationContext,
                     "Passenger Mode!",
@@ -172,6 +175,21 @@ class MainActivity : AppCompatActivity() {
                 ).show()
             }
             navController.navigate(R.id.nav_profile)
+            true
+        }
+
+        navView.menu!!.findItem(R.id.nav_my_posts).setOnMenuItemClickListener { menuItem: MenuItem? ->
+            //write your implementation here
+            //to close the navigation drawer
+
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                drawerLayout.closeDrawer(GravityCompat.START)
+            }
+
+            if(driverMode){
+                navController.navigate(R.id.nav_ride)
+            }else navController.navigate(R.id.nav_request)
+
             true
         }
 
