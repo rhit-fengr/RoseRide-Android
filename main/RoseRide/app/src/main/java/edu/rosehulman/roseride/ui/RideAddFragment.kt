@@ -11,6 +11,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import edu.rosehulman.roseride.R
 import edu.rosehulman.roseride.databinding.FragmentRideAddBinding
 import edu.rosehulman.roseride.ui.model.*
@@ -58,7 +60,7 @@ class RideAddFragment : Fragment() {
                 model.addRide(
                     Ride(
                         title,
-                        User("Steven", "812-223-7777", "fengr@rose-hulman.edu"),
+                        Firebase.auth.uid!!,
                         time + ":00",
                         date,
                         Address(pAddr),

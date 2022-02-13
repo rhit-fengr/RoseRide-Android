@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import edu.rosehulman.roseride.MainActivity
 import edu.rosehulman.roseride.R
 import edu.rosehulman.roseride.databinding.FragmentRequestDetailBinding
@@ -58,7 +60,7 @@ class RequestDetailFragment : Fragment(){
             val passengers = listOf(request.user)
             var ride = Ride(
                 request.title,
-                User(),
+                Firebase.auth.uid!!,
                 request.setOffTime,
                 request.setOffDate,
                 request.pickUpAddr,
@@ -66,6 +68,7 @@ class RequestDetailFragment : Fragment(){
                 passengers,
                 request.minPrice,
                 request.numOfPassengers,
+                false,
                 false)
             rideModel.addRide(ride)
             model.removeCurrentRequest()

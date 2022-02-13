@@ -2,6 +2,7 @@ package edu.rosehulman.roseride.ui.model
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Query
@@ -25,15 +26,37 @@ class RideViewModel : ViewModel() {
     fun getCurrentRide() = getRideAt(currentPos)
 
 
-    fun addListener(fragmentName: String, observer: () -> Unit) {
+    fun addAllListener(fragmentName: String, observer: () -> Unit) {
         Log.d(Constants.TAG, "Adding listener for $fragmentName")
         val subscription = ref.orderBy(Request.CREATED_KEY, Query.Direction.ASCENDING)
+            .whereNotEqualTo("user", Firebase.auth.uid)
             .addSnapshotListener{ snapshot: QuerySnapshot?, error: FirebaseFirestoreException? ->
                 error?.let {
                     Log.d(Constants.TAG, "Error: $error")
                     return@addSnapshotListener
                 }
 
+                rides.clear()
+                snapshot?.documents?.forEach{
+                    rides.add(Ride.from(it))
+
+                }
+
+                observer()
+            }
+
+        subscriptions[fragmentName] = subscription
+    }
+
+    fun addOneListener(fragmentName: String, observer: () -> Unit) {
+        Log.d(Constants.TAG, "Adding listener for $fragmentName")
+        val subscription = ref.orderBy(Request.CREATED_KEY, Query.Direction.ASCENDING)
+            .whereEqualTo("driver", Firebase.auth.uid)
+            .addSnapshotListener{ snapshot: QuerySnapshot?, error: FirebaseFirestoreException? ->
+                error?.let {
+                    Log.d(Constants.TAG, "Error: $error")
+                    return@addSnapshotListener
+                }
                 rides.clear()
                 snapshot?.documents?.forEach{
                     rides.add(Ride.from(it))
@@ -54,7 +77,7 @@ class RideViewModel : ViewModel() {
     fun addRide(ride: Ride?){
         val random = getRandom()
         val newRide = ride ?: Ride("Ride$random",
-            User("Steven","812-223-7777", "fengr@rose-hulman.edu"),
+            "zhangrj",
             "00:00:00",
             "2022-02-01",
             Address("200 N 7th St","Terre Haute", "47809", "IN"),
@@ -63,24 +86,26 @@ class RideViewModel : ViewModel() {
             listOf(),
             -1.0,
             1,
-        false)
+            false,
+            false)
         ref.add(newRide)
 //        rides.add(newRide)
     }
 
     fun updateCurrentRide(title: String="", setOffTime: String, setOffDate: String, pickUpAddr: Address,
-                          addr: Address, passengers: List<User>, cost: Double = -1.0, numOfSlots: Int, isSelected: Boolean){
+                          addr: Address, passengers: List<String>, cost: Double = -1.0, numOfSlots: Int,
+                          isSelected: Boolean, isSharable: Boolean){
         rides[currentPos].title = title
         rides[currentPos].setOffTime = setOffTime
         rides[currentPos].setOffDate = setOffDate
         rides[currentPos].pickUpAddr = pickUpAddr
 //        rides[currentPos].returnTime = returnTime
-        rides[currentPos].addr = addr
+        rides[currentPos].destinationAddr = addr
         rides[currentPos].passengers = passengers
         rides[currentPos].costPerPerson = cost
         rides[currentPos].numOfSlots = numOfSlots
         rides[currentPos].isSelected = isSelected
-
+        rides[currentPos].sharable = isSharable
         ref.document(getCurrentRide().id).set(getCurrentRide())
         // or use .update() if only want to overwrite specific field(s)
     }
@@ -89,6 +114,12 @@ class RideViewModel : ViewModel() {
 //        rides.removeAt(currentPos)
         ref.document(getCurrentRide().id).delete()
         currentPos = 0
+    }
+
+    fun removeUserFromRide() {
+        rides[currentPos].passengers.filter {
+            it == Firebase.auth.uid
+        }
     }
 
     fun size() = rides.size

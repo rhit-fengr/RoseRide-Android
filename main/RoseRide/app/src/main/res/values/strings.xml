@@ -24,7 +24,7 @@
     <string name="menu_rides">Rides</string>
     <string name="drawer_switch_mode">Switch to Driver Mode</string>
     <string name="drawer_review_appointments">My Appointments</string>
-    <string name="drawer_review_requests">My Requests</string>
+    <string name="drawer_review_history">My History</string>
     <string name="drawer_favorites">My Favorites</string>
     <string name="drawer_location">My Location</string>
     <string name="date_title">Date(YYYY/MM/DD)</string>

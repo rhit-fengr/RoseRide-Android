@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_bright"
+    tools:context=".ui.user.UserEditFragment">
+
+    <TextView
+        android:id="@+id/user_edit_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Edit your profile" />
+
+    <EditText
+        android:id="@+id/user_edit_name_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_edit_title"
+        android:layout_marginStart="20sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginBottom="20sp"
+        android:hint="Your name"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/user_edit_email_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_edit_name_edit_text"
+        android:layout_marginStart="20sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginBottom="20sp"
+        android:hint="email"
+        android:inputType="textEmailAddress"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/user_edit_phone_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_edit_email_edit_text"
+        android:layout_marginStart="20sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginBottom="20sp"
+        android:hint="phone"
+        android:inputType="phone"
+        android:importantForAutofill="no" />
+
+    <Button
+        android:id="@+id/user_edit_upload_photo_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_edit_phone_edit_text"
+        android:layout_alignParentStart="true"
+        android:layout_margin="20dp"
+        android:text="Upload Photo" />
+
+    <Button
+        android:id="@+id/user_edit_done_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_edit_phone_edit_text"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="20dp"
+        android:text="done" />
+
+    <ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_below="@+id/user_edit_done_button"
+        android:contentDescription="Image"
+        android:scaleType="centerInside" />
+
+</RelativeLayout>

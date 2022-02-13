@@ -39,14 +39,16 @@ class RequestListFragment : Fragment() {
         adapter = RequestAdapter(this)
         // set recyclerview and adapter properties
         binding.recyclerView.adapter = adapter
-        adapter.addListener(fragmentName)
+
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
 
         if(driverMode){
+            adapter.addAllListener(fragmentName)
             binding.fab.visibility=View.GONE
         }else{
+            adapter.addOneListener(fragmentName)
             binding.fab.visibility=View.VISIBLE
         }
 

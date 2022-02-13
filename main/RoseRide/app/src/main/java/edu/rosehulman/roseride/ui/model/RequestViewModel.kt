@@ -2,6 +2,7 @@ package edu.rosehulman.roseride.ui.model
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Query
@@ -24,9 +25,32 @@ class RequestViewModel : ViewModel(){
     fun getRequestAt(pos: Int) = requests[pos]
     fun getCurrentRequest() = getRequestAt(currentPos)
 
-    fun addListener(fragmentName: String, observer: () -> Unit) {
+    fun addAllListener(fragmentName: String, observer: () -> Unit) {
         Log.d(Constants.TAG, "Adding listener for $fragmentName")
         val subscription = ref.orderBy(Request.CREATED_KEY, Query.Direction.ASCENDING)
+            .whereNotEqualTo("user", Firebase.auth.uid)
+            .addSnapshotListener{ snapshot: QuerySnapshot?, error: FirebaseFirestoreException? ->
+                error?.let {
+                    Log.d(Constants.TAG, "Error: $error")
+                    return@addSnapshotListener
+                }
+
+                requests.clear()
+                snapshot?.documents?.forEach{
+                    requests.add(Request.from(it))
+
+                }
+
+                observer()
+            }
+
+        subscriptions[fragmentName] = subscription
+    }
+
+    fun addOneListener(fragmentName: String, observer: () -> Unit) {
+        Log.d(Constants.TAG, "Adding listener for $fragmentName")
+        val subscription = ref.orderBy(Request.CREATED_KEY, Query.Direction.ASCENDING)
+            .whereEqualTo("user", Firebase.auth.uid)
             .addSnapshotListener{ snapshot: QuerySnapshot?, error: FirebaseFirestoreException? ->
                 error?.let {
                     Log.d(Constants.TAG, "Error: $error")
@@ -54,14 +78,13 @@ class RequestViewModel : ViewModel(){
         val random = getRandom()
         val newRequest = request ?: Request(
             "Request$random",
-            User("Steven","812-223-7777", "fengr@rose-hulman.edu"),
+            "zhangrj",
             "00:00:00",
             "2022-02-01",
             Address("200 N 7th St","Terre Haute", "47809", "IN"),
 //            Time(0),
             1,
             Address("210 E Ohio St","Chicago", "60611", "IL"),
-            false,
             -1.0,
             -1.0,
             false)
@@ -77,7 +100,6 @@ class RequestViewModel : ViewModel(){
 //            returnTime: Time,
             numOfPassengers: Int,
             destinationAddr: Address,
-            sharable: Boolean = false,
             minPrice: Double,
             maxPrice: Double)
         {
@@ -88,7 +110,6 @@ class RequestViewModel : ViewModel(){
 //        requests[currentPos].returnTime = returnTime
         requests[currentPos].numOfPassengers = numOfPassengers
         requests[currentPos].destinationAddr = destinationAddr
-        requests[currentPos].sharable = sharable
         requests[currentPos].minPrice = minPrice
         requests[currentPos].maxPrice = maxPrice
 

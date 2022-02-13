@@ -9,15 +9,16 @@ import java.sql.Time
 
 data class Ride(
     var title: String="",
-    var driver: User=User(),
+    var driver: String="",
     var setOffTime: String="",
     var setOffDate: String="",
     var pickUpAddr: Address= Address(),
 //    var returnTime: String="",
-    var addr: Address= Address(),
-    var passengers: List<User> = listOf(),
+    var destinationAddr: Address= Address(),
+    var passengers: List<String> = listOf(),
     var costPerPerson: Double = 0.0,
     var numOfSlots: Int=1,
+    var sharable: Boolean = false,
     var isSelected: Boolean = false) {
 
     @get:Exclude
@@ -31,7 +32,7 @@ data class Ride(
     }
 
     companion object {
-        const val COLLECTION_PATH = "ride"
+        const val COLLECTION_PATH = "rides"
         const val CREATED_KEY = "created"
         fun from(snapshot: DocumentSnapshot):Ride {
             val r = snapshot.toObject(Ride::class.java)!! // data only

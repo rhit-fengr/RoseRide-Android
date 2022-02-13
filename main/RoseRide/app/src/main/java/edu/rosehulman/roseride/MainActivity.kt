@@ -28,9 +28,11 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.auth.FirebaseUser
 
 import androidx.annotation.NonNull
+import androidx.lifecycle.ViewModelProvider
 
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
 import edu.rosehulman.rosefire.Rosefire
+import edu.rosehulman.roseride.ui.model.UserViewModel
 
 
 class MainActivity : AppCompatActivity() {
@@ -100,9 +102,15 @@ class MainActivity : AppCompatActivity() {
         mAuthListener = AuthStateListener { firebaseAuth ->
             val user = firebaseAuth.currentUser
             Log.d(Constants.TAG,"user: ${user?.uid}")
-            if(user==null&& !checker){
+            if(user==null && !checker){
                 val signInIntent = Rosefire.getSignInIntent(this, REGISTRY_TOKEN);
                     resultLauncher.launch(signInIntent)
+            }
+            val userModel = ViewModelProvider(this).get(UserViewModel::class.java)
+            userModel.getOrMakeUser {
+                if (!userModel.hasCompletedSetup()) {
+                    navController.navigate(R.id.nav_profile_edit)
+                }
             }
 //            val username = user?.uid ?: "null"
 //            loginButton.setVisibility(if (user != null) View.GONE else View.VISIBLE)

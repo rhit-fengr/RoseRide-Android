@@ -5,6 +5,10 @@ plugins {
 apply plugin: 'com.google.gms.google-services'
 
 android {
+    buildFeatures {
+        viewBinding true
+    }
+
     compileSdk 31
 
     defaultConfig {
@@ -46,6 +50,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.firebaseui:firebase-ui-auth:8.0.0'
+    implementation 'com.google.firebase:firebase-storage-ktx'
 //    implementation 'edu.rosehulman.csse.rosefire:rosefire-android-client:2.1.0'
 
     implementation 'androidx.appcompat:appcompat:1.4.1'

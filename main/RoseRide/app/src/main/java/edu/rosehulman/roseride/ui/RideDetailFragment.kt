@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import edu.rosehulman.roseride.MainActivity
 import edu.rosehulman.roseride.R
 import edu.rosehulman.roseride.databinding.FragmentRideDetailBinding
@@ -42,21 +44,38 @@ class RideDetailFragment : Fragment(){
 //            model.updateCurrentRide(ride.title,ride.setOffTime,ride.setOffDate,ride.pickUpAddr,ride.addr,ride.passengers.plus(current user here),ride.costPerPerson,ride.numOfSlots,ride.isSelected)
             findNavController().navigate(R.id.nav_ride)
         }
+
+        binding.rideLeaveBtn.setOnClickListener {
+            model.removeUserFromRide()
+            findNavController().navigate(R.id.nav_ride)
+        }
     }
 
     private fun updateView() {
-        if(!MainActivity.driverMode){
+        if(!MainActivity.driverMode  && model.getCurrentRide().sharable){
             binding.rideDeleteBtn.visibility=View.GONE
             binding.rideRequestBtn.visibility=View.VISIBLE
+            binding.rideLeaveBtn.visibility=View.GONE
+        }
+        else if (MainActivity.driverMode  && !model.getCurrentRide().sharable) {
+            binding.rideDeleteBtn.visibility=View.GONE
+            binding.rideRequestBtn.visibility=View.GONE
+            binding.rideLeaveBtn.visibility=View.GONE
+        }
+        else if (!MainActivity.driverMode && model.getCurrentRide().sharable && model.getCurrentRide().passengers.contains(Firebase.auth.uid)){
+            binding.rideDeleteBtn.visibility=View.GONE
+            binding.rideRequestBtn.visibility=View.GONE
+            binding.rideLeaveBtn.visibility=View.VISIBLE
         }
         else{
             binding.rideDeleteBtn.visibility=View.VISIBLE
             binding.rideRequestBtn.visibility=View.GONE
+            binding.rideLeaveBtn.visibility=View.GONE
         }
         binding.rideDetailTitle.text = model.getCurrentRide().title
         binding.pickUpAddressAnswer.text = model.getCurrentRide().pickUpAddr.toStringBeautified()
         binding.setOffTime.text = model.getCurrentRide().setOffDate + "   " + model.getCurrentRide().setOffTime.substring(0,  model.getCurrentRide().setOffTime.length-3)
-        binding.destinationAddressAnswer.text = model.getCurrentRide().addr.toStringBeautified()
+        binding.destinationAddressAnswer.text = model.getCurrentRide().destinationAddr.toStringBeautified()
         binding.priceRangeAnswer.text = "$" + model.getCurrentRide().costPerPerson.toString()
         binding.availableSlots.text = (model.getCurrentRide().numOfSlots - model.getCurrentRide().passengers.size).toString() + "/" + model.getCurrentRide().numOfSlots.toString()
     }

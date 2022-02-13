@@ -112,11 +112,16 @@ class RequestAdapter(fragment: RequestListFragment) : RecyclerView.Adapter<Reque
         notifyDataSetChanged()
     }
 
-    fun addListener(fragmentName: String) {
-        model.addListener(fragmentName,{
+    fun addAllListener(fragmentName: String) {
+        model.addAllListener(fragmentName,{
             notifyDataSetChanged()
         })
+    }
 
+    fun addOneListener(fragmentName: String) {
+        model.addOneListener(fragmentName,{
+            notifyDataSetChanged()
+        })
     }
 
     fun removeListener(fragmentName: String) {

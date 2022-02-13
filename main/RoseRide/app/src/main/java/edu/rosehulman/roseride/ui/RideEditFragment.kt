@@ -57,7 +57,8 @@ class RideEditFragment : Fragment() {
                         listOf(),
                         cost.toDouble(),
                         numOfSlots.toInt(),
-                        false
+                        false,
+                        true
                 )
 
                 updateView()
@@ -106,7 +107,7 @@ class RideEditFragment : Fragment() {
         val current = model.getCurrentRide()
         binding.rideName.setText(current.title)
         binding.pickUpAddressAnswer.setText(current.pickUpAddr.toString())
-        binding.destinationAddressAnswer.setText(current.addr.toString())
+        binding.destinationAddressAnswer.setText(current.destinationAddr.toString())
         binding.dateAnswer.setText(current.setOffDate)
         binding.timeAnswer.setText(current.setOffTime.substring(0,current.setOffTime.length-3))
         binding.costPerPerson.setText(current.costPerPerson.toString())

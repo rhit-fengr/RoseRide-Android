@@ -21,7 +21,13 @@
         android:id="@+id/nav_profile"
         android:name="edu.rosehulman.roseride.ui.user.UserFragment"
         android:label="@string/menu_profile"
-        tools:layout="@layout/fragment_ride_list" />
+        tools:layout="@layout/fragment_user" />
+
+    <fragment
+        android:id="@+id/nav_profile_edit"
+        android:name="edu.rosehulman.roseride.ui.user.UserEditFragment"
+        android:label="Edit Profile"
+        tools:layout="@layout/fragment_user_edit" />
 
     //new
     <fragment

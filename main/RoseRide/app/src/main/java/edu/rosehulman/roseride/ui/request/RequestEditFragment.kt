@@ -64,7 +64,6 @@ class RequestEditFragment : Fragment(){
                     Address(pAddr),
                     1,
                     Address(dAddr),
-                    false,
                     minPrice.toDouble(),
                     maxPrice.toDouble()
                 )

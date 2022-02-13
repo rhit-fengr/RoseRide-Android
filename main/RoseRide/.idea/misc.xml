@@ -47,6 +47,9 @@
         <entry key="..\:/Users/imabi/AndroidStudioProjects/RoseRide Project/RoseRide-Android/main/RoseRide/app/src/main/res/drawable/ic_baseline_calendar_month_24.xml" value="0.3609375" />
         <entry key="..\:/Users/imabi/AndroidStudioProjects/RoseRide Project/RoseRide-Android/main/RoseRide/app/src/main/res/drawable/ic_baseline_edit_calendar_24.xml" value="0.3609375" />
         <entry key="..\:/Users/imabi/AndroidStudioProjects/RoseRide Project/RoseRide-Android/main/RoseRide/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3609375" />
+        <entry key="..\:/Users/imabi/AndroidStudioProjects/RoseRide Project/RoseRide-Android/main/RoseRide/app/src/main/res/layout/app_bar_main.xml" value="0.2563405797101449" />
+        <entry key="..\:/Users/imabi/AndroidStudioProjects/RoseRide Project/RoseRide-Android/main/RoseRide/app/src/main/res/layout/content_main.xml" value="0.2563405797101449" />
+        <entry key="..\:/Users/imabi/AndroidStudioProjects/RoseRide Project/RoseRide-Android/main/RoseRide/app/src/main/res/layout/fragment_home.xml" value="0.2773556231003039" />
         <entry key="..\:/Users/imabi/AndroidStudioProjects/RoseRide Project/RoseRide-Android/main/RoseRide/app/src/main/res/layout/fragment_request_add.xml" value="0.2644927536231884" />
         <entry key="..\:/Users/imabi/AndroidStudioProjects/RoseRide Project/RoseRide-Android/main/RoseRide/app/src/main/res/layout/fragment_request_detail.xml" value="0.2644927536231884" />
         <entry key="..\:/Users/imabi/AndroidStudioProjects/RoseRide Project/RoseRide-Android/main/RoseRide/app/src/main/res/layout/fragment_request_edit.xml" value="0.1" />
@@ -54,7 +57,11 @@
         <entry key="..\:/Users/imabi/AndroidStudioProjects/RoseRide Project/RoseRide-Android/main/RoseRide/app/src/main/res/layout/fragment_ride_detail.xml" value="0.16084093211752787" />
         <entry key="..\:/Users/imabi/AndroidStudioProjects/RoseRide Project/RoseRide-Android/main/RoseRide/app/src/main/res/layout/fragment_ride_edit.xml" value="0.2796352583586626" />
         <entry key="..\:/Users/imabi/AndroidStudioProjects/RoseRide Project/RoseRide-Android/main/RoseRide/app/src/main/res/layout/fragment_rose_login.xml" value="0.22010869565217392" />
+        <entry key="..\:/Users/imabi/AndroidStudioProjects/RoseRide Project/RoseRide-Android/main/RoseRide/app/src/main/res/layout/fragment_user.xml" value="0.18465045592705168" />
+        <entry key="..\:/Users/imabi/AndroidStudioProjects/RoseRide Project/RoseRide-Android/main/RoseRide/app/src/main/res/layout/fragment_user_edit.xml" value="0.2563405797101449" />
+        <entry key="..\:/Users/imabi/AndroidStudioProjects/RoseRide Project/RoseRide-Android/main/RoseRide/app/src/main/res/layout/nav_header_main.xml" value="0.2563405797101449" />
         <entry key="..\:/Users/imabi/AndroidStudioProjects/RoseRide Project/RoseRide-Android/main/RoseRide/app/src/main/res/layout/row_request.xml" value="0.25181159420289856" />
+        <entry key="..\:/Users/imabi/AndroidStudioProjects/RoseRide Project/RoseRide-Android/main/RoseRide/app/src/main/res/menu/activity_main_drawer.xml" value="0.5615384615384615" />
       </map>
     </option>
   </component>

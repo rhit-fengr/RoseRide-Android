@@ -13,13 +13,12 @@ import java.sql.Time
 
 data class Request(
     var title: String="",
-    var user: User=User(),
+    var user: String="",
     var setOffTime: String="",
     var setOffDate: String="",
     var pickUpAddr: Address= Address(),
     var numOfPassengers: Int=1,
     var destinationAddr: Address = Address(),
-    var sharable: Boolean = false,
     var minPrice: Double=-1.0,
     var maxPrice: Double=-1.0,
     var isSelected: Boolean = false){

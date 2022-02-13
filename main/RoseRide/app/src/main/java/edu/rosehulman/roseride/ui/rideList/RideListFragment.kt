@@ -36,15 +36,17 @@ class RideListFragment : Fragment() {
         adapter = RideAdapter(this)
         // set recyclerview and adapter properties
         binding.recyclerView.adapter = adapter
-         adapter.addListener(fragmentName)
+
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
 
         if(MainActivity.driverMode){
             binding.fab.visibility=View.VISIBLE
+            adapter.addOneListener(fragmentName)
         }else{
             binding.fab.visibility=View.GONE
+            adapter.addAllListener(fragmentName)
         }
 
         binding.fab.setOnClickListener{

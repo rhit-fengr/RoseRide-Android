@@ -33,11 +33,6 @@ class RideAdapter(fragment: RideListFragment) : RecyclerView.Adapter<RideAdapter
 
 
         init {
-            if(MainActivity.driverMode){
-                editbtn.visibility=View.VISIBLE
-            }else{
-                editbtn.visibility=View.GONE
-            }
 
             itemView.setOnClickListener{
                 // navigate
@@ -71,10 +66,17 @@ class RideAdapter(fragment: RideListFragment) : RecyclerView.Adapter<RideAdapter
         }
 
         fun bind(r: Ride) {
+
+            if(MainActivity.driverMode && r.sharable){
+                editbtn.visibility=View.VISIBLE
+            }else{
+                editbtn.visibility=View.GONE
+            }
+
             title.text = r.title
-            dAddr.text = "Address: "+r.addr.toString()
+            dAddr.text = "Address: "+r.destinationAddr.toString()
             time.text = "Set-off Time: "+ r.setOffDate.toString() + " " + r.setOffTime.toString().substring(0, r.setOffTime.toString().length-3)
-            sAddr.text = "Set-off Address: "+r.addr.toString()
+            sAddr.text = "Set-off Address: "+r.destinationAddr.toString()
             cost.text = "Cost/Person ($): "+r.costPerPerson.toString()
             numOfSlots.text = "Available slots: "+r.numOfSlots.toString()
             Log.d("RR","isSelected: ${r.isSelected}")
@@ -114,11 +116,16 @@ class RideAdapter(fragment: RideListFragment) : RecyclerView.Adapter<RideAdapter
         notifyDataSetChanged()
     }
 
-    fun addListener(fragmentName: String) {
-        model.addListener(fragmentName,{
+    fun addAllListener(fragmentName: String) {
+        model.addAllListener(fragmentName,{
             notifyDataSetChanged()
         })
+    }
 
+    fun addOneListener(fragmentName: String) {
+        model.addOneListener(fragmentName,{
+            notifyDataSetChanged()
+        })
     }
 
     fun removeListener(fragmentName: String) {

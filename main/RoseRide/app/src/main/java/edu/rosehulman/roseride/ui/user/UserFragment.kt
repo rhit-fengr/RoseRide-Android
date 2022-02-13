@@ -1,20 +1,27 @@
 package edu.rosehulman.roseride.ui.user
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import edu.rosehulman.roseride.Constants
+import edu.rosehulman.roseride.R
 import edu.rosehulman.roseride.databinding.FragmentUserBinding
+import edu.rosehulman.roseride.ui.model.UserViewModel
 
 
 class UserFragment : Fragment() {
 
     private lateinit var binding: FragmentUserBinding
+    private lateinit var userModel: UserViewModel
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -25,6 +32,7 @@ class UserFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        userModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
         binding = FragmentUserBinding.inflate(inflater, container, false)
         val root: View = binding.root
         updateView()
@@ -32,13 +40,25 @@ class UserFragment : Fragment() {
         logOutbtn.setOnClickListener {
             Firebase.auth.signOut()
         }
+        binding.editButton.setOnClickListener {
+            findNavController().navigate(R.id.nav_profile_edit)
+        }
         return root
     }
 
     private fun updateView() {
-        binding.centerImage.load("https://media-exp1.licdn.com/dms/image/C4E03AQHYevMgxmPPMw/profile-displayphoto-shrink_200_200/0/1603517211239?e=1647475200&v=beta&t=LZFiFKxY_7fBwUkRMAqvqPRBtWCP5FKc4qT6OtoqUl0"){
-            crossfade(true)
-            transformations(CircleCropTransformation())
+
+        userModel.getOrMakeUser {
+            with(userModel.user!!) {
+                Log.d(Constants.TAG, "$this")
+                binding.profileName.setText(name)
+                binding.profilePhone.setText(phone)
+                binding.profileEmail.setText(email)
+                binding.centerImage.load(storageUriString){
+                    crossfade(true)
+                    transformations(CircleCropTransformation())
+                }
+            }
         }
     }
 
