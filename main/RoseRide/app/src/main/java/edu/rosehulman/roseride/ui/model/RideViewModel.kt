@@ -1,7 +1,11 @@
 package edu.rosehulman.roseride.ui.model
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.ListenerRegistration
@@ -10,8 +14,14 @@ import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import edu.rosehulman.roseride.Constants
-import java.sql.Date
+import edu.rosehulman.roseride.R
 import java.sql.Time
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 import kotlin.random.Random
 
 class RideViewModel : ViewModel() {
@@ -20,18 +30,16 @@ class RideViewModel : ViewModel() {
     var currentPos = 0
 
     val ref = Firebase.firestore.collection(Ride.COLLECTION_PATH)
+    val refHistory = Firebase.firestore.collection(History.COLLECTION_PATH)
     var subscriptions = HashMap<String, ListenerRegistration>()
 
     fun getRideAt(pos: Int) = rides[pos]
     fun getCurrentRide() = getRideAt(currentPos)
 
-
     fun addAllListener(fragmentName: String, observer: () -> Unit) {
         Log.d(Constants.TAG, "Adding listener for $fragmentName")
-        val subscription = ref
+        val subscription = ref.orderBy(Request.CREATED_KEY, Query.Direction.ASCENDING)
 //            .whereNotEqualTo("user", Firebase.auth.uid)
-//            .orderBy("user", Query.Direction.ASCENDING)
-            .orderBy(Request.CREATED_KEY, Query.Direction.ASCENDING)
             .addSnapshotListener{ snapshot: QuerySnapshot?, error: FirebaseFirestoreException? ->
                 error?.let {
                     Log.d(Constants.TAG, "Error: $error")
@@ -41,19 +49,17 @@ class RideViewModel : ViewModel() {
                 rides.clear()
                 snapshot?.documents?.forEach{
                     rides.add(Ride.from(it))
-
                 }
-
                 observer()
             }
-
         subscriptions[fragmentName] = subscription
     }
+
 
     fun addOneListener(fragmentName: String, observer: () -> Unit) {
         Log.d(Constants.TAG, "Adding listener for $fragmentName")
         val subscription = ref.orderBy(Request.CREATED_KEY, Query.Direction.ASCENDING)
-            .whereEqualTo("driver", Firebase.auth.uid)
+//            .whereEqualTo("driver", Firebase.auth.uid)
             .addSnapshotListener{ snapshot: QuerySnapshot?, error: FirebaseFirestoreException? ->
                 error?.let {
                     Log.d(Constants.TAG, "Error: $error")
@@ -64,12 +70,46 @@ class RideViewModel : ViewModel() {
                     rides.add(Ride.from(it))
 
                 }
-
                 observer()
             }
-
         subscriptions[fragmentName] = subscription
     }
+
+    fun checkHistory(){
+        Log.d("gheat", rides.size.toString())
+        rides.forEach {
+            val current = getCurrentDateTime()
+            val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+            val formatted = formatter.format(current)
+            Log.d("ghet", "ghet")
+            Log.d("what", formatted)
+            Log.d("huh", it.setOffDate)
+            if(formatted == it.setOffDate){
+                switchToHistory(it)
+            }
+        }
+    }
+
+    fun getCurrentDateTime(): Date {
+        return Calendar.getInstance().time
+    }
+
+    fun switchToHistory(ride: Ride?) {
+        var history = History(
+            title = ride?.title!!,
+            driver = ride?.driver,
+            setOffTime = ride?.setOffTime,
+            setOffDate = ride?.setOffDate,
+            destinationAddr = ride?.destinationAddr,
+            costPerPerson = ride?.costPerPerson,
+            passengers = ride?.passengers
+        )
+
+        ref.document(ride.id).delete()
+        refHistory.add(history)
+    }
+
+
 
     fun removeListener(fragmentName: String){
         subscriptions[fragmentName]?.remove() // tells firebase to stop listening
@@ -116,6 +156,10 @@ class RideViewModel : ViewModel() {
 //        rides.removeAt(currentPos)
         ref.document(getCurrentRide().id).delete()
         currentPos = 0
+    }
+
+    fun removeRide(ride: Ride){
+        ref.document(ride.id).delete()
     }
 
     fun removeUserFromRide() {

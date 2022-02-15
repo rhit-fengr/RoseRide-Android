@@ -12,12 +12,17 @@ import androidx.navigation.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.color.MaterialColors
+import edu.rosehulman.roseride.ui.model.History
+import edu.rosehulman.roseride.ui.model.HistoryViewModel
 import edu.rosehulman.roseride.ui.model.Ride
 import edu.rosehulman.roseride.ui.model.RideViewModel
 import edu.rosehulman.roseride.ui.rideList.RideListFragment
+import java.text.SimpleDateFormat
+import java.util.*
 
 class RideAdapter(fragment: RideListFragment) : RecyclerView.Adapter<RideAdapter.RideViewHolder>() {
     val model = ViewModelProvider(fragment.requireActivity()).get(RideViewModel::class.java)
+    val modelHistory = ViewModelProvider(fragment.requireActivity()).get(HistoryViewModel::class.java)
     val fragment = fragment
 
 
@@ -33,6 +38,16 @@ class RideAdapter(fragment: RideListFragment) : RecyclerView.Adapter<RideAdapter
 
 
         init {
+
+            Log.d("size", model.size().toString())
+            val current = getCurrentDateTime()
+            val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+            val formatted = formatter.format(current)
+            model.rides.forEach {
+                if(formatted > it.setOffDate){
+                    switchToHistory(it)
+                }
+            }
 
             itemView.setOnClickListener{
                 // navigate
@@ -76,7 +91,7 @@ class RideAdapter(fragment: RideListFragment) : RecyclerView.Adapter<RideAdapter
             title.text = r.title
             dAddr.text = "Address: "+r.destinationAddr.toString()
             time.text = "Set-off Time: "+ r.setOffDate.toString() + " " + r.setOffTime.toString().substring(0, r.setOffTime.toString().length-3)
-            sAddr.text = "Set-off Address: "+r.destinationAddr.toString()
+            sAddr.text = "Set-off Address: "+r.pickUpAddr.toString()
             cost.text = "Cost/Person ($): "+r.costPerPerson.toString()
             numOfSlots.text = "Available slots: "+r.numOfSlots.toString()
             Log.d("RR","isSelected: ${r.isSelected}")
@@ -130,6 +145,25 @@ class RideAdapter(fragment: RideListFragment) : RecyclerView.Adapter<RideAdapter
 
     fun removeListener(fragmentName: String) {
         model.removeListener(fragmentName)
+    }
+
+    fun getCurrentDateTime(): Date {
+        return Calendar.getInstance().time
+    }
+
+    fun switchToHistory(ride: Ride?) {
+        var history = History(
+            title = ride?.title!!,
+            driver = ride?.driver,
+            setOffTime = ride?.setOffTime,
+            setOffDate = ride?.setOffDate,
+            destinationAddr = ride?.destinationAddr,
+            costPerPerson = ride?.costPerPerson,
+            passengers = ride?.passengers
+        )
+
+        model.removeRide(ride)
+        modelHistory.addHistory(history)
     }
 
 }

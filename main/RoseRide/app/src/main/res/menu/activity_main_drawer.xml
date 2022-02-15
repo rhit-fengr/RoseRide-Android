@@ -22,14 +22,14 @@
         <item
             android:id="@+id/nav_my_posts"
             android:icon="@drawable/ic_baseline_bookmarks_24"
-            android:title="@string/drawer_review_history" />
+            android:title="@string/drawer_review_requests" />
         <item
             android:id="@+id/nav_location"
             android:icon="@drawable/ic_baseline_location_on_24"
             android:title="@string/drawer_location" />
         <item
-            android:id="@+id/nav_favorites"
+            android:id="@+id/nav_history"
             android:icon="@drawable/ic_baseline_favorite_24"
-            android:title="@string/drawer_favorites" />
+            android:title="@string/drawer_review_history" />
     </group>
 </menu>

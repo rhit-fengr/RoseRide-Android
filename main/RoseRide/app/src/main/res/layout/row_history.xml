@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:layout_margin="4dp">
+
+    <TextView
+        android:id="@+id/row_history_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="24sp"
+        android:text="Deming Park" />
+
+    <RelativeLayout
+        android:id="@+id/row_history_leftText"
+        android:layout_width="337dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/row_history_title"
+        android:layout_marginTop="10dp">
+
+
+        <TextView
+            android:id="@+id/row_history_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:textSize="16sp"
+            android:text="Address: 500 S Fruitridge Ave, Terre Haute, IN 47803"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/row_history_driver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/row_history_address"
+            android:textSize="16sp"
+            android:text="Driver: John Cena"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/row_history_set_off_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/row_history_driver"
+            android:layout_alignParentLeft="true"
+            android:textSize="16sp"
+            android:text="Set-off Time: 14:00 AM, 02-17-2022"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/row_history_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/row_history_set_off_time"
+            android:layout_alignParentLeft="true"
+            android:textSize="16sp"
+            android:text="Cost/Person ($): TBD"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/row_history_rightImage"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:contentDescription="@string/user_icon_description"
+        android:src="@drawable/ic_baseline_edit_24" />
+
+
+</RelativeLayout>

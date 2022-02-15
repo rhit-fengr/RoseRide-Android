@@ -27,10 +27,8 @@ class RequestViewModel : ViewModel(){
 
     fun addAllListener(fragmentName: String, observer: () -> Unit) {
         Log.d(Constants.TAG, "Adding listener for $fragmentName")
-        val subscription = ref
+        val subscription = ref.orderBy(Request.CREATED_KEY, Query.Direction.ASCENDING)
 //            .whereNotEqualTo("user", Firebase.auth.uid)
-//            .orderBy("user", Query.Direction.ASCENDING)
-            .orderBy(Request.CREATED_KEY, Query.Direction.ASCENDING)
             .addSnapshotListener{ snapshot: QuerySnapshot?, error: FirebaseFirestoreException? ->
                 error?.let {
                     Log.d(Constants.TAG, "Error: $error")
@@ -52,7 +50,7 @@ class RequestViewModel : ViewModel(){
     fun addOneListener(fragmentName: String, observer: () -> Unit) {
         Log.d(Constants.TAG, "Adding listener for $fragmentName")
         val subscription = ref.orderBy(Request.CREATED_KEY, Query.Direction.ASCENDING)
-            .whereEqualTo("user", Firebase.auth.uid)
+//            .whereEqualTo("user", Firebase.auth.uid)
             .addSnapshotListener{ snapshot: QuerySnapshot?, error: FirebaseFirestoreException? ->
                 error?.let {
                     Log.d(Constants.TAG, "Error: $error")
