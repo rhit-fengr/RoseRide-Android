@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.user.UserFragment"
-    android:background="@android:color/holo_blue_dark">
+    android:background="#FFDDA0DD">
 
 
     <ImageView
@@ -21,42 +21,46 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/center_image"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/alike_angular"
+        android:textColor="@color/MediumSpringGreen"
         android:text="Steven Feng"
         android:textSize="30sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/profile_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/profile_name"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/alike_angular"
+        android:textColor="@color/Black"
         android:text="Your Profile"
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/profile_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/center_image"
-        android:text="812-223-7777"
-        android:textSize="20sp"
         android:layout_centerHorizontal="true"
-        />
+        android:fontFamily="@font/trade_winds"
+        android:textColor="@color/DeepPink"
+        android:text="8122237777"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/profile_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/profile_phone"
-        android:text="fengr@rose-hulman.edu"
-        android:textSize="20sp"
         android:layout_centerHorizontal="true"
-        />
+        android:fontFamily="cursive"
+        android:textColor="@color/GreenYellow"
+        android:text="fengr@rose-hulman.edu"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/edit_button"

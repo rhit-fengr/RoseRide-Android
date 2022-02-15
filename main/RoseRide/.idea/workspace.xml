@@ -18,7 +18,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\imabi\.android\avd\Pixel_5_API_29.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\fengr\.android\avd\Pixel_3a_API_30.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -58,6 +58,8 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android-custom-viewC:/Users/fengr/.gradle/caches/modules-2/files-2.1/androidx.drawerlayout/drawerlayout/1.1.1/d95f7d9cd7d95cc0c038bbcf9c65f521b56fee55/drawerlayout-1.1.1-sources.jar!/androidx/drawerlayout/widget/DrawerLayout.java_DrawerLayout_DIMENSIONS" value="1080&#10;1920" />
+    <property name="android-custom-viewC:/Users/fengr/.gradle/caches/modules-2/files-2.1/androidx.drawerlayout/drawerlayout/1.1.1/d95f7d9cd7d95cc0c038bbcf9c65f521b56fee55/drawerlayout-1.1.1-sources.jar!/androidx/drawerlayout/widget/DrawerLayout.java_SELECTED" value="DrawerLayout" />
     <property name="android-custom-viewC:/Users/fengr/.gradle/caches/modules-2/files-2.1/com.google.android.material/material/1.4.0/51035a8f6342c20d4d8f242d100e6f25e0c271ac/material-1.4.0-sources.jar!/com/google/android/material/floatingactionbutton/FloatingActionButton.java_FloatingActionButton_DIMENSIONS" value="1080&#10;1920" />
     <property name="android-custom-viewC:/Users/fengr/.gradle/caches/modules-2/files-2.1/com.google.android.material/material/1.4.0/51035a8f6342c20d4d8f242d100e6f25e0c271ac/material-1.4.0-sources.jar!/com/google/android/material/floatingactionbutton/FloatingActionButton.java_SELECTED" value="FloatingActionButton" />
     <property name="android-custom-viewC:/Users/fengr/.gradle/caches/modules-2/files-2.1/com.google.android.material/material/1.4.0/51035a8f6342c20d4d8f242d100e6f25e0c271ac/material-1.4.0-sources.jar!/com/google/android/material/internal/VisibilityAwareImageButton.java_SELECTED" value="VisibilityAwareImageButton" />
