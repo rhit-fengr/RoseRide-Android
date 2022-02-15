@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:fontFamily="@font/trade_winds"
         android:textSize="24sp"
         android:text="Deming Park" />
 
@@ -20,14 +21,15 @@
         android:layout_below="@id/row_ride_title"
         android:layout_marginTop="10dp">
 
-    <TextView
-        android:id="@+id/row_ride_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:textSize="16sp"
-        android:text="Address: 500 S Fruitridge Ave, Terre Haute, IN 47803"
-        android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/row_ride_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:fontFamily="cursive"
+            android:text="Address: 500 S Fruitridge Ave, Terre Haute, IN 47803"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
     <TextView
         android:id="@+id/row_ride_set_off_time"
@@ -36,6 +38,7 @@
         android:layout_below="@id/row_ride_address"
         android:layout_alignParentLeft="true"
         android:textSize="16sp"
+        android:fontFamily="cursive"
         android:text="Set-off Time: 14:00 AM, 02-17-2022"
         android:textStyle="bold"/>
 
@@ -45,6 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/row_ride_set_off_time"
         android:layout_alignParentLeft="true"
+        android:fontFamily="cursive"
         android:textSize="16sp"
         android:text="Set-off Address: TBD"
         android:textStyle="bold"/>
@@ -55,6 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/row_ride_set_off_address"
         android:layout_alignParentLeft="true"
+        android:fontFamily="cursive"
         android:textSize="16sp"
         android:text="Cost/Person ($): TBD"
         android:textStyle="bold"/>
@@ -65,6 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/row_ride_cost"
         android:layout_alignParentLeft="true"
+        android:fontFamily="cursive"
         android:textSize="16sp"
         android:text="Available slots: 1"
         android:textStyle="bold"/>
