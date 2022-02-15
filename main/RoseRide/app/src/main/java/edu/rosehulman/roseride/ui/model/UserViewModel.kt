@@ -1,5 +1,6 @@
 package edu.rosehulman.roseride.ui.model
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentSnapshot
@@ -7,7 +8,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class UserViewModel: ViewModel() {
-    var ref = Firebase.firestore.collection(User.COLLECTION_PATH).document(Firebase.auth.uid!!)
+
 
     var user: User? = null
 
@@ -21,6 +22,8 @@ class UserViewModel: ViewModel() {
         }
         else{
             //make
+                Log.d("asdf", "${Firebase.auth.uid}")
+            var ref = Firebase.firestore.collection(User.COLLECTION_PATH).document(Firebase.auth.uid!!)
             ref.get().addOnSuccessListener { snapshot: DocumentSnapshot ->
                 if (snapshot.exists()) {
                     user = snapshot.toObject(User::class.java)
@@ -42,6 +45,7 @@ class UserViewModel: ViewModel() {
                 email = newEmail
                 storageUriString = newStorageUriString
                 hasCompletedSetup = newHasCompletedSetup
+                var ref = Firebase.firestore.collection(User.COLLECTION_PATH).document(Firebase.auth.uid!!)
                 ref.set(this)
             }
         }

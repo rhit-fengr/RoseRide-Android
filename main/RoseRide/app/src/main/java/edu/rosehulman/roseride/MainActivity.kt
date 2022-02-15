@@ -102,14 +102,18 @@ class MainActivity : AppCompatActivity() {
         mAuthListener = AuthStateListener { firebaseAuth ->
             val user = firebaseAuth.currentUser
             Log.d(Constants.TAG,"user: ${user?.uid}")
-            if(user==null && !checker){
+            if(user==null /*&& !checker*/){
                 val signInIntent = Rosefire.getSignInIntent(this, REGISTRY_TOKEN);
                     resultLauncher.launch(signInIntent)
             }
-            val userModel = ViewModelProvider(this).get(UserViewModel::class.java)
-            userModel.getOrMakeUser {
-                if (!userModel.hasCompletedSetup()) {
-                    navController.navigate(R.id.nav_profile_edit)
+            else {
+                val userModel = ViewModelProvider(this).get(UserViewModel::class.java)
+                userModel.getOrMakeUser {
+                    if (!userModel.hasCompletedSetup()) {
+                        navController.navigate(R.id.nav_profile_edit)
+                    } else {
+                        navController.navigate(R.id.nav_profile)
+                    }
                 }
             }
 //            val username = user?.uid ?: "null"
@@ -132,7 +136,7 @@ class MainActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_ride, R.id.nav_request, R.id.nav_profile
+                R.id.nav_ride, R.id.nav_request, R.id.nav_profile, R.id.navigation_history
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
