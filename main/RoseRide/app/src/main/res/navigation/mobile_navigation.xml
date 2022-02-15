@@ -30,6 +30,13 @@
         tools:layout="@layout/fragment_user_edit" />
 
     //new
+
+    <fragment
+        android:id="@+id/navigation_history"
+        android:name="edu.rosehulman.roseride.ui.historyList.HistoryListFragment"
+        android:label="History"
+        tools:layout="@layout/fragment_history_list" />
+
     <fragment
         android:id="@+id/navigation_request_add"
         android:name="edu.rosehulman.roseride.ui.request.RequestAddFragment"

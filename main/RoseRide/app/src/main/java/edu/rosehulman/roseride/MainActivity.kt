@@ -178,18 +178,23 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        navView.menu!!.findItem(R.id.nav_my_posts).setOnMenuItemClickListener { menuItem: MenuItem? ->
-            //write your implementation here
-            //to close the navigation drawer
+//        navView.menu!!.findItem(R.id.nav_my_posts).setOnMenuItemClickListener { menuItem: MenuItem? ->
+//            //write your implementation here
+//            //to close the navigation drawer
+//
+//            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+//                drawerLayout.closeDrawer(GravityCompat.START)
+//            }
+//
+//            if(driverMode){
+//                navController.navigate(R.id.nav_ride)
+//            }else navController.navigate(R.id.nav_request)
+//
+//            true
+//        }
 
-            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                drawerLayout.closeDrawer(GravityCompat.START)
-            }
-
-            if(driverMode){
-                navController.navigate(R.id.nav_ride)
-            }else navController.navigate(R.id.nav_request)
-
+        navView.menu!!.findItem(R.id.nav_history).setOnMenuItemClickListener { menuItem: MenuItem? ->
+            navController.navigate(R.id.navigation_history)
             true
         }
 
