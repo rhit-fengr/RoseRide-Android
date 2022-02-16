@@ -48,8 +48,11 @@ class RideListFragment : Fragment() {
 //            binding.fab.visibility=View.GONE
 //        }
 
+
         checkFab()
-        checkOne()
+        if(MainActivity.driverMode) {
+            checkOne()
+        }
 
         binding.fab.setOnClickListener{
             findNavController().navigate(R.id.nav_ride_add)
@@ -59,10 +62,11 @@ class RideListFragment : Fragment() {
     }
 
     fun checkOne() {
+        adapter.removeListener(fragmentName)
         if(!MainActivity.onlyUser){
-            adapter.addAllListener(RequestListFragment.fragmentName)
+            adapter.addAllListener(fragmentName)
         }else{
-            adapter.addOneListener(RequestListFragment.fragmentName)
+            adapter.addOneListener(fragmentName)
         }
     }
 
@@ -71,6 +75,14 @@ class RideListFragment : Fragment() {
             binding.fab.visibility=View.VISIBLE
         }else{
             binding.fab.visibility=View.GONE
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkFab()
+        if(MainActivity.driverMode) {
+            checkOne()
         }
     }
 

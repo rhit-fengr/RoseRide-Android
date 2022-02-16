@@ -10,7 +10,6 @@ import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import edu.rosehulman.roseride.Constants
-import edu.rosehulman.roseride.MainActivity.Companion.onlyUser
 import kotlin.random.Random
 
 class RequestViewModel : ViewModel(){
@@ -71,7 +70,6 @@ class RequestViewModel : ViewModel(){
     fun removeListener(fragmentName: String){
         subscriptions[fragmentName]?.remove() // tells firebase to stop listening
         subscriptions.remove(fragmentName) // removes from map
-        onlyUser = false
     }
 
     fun addRequest(request: Request?){
