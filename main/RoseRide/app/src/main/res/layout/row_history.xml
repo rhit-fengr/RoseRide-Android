@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:fontFamily="@font/trade_winds"
         android:textSize="24sp"
         android:text="Deming Park" />
 
@@ -27,6 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:fontFamily="monospace"
             android:textSize="16sp"
             android:text="Address: 500 S Fruitridge Ave, Terre Haute, IN 47803"
             android:textStyle="bold"/>
@@ -37,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@id/row_history_address"
+            android:fontFamily="monospace"
             android:textSize="16sp"
             android:text="Driver: John Cena"
             android:textStyle="bold"/>
@@ -47,6 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/row_history_driver"
             android:layout_alignParentLeft="true"
+            android:fontFamily="monospace"
             android:textSize="16sp"
             android:text="Set-off Time: 14:00 AM, 02-17-2022"
             android:textStyle="bold"/>
@@ -57,6 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/row_history_set_off_time"
             android:layout_alignParentLeft="true"
+            android:fontFamily="monospace"
             android:textSize="16sp"
             android:text="Cost/Person ($): TBD"
             android:textStyle="bold"/>

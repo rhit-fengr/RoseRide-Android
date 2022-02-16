@@ -50,9 +50,7 @@ class RideListFragment : Fragment() {
 
 
         checkFab()
-        if(MainActivity.driverMode) {
-            checkOne()
-        }
+        checkOne()
 
         binding.fab.setOnClickListener{
             findNavController().navigate(R.id.nav_ride_add)

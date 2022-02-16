@@ -54,9 +54,7 @@ class RequestListFragment : Fragment() {
 //        }
 
         checkFab()
-        if(!driverMode) {
-            checkOne()
-        }
+        checkOne()
 
         binding.fab.setOnClickListener{
             findNavController().navigate(R.id.nav_request_add)
