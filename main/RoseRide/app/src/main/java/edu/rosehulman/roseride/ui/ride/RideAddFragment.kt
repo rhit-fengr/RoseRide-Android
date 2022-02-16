@@ -1,5 +1,6 @@
 package edu.rosehulman.roseride.ui.ride
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,6 +9,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.widget.Autocomplete
+import com.google.android.libraries.places.widget.AutocompleteActivity
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -111,6 +117,31 @@ class RideAddFragment : Fragment() {
                 picker.show(parentFragmentManager, "tag")
             }
 
+        Places.initialize(context, "AIzaSyAKKb9_jLm6QSktSq7hBmPP48Bzcbr4iVg")
+
+        binding.pickUpAddressAnswer.setFocusable(false)
+        binding.pickUpAddressAnswer.setOnClickListener() {
+            Log.d("pickUpAddress", "Clicked")
+            var fieldList = Arrays.asList(Place.Field.ADDRESS, Place.Field.LAT_LNG, Place.Field.NAME)
+            var intent = Autocomplete.IntentBuilder(
+                AutocompleteActivityMode.OVERLAY,
+            fieldList).build(context)
+
+            startActivityForResult(intent, 100);
+        }
+
+        binding.destinationAddressAnswer.setFocusable(false)
+        binding.destinationAddressAnswer.setOnClickListener() {
+            Log.d("pickUpAddress", "Clicked")
+            var fieldList = Arrays.asList(Place.Field.ADDRESS, Place.Field.LAT_LNG, Place.Field.NAME)
+            var intent = Autocomplete.IntentBuilder(
+                AutocompleteActivityMode.OVERLAY,
+                fieldList).build(context)
+
+            startActivityForResult(intent, 101);
+        }
+
+
     }
 
     private fun updateView() {
@@ -122,6 +153,19 @@ class RideAddFragment : Fragment() {
         binding.timeAnswer.setText(time)
         binding.costPerPerson.setText(cost)
         binding.numOfSlots.setText(numOfSlots)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 100) {
+            val place = Autocomplete.getPlaceFromIntent(data)
+            Log.d("what", place.address)
+            binding.pickUpAddressAnswer.setText(place.address)
+        }
+        else if(requestCode == 101){
+            val place = Autocomplete.getPlaceFromIntent(data)
+            binding.destinationAddressAnswer.setText(place.address)
+        }
     }
 
 }
