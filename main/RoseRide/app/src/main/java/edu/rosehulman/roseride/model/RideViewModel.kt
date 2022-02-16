@@ -18,10 +18,20 @@ import kotlin.random.Random
 
 class RideViewModel : ViewModel() {
 
+    companion object{
+        val ref2 = Firebase.firestore.collection(Ride.COLLECTION_PATH)
+        lateinit var query2: Query
+    }
+
+    init {
+        query2 = ref2.orderBy("title", Query.Direction.ASCENDING)
+        Log.d(Constants.TAG, "Init Query2: ${query2}")
+    }
+
     var rides = ArrayList<Ride>()
     var currentPos = 0
 
-    val ref = Firebase.firestore.collection(Ride.COLLECTION_PATH)
+//    val ref = Firebase.firestore.collection(Ride.COLLECTION_PATH)
     val refHistory = Firebase.firestore.collection(History.COLLECTION_PATH)
     var subscriptions = HashMap<String, ListenerRegistration>()
 
@@ -30,7 +40,8 @@ class RideViewModel : ViewModel() {
 
     fun addAllListener(fragmentName: String, observer: () -> Unit) {
         Log.d(Constants.TAG, "Adding listener for $fragmentName")
-        val subscription = ref.orderBy(Request.CREATED_KEY, Query.Direction.ASCENDING)
+        Log.d(Constants.TAG, "Query2: ${query2}")
+        val subscription = query2
 //            .whereNotEqualTo("user", Firebase.auth.uid)
             .addSnapshotListener{ snapshot: QuerySnapshot?, error: FirebaseFirestoreException? ->
                 error?.let {
@@ -50,7 +61,7 @@ class RideViewModel : ViewModel() {
 
     fun addOneListener(fragmentName: String, observer: () -> Unit) {
         Log.d(Constants.TAG, "Adding listener for $fragmentName")
-        val subscription = ref.orderBy(Request.CREATED_KEY, Query.Direction.ASCENDING)
+        val subscription = query2
             .whereEqualTo("driver", Firebase.auth.uid)
             .addSnapshotListener{ snapshot: QuerySnapshot?, error: FirebaseFirestoreException? ->
                 error?.let {
@@ -86,7 +97,7 @@ class RideViewModel : ViewModel() {
             1,
             false,
             false)
-        ref.add(newRide)
+        ref2.add(newRide)
 //        rides.add(newRide)
     }
 
@@ -104,18 +115,18 @@ class RideViewModel : ViewModel() {
         rides[currentPos].numOfSlots = numOfSlots
         rides[currentPos].isSelected = isSelected
         rides[currentPos].sharable = isSharable
-        ref.document(getCurrentRide().id).set(getCurrentRide())
+        ref2.document(getCurrentRide().id).set(getCurrentRide())
         // or use .update() if only want to overwrite specific field(s)
     }
 
     fun removeCurrentRide(){
 //        rides.removeAt(currentPos)
-        ref.document(getCurrentRide().id).delete()
+        ref2.document(getCurrentRide().id).delete()
         currentPos = 0
     }
 
     fun removeRide(ride: Ride){
-        ref.document(ride.id).delete()
+        ref2.document(ride.id).delete()
         currentPos = 0
     }
 

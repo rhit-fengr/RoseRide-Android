@@ -17,35 +17,15 @@
             android:theme="@style/Theme.RoseRide.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <meta-data android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
+            <meta-data android:name="android.app.default_searchable" android:value=".SearchResultsActivity" />
         </activity>
         <activity android:name=".SearchResultsActivity"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-        </activity>
-        <activity android:name=".SearchResultsActivity"
-            android:exported="false">
-        <intent-filter>
-            <action android:name="android.intent.action.SEARCH" />
-        </intent-filter>
-        </activity>
-        <activity android:name=".SearchResultsActivity"
-            android:exported="false">
-        <intent-filter>
-            <action android:name="android.intent.action.SEARCH" />
-        </intent-filter>
-        </activity>
-        <activity android:name=".SearchResultsActivity"
-            android:exported="false">
-        <intent-filter>
-            <action android:name="android.intent.action.SEARCH" />
-        </intent-filter>
         </activity>
         <activity android:name="edu.rosehulman.rosefire.WebLoginActivity"></activity>
 
@@ -55,6 +35,11 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCkkJtYRYR0yU6q4cfTHP6B6NSVOCJYeY8"/>
+        <meta-data
+            android:name="android.app.searchable"
+            android:resource="@xml/searchable" />
     </application>
 
 </manifest>
+
+<!--    https://stackoverflow.com/questions/11699206/cannot-get-searchview-in-actionbar-to-work-->

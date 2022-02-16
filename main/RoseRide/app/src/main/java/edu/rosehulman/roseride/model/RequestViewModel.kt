@@ -14,10 +14,14 @@ import kotlin.random.Random
 
 class RequestViewModel : ViewModel(){
 
+    companion object{
+        val ref = Firebase.firestore.collection(Request.COLLECTION_PATH)
+        var query = ref.orderBy(Request.CREATED_KEY, Query.Direction.ASCENDING)
+    }
+
     var requests = ArrayList<Request>()
     var currentPos = 0
 
-    val ref = Firebase.firestore.collection(Request.COLLECTION_PATH)
     var subscriptions = HashMap<String, ListenerRegistration>()
 
     fun getRequestAt(pos: Int) = requests[pos]
@@ -25,8 +29,8 @@ class RequestViewModel : ViewModel(){
 
     fun addAllListener(fragmentName: String, observer: () -> Unit) {
         Log.d(Constants.TAG, "Adding listener for $fragmentName")
-        val subscription = ref.orderBy(Request.CREATED_KEY, Query.Direction.ASCENDING)
-//            .whereNotEqualTo("user", Firebase.auth.uid)
+//        query = ref.orderBy(Request.CREATED_KEY, Query.Direction.ASCENDING)
+        val subscription = query
             .addSnapshotListener{ snapshot: QuerySnapshot?, error: FirebaseFirestoreException? ->
                 error?.let {
                     Log.d(Constants.TAG, "Error: $error")
@@ -47,8 +51,7 @@ class RequestViewModel : ViewModel(){
 
     fun addOneListener(fragmentName: String, observer: () -> Unit) {
         Log.d(Constants.TAG, "Adding listener for $fragmentName")
-        val subscription = ref.orderBy(Request.CREATED_KEY, Query.Direction.ASCENDING)
-            .whereEqualTo("user", Firebase.auth.uid)
+        val subscription = query.whereEqualTo("user", Firebase.auth.uid)
             .addSnapshotListener{ snapshot: QuerySnapshot?, error: FirebaseFirestoreException? ->
                 error?.let {
                     Log.d(Constants.TAG, "Error: $error")

@@ -2,6 +2,7 @@ package edu.rosehulman.roseride
 
 import android.app.Activity
 import android.app.SearchManager
+import android.content.ComponentName
 import android.content.Context
 import android.os.Bundle
 import android.view.Menu
@@ -21,8 +22,10 @@ import edu.rosehulman.roseride.databinding.ActivityMainBinding
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
+import android.view.View
 import android.widget.SearchView
 import androidx.activity.result.contract.ActivityResultContracts
+
 import androidx.navigation.NavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -31,8 +34,15 @@ import com.google.firebase.ktx.Firebase
 import androidx.lifecycle.ViewModelProvider
 
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
+import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.ktx.firestore
 import edu.rosehulman.rosefire.Rosefire
+import edu.rosehulman.roseride.model.Request
+import edu.rosehulman.roseride.model.RequestViewModel
+import edu.rosehulman.roseride.model.RideViewModel
 import edu.rosehulman.roseride.model.UserViewModel
+import edu.rosehulman.roseride.ui.requestList.RequestListFragment
+import edu.rosehulman.roseride.ui.rideList.RideListFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -47,6 +57,8 @@ class MainActivity : AppCompatActivity() {
         var checker: Boolean = false
         var namae = "Peter Joe"
         var email ="p.joe@gmail.com"
+        lateinit var navController: NavController
+        lateinit var bottom_nav_view:BottomNavigationView
     }
 
 
@@ -76,7 +88,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var drawerLayout: DrawerLayout
     lateinit var navView: NavigationView
-    lateinit var navController: NavController
+
 
     override fun onStart() {
         super.onStart()
@@ -98,6 +110,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.appBarMain.toolbar)
+
 
 //        binding.appBarMain.fab.setOnClickListener { view ->
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -151,12 +164,23 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-       val bottom_nav_view:BottomNavigationView = findViewById(R.id.bottom_nav_view)
+        bottom_nav_view = findViewById(R.id.bottom_nav_view)
         bottom_nav_view.setupWithNavController(navController)
 
         setupDrawerMenuItems()
 
+//        if(this.intent.action==Intent.ACTION_SEARCH){
+//            handleIntent(intent)
+//        }
+
     }
+
+//    override fun onResume() {
+//        super.onResume()
+//        if(this.intent.action==Intent.ACTION_SEARCH){
+//            handleIntent(intent)
+//        }
+//    }
 
     private fun setupDrawerMenuItems() {
         // ref:
@@ -268,20 +292,114 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
+        super.onCreateOptionsMenu(menu)
         menuInflater.inflate(R.menu.options_menu, menu)
 
         // Associate searchable configuration with the SearchView
-        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        (menu.findItem(R.id.search).actionView as SearchView).apply {
-            setSearchableInfo(searchManager.getSearchableInfo(componentName))
-        }
+        val item = menu.findItem(R.id.search)
+        val searchView = item.actionView as SearchView
+//        searchView.setOnKeyListener(object : View.OnKeyListener {
+//            override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+////                if(keyCode == KeyEvent.KEYCODE_ENTER) {
+//                    val intent = Intent(this@MainActivity, SearchResultsActivity::class.java)
+//                    intent.putExtra("query", v.toString())
+//                    intent.action = Intent.ACTION_SEARCH
+//                    startActivity(intent)
+////                }
+//                return false
+//            }
+//        })
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                val intent = Intent(this@MainActivity, SearchResultsActivity::class.java)
+                intent.putExtra("query", query)
+                intent.action = Intent.ACTION_SEARCH
+
+                startActivity(intent)
+
+
+//                searchView.onActionViewCollapsed()
+//                item.collapseActionView()
+
+
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
+            }
+        })
+
+        searchView.setOnCloseListener(object : SearchView.OnCloseListener{
+            override fun onClose(): Boolean {
+                RequestViewModel.query = RequestViewModel.ref.orderBy(Request.CREATED_KEY, Query.Direction.ASCENDING)
+                RideViewModel.query2 = RideViewModel.ref2.orderBy(Request.CREATED_KEY, Query.Direction.ASCENDING)
+                navController.navigate(R.id.nav_profile)
+                return false
+            }
+
+        })
+
+        var searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchableInfo = searchManager.getSearchableInfo((ComponentName(
+                        this,
+                        MainActivity::class.java
+                    )))
+        searchView.setSearchableInfo(searchableInfo)
+
+//        val searchAutoComplete: androidx.appcompat.widget.SearchView.SearchAutoComplete =
+//            searchView.findViewById(androidx.appcompat.R.id.search_src_text)
+//        searchAutoComplete.setHintTextColor(Color.GRAY)
+//        searchAutoComplete.setTextColor(Color.BLACK)
+
+//        (menu.findItem(R.id.search).actionView as SearchView).apply {
+//           setSearchableInfo(searchManager.getSearchableInfo(ComponentName(
+//                        context,
+//                        SearchResultsActivity::class.java
+//                    )))
+
+
+//            Log.d(Constants.TAG,"search bar debug: "+context)
+//            setSearchableInfo(
+//                searchManager.getSearchableInfo(
+//                    ComponentName(
+//                        context,
+//                        SearchResultsActivity::class.java
+//                    )
+//                )
+//            )
+//        }
         return true
     }
 
+
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
+//        val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
+//    private fun handleIntent(intent: Intent) {
+//        Log.d(Constants.TAG, "intent action: " + intent.action)
+//        if (Intent.ACTION_SEARCH == intent.action) {
+//            val ref = Firebase.firestore.collection(Request.COLLECTION_PATH)
+//            val qString = intent.getStringExtra(SearchManager.QUERY)
+//            //use the query to search your data somehow
+//            Log.d(Constants.TAG, "search: " + qString.toString())
+//
+//            if (navController.currentDestination!!.id == R.id.nav_request) {
+//                RequestViewModel.query = if (qString.isNullOrEmpty()) ref.orderBy(
+//                    Request.CREATED_KEY,
+//                    Query.Direction.ASCENDING
+//                )
+//                else ref.whereGreaterThanOrEqualTo("title", qString.uppercase())
+//                    .whereLessThanOrEqualTo("title", qString.lowercase() + "\uf8ff")
+//                    .orderBy("title", Query.Direction.ASCENDING)
+//                navController.navigateUp()
+//                navController.navigate(R.id.nav_request)
+//            }
+//
+//        }
+//    }
 
 }
