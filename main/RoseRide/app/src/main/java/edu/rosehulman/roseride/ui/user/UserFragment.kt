@@ -57,9 +57,11 @@ class UserFragment : Fragment() {
                 binding.profileName.setText(name)
                 binding.profilePhone.setText(phone)
                 binding.profileEmail.setText(email)
-                binding.centerImage.load(storageUriString){
-                    crossfade(true)
-                    transformations(CircleCropTransformation())
+                if(storageUriString != "") {
+                    binding.centerImage.load(storageUriString) {
+                        crossfade(true)
+                        transformations(CircleCropTransformation())
+                    }
                 }
             }
         }
