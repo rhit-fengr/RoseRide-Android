@@ -1,17 +1,8 @@
 package edu.rosehulman.roseride
 
 import android.app.Activity
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 import android.app.SearchManager
 import android.content.Context
->>>>>>> Stashed changes
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -30,36 +21,13 @@ import edu.rosehulman.roseride.databinding.ActivityMainBinding
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
 import android.widget.SearchView
->>>>>>> Stashed changes
-=======
-import android.widget.SearchView
->>>>>>> Stashed changes
-=======
-import android.widget.SearchView
->>>>>>> Stashed changes
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.NavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
-=======
-
->>>>>>> Stashed changes
-=======
-
->>>>>>> Stashed changes
 import androidx.lifecycle.ViewModelProvider
 
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
@@ -299,7 +267,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
+        menuInflater.inflate(R.menu.options_menu, menu)
+
+        // Associate searchable configuration with the SearchView
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        (menu.findItem(R.id.search).actionView as SearchView).apply {
+            setSearchableInfo(searchManager.getSearchableInfo(componentName))
+        }
         return true
     }
 
