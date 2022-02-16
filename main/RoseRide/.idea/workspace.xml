@@ -80,11 +80,14 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="resourceFile" />
-        <option value="Class" />
         <option value="Kotlin Object" />
         <option value="Kotlin Class" />
         <option value="layoutResourceFile" />
+<<<<<<< Updated upstream
         <option value="valueResourceFile" />
+=======
+        <option value="Class" />
+>>>>>>> Stashed changes
       </list>
     </option>
   </component>
@@ -111,6 +114,8 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android-custom-viewC:/Users/fengr/.gradle/caches/modules-2/files-2.1/androidx.appcompat/appcompat/1.4.1/f9e48179ea0c6ac0080a277b9383f74523f56aa2/appcompat-1.4.1-sources.jar!/androidx/appcompat/widget/SearchView.java_SELECTED" value="SearchView" />
+    <property name="android-custom-viewC:/Users/fengr/.gradle/caches/modules-2/files-2.1/androidx.appcompat/appcompat/1.4.1/f9e48179ea0c6ac0080a277b9383f74523f56aa2/appcompat-1.4.1-sources.jar!/androidx/appcompat/widget/SearchView.java_SearchView_DIMENSIONS" value="1080&#10;1920" />
     <property name="android-custom-viewC:/Users/fengr/.gradle/caches/modules-2/files-2.1/androidx.drawerlayout/drawerlayout/1.1.1/d95f7d9cd7d95cc0c038bbcf9c65f521b56fee55/drawerlayout-1.1.1-sources.jar!/androidx/drawerlayout/widget/DrawerLayout.java_DrawerLayout_DIMENSIONS" value="1080&#10;1920" />
     <property name="android-custom-viewC:/Users/fengr/.gradle/caches/modules-2/files-2.1/androidx.drawerlayout/drawerlayout/1.1.1/d95f7d9cd7d95cc0c038bbcf9c65f521b56fee55/drawerlayout-1.1.1-sources.jar!/androidx/drawerlayout/widget/DrawerLayout.java_SELECTED" value="DrawerLayout" />
     <property name="android-custom-viewC:/Users/fengr/.gradle/caches/modules-2/files-2.1/com.google.android.material/material/1.4.0/51035a8f6342c20d4d8f242d100e6f25e0c271ac/material-1.4.0-sources.jar!/com/google/android/material/floatingactionbutton/FloatingActionButton.java_FloatingActionButton_DIMENSIONS" value="1080&#10;1920" />
