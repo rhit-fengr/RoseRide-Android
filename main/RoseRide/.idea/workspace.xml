@@ -84,7 +84,15 @@
         <option value="Kotlin Class" />
         <option value="layoutResourceFile" />
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
         <option value="valueResourceFile" />
+=======
+        <option value="Class" />
+>>>>>>> Stashed changes
+=======
+        <option value="Class" />
+>>>>>>> Stashed changes
 =======
         <option value="Class" />
 >>>>>>> Stashed changes
