@@ -44,6 +44,11 @@ class HistoryListFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        adapter.addListener(fragmentName)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         adapter.removeListener(RequestListFragment.fragmentName)

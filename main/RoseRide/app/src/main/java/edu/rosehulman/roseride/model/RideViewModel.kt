@@ -134,7 +134,7 @@ class RideViewModel : ViewModel() {
         rides[currentPos].passengers = rides[currentPos].passengers.filter {
             it != Firebase.auth.uid
         }
-        ref.document(getCurrentRide().id).set(getCurrentRide())
+        ref2.document(getCurrentRide().id).set(getCurrentRide())
     }
 
     fun size() = rides.size
