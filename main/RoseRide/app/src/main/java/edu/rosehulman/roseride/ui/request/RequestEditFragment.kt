@@ -1,5 +1,7 @@
 package edu.rosehulman.roseride.ui.request
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,6 +10,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.model.TypeFilter
+import com.google.android.libraries.places.widget.Autocomplete
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.timepicker.MaterialTimePicker
@@ -19,7 +26,7 @@ import edu.rosehulman.roseride.model.Address
 import edu.rosehulman.roseride.model.RequestViewModel
 import java.text.SimpleDateFormat
 import java.sql.Date
-
+import java.util.*
 
 
 class RequestEditFragment : Fragment(){
@@ -119,6 +126,37 @@ class RequestEditFragment : Fragment(){
                 picker.show(parentFragmentManager, "tag");
             }
 
+        Places.initialize(context, "AIzaSyAKKb9_jLm6QSktSq7hBmPP48Bzcbr4iVg")
+
+        binding.pickUpAddressAnswer.setFocusable(false)
+        binding.pickUpAddressAnswer.setOnClickListener() {
+            Log.d("pickUpAddress", "Clicked")
+            var fieldList = Arrays.asList(Place.Field.ADDRESS, Place.Field.LAT_LNG, Place.Field.NAME)
+            var intent = Autocomplete.IntentBuilder(
+                AutocompleteActivityMode.OVERLAY,
+                fieldList)
+                .setTypeFilter(TypeFilter.ADDRESS)
+                .setCountry("USA")
+                .build(context)
+
+            startActivityForResult(intent, 100);
+        }
+
+        binding.destinationAddressAnswer.setFocusable(false)
+        binding.destinationAddressAnswer.setOnClickListener() {
+            Log.d("pickUpAddress", "Clicked")
+            var fieldList = Arrays.asList(Place.Field.ADDRESS, Place.Field.LAT_LNG, Place.Field.NAME)
+            var intent = Autocomplete.IntentBuilder(
+                AutocompleteActivityMode.OVERLAY,
+                fieldList)
+                .setTypeFilter(TypeFilter.ADDRESS)
+                .setCountry("USA")
+                .build(context)
+
+            startActivityForResult(intent, 101);
+        }
+
+
     }
 
     private fun updateView() {
@@ -131,5 +169,18 @@ class RequestEditFragment : Fragment(){
         binding.timeAnswer.setText(current.setOffTime.substring(0,model.getCurrentRequest().setOffTime.length-3))
         binding.minPrice.setText(current.minPrice.toString())
         binding.maxPrice.setText(current.maxPrice.toString())
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
+            val place = Autocomplete.getPlaceFromIntent(data)
+            Log.d("what", place.address)
+            binding.pickUpAddressAnswer.setText(place.address)
+        }
+        else if(requestCode == 101 && resultCode == Activity.RESULT_OK){
+            val place = Autocomplete.getPlaceFromIntent(data)
+            binding.destinationAddressAnswer.setText(place.address)
+        }
     }
 }

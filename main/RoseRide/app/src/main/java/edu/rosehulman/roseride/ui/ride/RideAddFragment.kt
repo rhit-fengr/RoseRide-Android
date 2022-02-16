@@ -1,13 +1,22 @@
 package edu.rosehulman.roseride.ui.ride
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.model.TypeFilter
+import com.google.android.libraries.places.widget.Autocomplete
+import com.google.android.libraries.places.widget.AutocompleteActivity
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -24,8 +33,8 @@ class RideAddFragment : Fragment() {
     private lateinit var model: RideViewModel
     private lateinit var binding: FragmentRideAddBinding
     private var title = ""
-    private var pAddr = "street, city, zip, state"
-    private var dAddr = "street, city, zip, state"
+    private var pAddr = "enter address here"
+    private var dAddr = "enter address here"
     private var date = "2022-02-01"
     private var time = "00:00"
     private var cost = "-1"
@@ -48,32 +57,43 @@ class RideAddFragment : Fragment() {
     private fun setupButtons() {
         binding.rideAddSubmit
             .setOnClickListener() {
-                title = binding.rideName.text.toString()
-                pAddr = binding.pickUpAddressAnswer.text.toString()
-                dAddr = binding.destinationAddressAnswer.text.toString()
-                date = binding.dateAnswer.text.toString()
-                time = binding.timeAnswer.text.toString() // might consider to add a timepicker here instead
-                cost = binding.costPerPerson.text.toString()
-                numOfSlots = binding.numOfSlots.text.toString()
+                if(title == "" || pAddr == "enter address here" || dAddr == "enter address here"
+                    || Integer.parseInt(cost) < 0){
+                    Toast.makeText(
+                        context,
+                        "Fill in all required!!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                else {
+                    title = binding.rideName.text.toString()
+                    pAddr = binding.pickUpAddressAnswer.text.toString()
+                    dAddr = binding.destinationAddressAnswer.text.toString()
+                    date = binding.dateAnswer.text.toString()
+                    time =
+                        binding.timeAnswer.text.toString() // might consider to add a timepicker here instead
+                    cost = binding.costPerPerson.text.toString()
+                    numOfSlots = binding.numOfSlots.text.toString()
 
-                model.addRide(
-                    Ride(
-                        title,
-                        Firebase.auth.uid!!,
-                        time + ":00",
-                        date,
-                        Address(pAddr),
-//                        "00:00:00",
-                        Address(dAddr),
-                        listOf(),
-                        cost.toDouble(),
-                        numOfSlots.toInt(),
-                        false
+                    model.addRide(
+                        Ride(
+                            title,
+                            Firebase.auth.uid!!,
+                            time + ":00",
+                            date,
+                            Address(pAddr),
+                            //                        "00:00:00",
+                            Address(dAddr),
+                            listOf(),
+                            cost.toDouble(),
+                            numOfSlots.toInt(),
+                            false
+                        )
                     )
-                )
 
-                updateView()
-                findNavController().navigate(R.id.nav_ride)
+                    updateView()
+                    findNavController().navigate(R.id.nav_ride)
+                }
             }
         binding.timeButton
             .setOnClickListener() {
@@ -111,6 +131,37 @@ class RideAddFragment : Fragment() {
                 picker.show(parentFragmentManager, "tag")
             }
 
+        Places.initialize(context, "AIzaSyAKKb9_jLm6QSktSq7hBmPP48Bzcbr4iVg")
+
+        binding.pickUpAddressAnswer.setFocusable(false)
+        binding.pickUpAddressAnswer.setOnClickListener() {
+            Log.d("pickUpAddress", "Clicked")
+            var fieldList = Arrays.asList(Place.Field.ADDRESS, Place.Field.LAT_LNG, Place.Field.NAME)
+            var intent = Autocomplete.IntentBuilder(
+                AutocompleteActivityMode.OVERLAY,
+                fieldList)
+                .setTypeFilter(TypeFilter.ADDRESS)
+                .setCountry("USA")
+                .build(context)
+
+            startActivityForResult(intent, 100);
+        }
+
+        binding.destinationAddressAnswer.setFocusable(false)
+        binding.destinationAddressAnswer.setOnClickListener() {
+            Log.d("pickUpAddress", "Clicked")
+            var fieldList = Arrays.asList(Place.Field.ADDRESS, Place.Field.LAT_LNG, Place.Field.NAME)
+            var intent = Autocomplete.IntentBuilder(
+                AutocompleteActivityMode.OVERLAY,
+                fieldList)
+                .setTypeFilter(TypeFilter.ADDRESS)
+                .setCountry("USA")
+                .build(context)
+
+            startActivityForResult(intent, 101);
+        }
+
+
     }
 
     private fun updateView() {
@@ -122,6 +173,19 @@ class RideAddFragment : Fragment() {
         binding.timeAnswer.setText(time)
         binding.costPerPerson.setText(cost)
         binding.numOfSlots.setText(numOfSlots)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
+            val place = Autocomplete.getPlaceFromIntent(data)
+            Log.d("what", place.address)
+            binding.pickUpAddressAnswer.setText(place.address)
+        }
+        else if(requestCode == 101 && resultCode == Activity.RESULT_OK){
+            val place = Autocomplete.getPlaceFromIntent(data)
+            binding.destinationAddressAnswer.setText(place.address)
+        }
     }
 
 }

@@ -1,13 +1,21 @@
 package edu.rosehulman.roseride.ui.request
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.model.TypeFilter
+import com.google.android.libraries.places.widget.Autocomplete
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -22,13 +30,14 @@ import edu.rosehulman.roseride.model.Request
 import edu.rosehulman.roseride.model.RequestViewModel
 import java.sql.Date
 import java.text.SimpleDateFormat
+import java.util.*
 
 class RequestAddFragment : Fragment() {
     private lateinit var model: RequestViewModel
     private lateinit var binding: FragmentRequestAddBinding
     private var title = ""
-    private var pAddr = "street, city, zip, state"
-    private var dAddr = "street, city, zip, state"
+    private var pAddr = "enter address here"
+    private var dAddr = "enter address here"
     private var date = "2022-02-01"
     private var time = "00:00"
     private var minPrice = "-1"
@@ -51,32 +60,43 @@ class RequestAddFragment : Fragment() {
     private fun setupButtons() {
         binding.requestEditSubmit
             .setOnClickListener(){
-                title = binding.requestName.text.toString()
-                pAddr = binding.pickUpAddressAnswer.text.toString()
-                dAddr = binding.destinationAddressAnswer.text.toString()
-                date = binding.dateAnswer.text.toString()
-                time = binding.timeAnswer.text.toString() // might consider to add a timepicker here instead
-                minPrice = binding.minPrice.text.toString()
-                maxPrice = binding.maxPrice.text.toString()
-                sharable = binding.sharableToggle.isChecked
+                if(title == "" || pAddr == "enter address here" || dAddr == "enter address here"
+                    || Integer.parseInt(minPrice) < 0 || Integer.parseInt(maxPrice) < 0){
+                    Toast.makeText(
+                        context,
+                        "Fill in all required!!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                else {
+                    title = binding.requestName.text.toString()
+                    pAddr = binding.pickUpAddressAnswer.text.toString()
+                    dAddr = binding.destinationAddressAnswer.text.toString()
+                    date = binding.dateAnswer.text.toString()
+                    time =
+                        binding.timeAnswer.text.toString() // might consider to add a timepicker here instead
+                    minPrice = binding.minPrice.text.toString()
+                    maxPrice = binding.maxPrice.text.toString()
+                    sharable = binding.sharableToggle.isChecked
 
-                model.addRequest(
-                    Request(
-                        title,
-                        Firebase.auth.uid!!,
-                        time + ":00",
-                        date,
-                        Address(pAddr),
-                        1,
-                        Address(dAddr),
-                        minPrice.toDouble(),
-                        maxPrice.toDouble(),
-                        sharable
+                    model.addRequest(
+                        Request(
+                            title,
+                            Firebase.auth.uid!!,
+                            time + ":00",
+                            date,
+                            Address(pAddr),
+                            1,
+                            Address(dAddr),
+                            minPrice.toDouble(),
+                            maxPrice.toDouble(),
+                            sharable
+                        )
                     )
-                )
 
-                updateView()
-                findNavController().navigate(R.id.nav_request)
+                    updateView()
+                    findNavController().navigate(R.id.nav_request)
+                }
             }
         binding.timeButton
             .setOnClickListener(){
@@ -116,6 +136,36 @@ class RequestAddFragment : Fragment() {
                 picker.show(parentFragmentManager, "tag")
             }
 
+        Places.initialize(context, "AIzaSyAKKb9_jLm6QSktSq7hBmPP48Bzcbr4iVg")
+
+        binding.pickUpAddressAnswer.setFocusable(false)
+        binding.pickUpAddressAnswer.setOnClickListener() {
+            Log.d("pickUpAddress", "Clicked")
+            var fieldList = Arrays.asList(Place.Field.ADDRESS, Place.Field.LAT_LNG, Place.Field.NAME)
+            var intent = Autocomplete.IntentBuilder(
+                AutocompleteActivityMode.OVERLAY,
+                fieldList)
+                .setTypeFilter(TypeFilter.ADDRESS)
+                .setCountry("USA")
+                .build(context)
+
+            startActivityForResult(intent, 100);
+        }
+
+        binding.destinationAddressAnswer.setFocusable(false)
+        binding.destinationAddressAnswer.setOnClickListener() {
+            Log.d("pickUpAddress", "Clicked")
+            var fieldList = Arrays.asList(Place.Field.ADDRESS, Place.Field.LAT_LNG, Place.Field.NAME)
+            var intent = Autocomplete.IntentBuilder(
+                AutocompleteActivityMode.OVERLAY,
+                fieldList)
+                .setTypeFilter(TypeFilter.ADDRESS)
+                .setCountry("USA")
+                .build(context)
+
+            startActivityForResult(intent, 101);
+        }
+
     }
 
     private fun updateView() {
@@ -127,6 +177,19 @@ class RequestAddFragment : Fragment() {
         binding.timeAnswer.setText(time)
         binding.minPrice.setText(minPrice)
         binding.maxPrice.setText(maxPrice)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 100 && resultCode == RESULT_OK) {
+            val place = Autocomplete.getPlaceFromIntent(data)
+            Log.d("what", place.address)
+            binding.pickUpAddressAnswer.setText(place.address)
+        }
+        else if(requestCode == 101 && resultCode == RESULT_OK){
+            val place = Autocomplete.getPlaceFromIntent(data)
+            binding.destinationAddressAnswer.setText(place.address)
+        }
     }
 
 }
