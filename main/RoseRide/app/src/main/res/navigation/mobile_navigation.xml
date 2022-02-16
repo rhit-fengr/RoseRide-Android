@@ -16,7 +16,6 @@
         android:name="edu.rosehulman.roseride.ui.SplashFragment"
         tools:layout="@layout/fragment_splash" />
 
-
     <fragment
         android:id="@+id/nav_request"
         android:name="edu.rosehulman.roseride.ui.requestList.RequestListFragment"
@@ -36,11 +35,6 @@
         tools:layout="@layout/fragment_user_edit" />
 
     //new
-
-    <fragment
-        android:id="@+id/nav_other_user"
-        android:name="edu.rosehulman.roseride.ui.user.UserOtherFragment"
-        tools:layout="@layout/fragment_user_other" />
 
     <fragment
         android:id="@+id/nav_history"
