@@ -1,6 +1,7 @@
 package edu.rosehulman.roseride.ui.request
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,22 +41,26 @@ class RequestDetailFragment : Fragment(){
 
     private fun updateView() {
         if(!MainActivity.driverMode && model.getCurrentRequest().user.equals(Firebase.auth.uid)){
-            binding.sharableAnswer.visibility=View.GONE
+            binding.sharableTitle.visibility=View.GONE
+            binding.spinner2.visibility=View.GONE
             binding.requestAcceptButton.visibility=View.GONE
             binding.requestDeleteBtn.visibility=View.VISIBLE
         }
         else if(!MainActivity.driverMode && !model.getCurrentRequest().user.equals(Firebase.auth.uid)){
-            binding.sharableAnswer.visibility=View.GONE
+            binding.sharableTitle.visibility=View.GONE
+            binding.spinner2.visibility=View.GONE
             binding.requestAcceptButton.visibility=View.GONE
             binding.requestDeleteBtn.visibility=View.GONE
         }
         else if(MainActivity.driverMode && !model.getCurrentRequest().sharable){
-            binding.sharableAnswer.visibility=View.GONE
+            binding.sharableTitle.visibility=View.GONE
+            binding.spinner2.visibility=View.GONE
             binding.requestAcceptButton.visibility=View.VISIBLE
             binding.requestDeleteBtn.visibility=View.GONE
         }
         else{
-            binding.sharableAnswer.visibility=View.VISIBLE
+            binding.sharableTitle.visibility=View.VISIBLE
+            binding.spinner2.visibility=View.VISIBLE
             binding.requestAcceptButton.visibility=View.VISIBLE
             binding.requestDeleteBtn.visibility=View.GONE
         }
@@ -68,14 +73,15 @@ class RequestDetailFragment : Fragment(){
     }
 
     private fun setupButtons() {
-        binding.spinner2?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        binding.spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 numberOfPassengers = position + 1
+                Log.d("haaz", numberOfPassengers.toString())
+                Log.d("haaz", position.toString())
             }
-
         }
         binding.requestAcceptButton.setOnClickListener {
             val request = model.getCurrentRequest()

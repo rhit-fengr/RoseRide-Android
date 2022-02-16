@@ -17,6 +17,9 @@ import com.google.android.libraries.places.api.model.TypeFilter
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.CompositeDateValidator
+import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -35,8 +38,8 @@ class RideAddFragment : Fragment() {
     private var title = ""
     private var pAddr = "enter address here"
     private var dAddr = "enter address here"
-    private var date = "2022-02-01"
-    private var time = "00:00"
+    private var date = SimpleDateFormat("yyyy-MM-dd").format(Date())
+    private var time = SimpleDateFormat("HH:mm").format(Date())
     private var cost = "-1"
     private var numOfSlots = "1"
 
@@ -57,8 +60,8 @@ class RideAddFragment : Fragment() {
     private fun setupButtons() {
         binding.rideAddSubmit
             .setOnClickListener() {
-                if(title == "" || pAddr == "enter address here" || dAddr == "enter address here"
-                    || Integer.parseInt(cost) < 0){
+                if(binding.rideName.text.toString() == "" || binding.pickUpAddressAnswer.text.toString() == "enter address here"
+                    || binding.destinationAddressAnswer.text.toString() == "enter address here" || Integer.parseInt(binding.costPerPerson.text.toString()) < 0){
                     Toast.makeText(
                         context,
                         "Fill in all required!!",
@@ -96,15 +99,17 @@ class RideAddFragment : Fragment() {
                 }
             }
         binding.timeButton
-            .setOnClickListener() {
+            .setOnClickListener(){
                 val picker =
                     MaterialTimePicker.Builder()
                         .setTimeFormat(TimeFormat.CLOCK_12H)
-                        .setHour(12)
-                        .setMinute(10)
+                        .setHour(Calendar.getInstance().get(Calendar.HOUR_OF_DAY))
+                        .setMinute(Calendar.getInstance().get(Calendar.MINUTE))
                         .setTitleText("Select Set-off time")
                         .build()
-                picker.addOnPositiveButtonClickListener {
+                picker.addOnPositiveButtonClickListener{
+//                    val s = String.format("%2d:%2d", picker.hour, picker.minute)
+
                     var s: String
                     s = if(picker.hour<10){
                         "0"+picker.hour.toString()+":"
@@ -114,17 +119,49 @@ class RideAddFragment : Fragment() {
                     }else s += picker.minute.toString()
                     binding.timeAnswer.text = s
                 }
-                picker.show(parentFragmentManager, "tag")
+                picker.show(parentFragmentManager, "tag");
             }
 
+//        binding.dateButton
+//            .setOnClickListener() {
+//                val picker =
+//                    MaterialDatePicker.Builder.datePicker()
+//                        .setTitleText("Select Set-off date")
+//                        .build()
+//                picker.addOnPositiveButtonClickListener {
+//                    val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+//                    val s = dateFormatter.format(Date(it+86400000))
+//                    binding.dateAnswer.text = s
+//                }
+//                picker.show(parentFragmentManager, "tag")
+//            }
+
+
+//        https://stackoverflow.com/questions/62469312/materialdatepicker-select-date-between-2-dates-only
         binding.dateButton
-            .setOnClickListener() {
+            .setOnClickListener(){
+
+                val constraintsBuilderRange = CalendarConstraints.Builder()
+
+//          ....define min and max for example with LocalDateTime and ZonedDateTime or Calendar
+                val dateValidatorMin: CalendarConstraints.DateValidator =
+                    DateValidatorPointForward.from(Calendar.getInstance().getTimeInMillis())
+                Calendar.getInstance().add(Calendar.YEAR, 1)
+//                val dateValidatorMax: DateValidator =
+//                    DateValidatorPointBackward.before(Calendar.getInstance().getTimeInMillis())
+//                Calendar.getInstance().add(Calendar.YEAR, -1)
+
+                val listValidators = ArrayList<CalendarConstraints.DateValidator>()
+                listValidators.add(dateValidatorMin)
+                val validators = CompositeDateValidator.allOf(listValidators)
+                constraintsBuilderRange.setValidator(validators)
                 val picker =
                     MaterialDatePicker.Builder.datePicker()
+                        .setCalendarConstraints(constraintsBuilderRange.build())
                         .setTitleText("Select Set-off date")
                         .build()
-                picker.addOnPositiveButtonClickListener {
-                    val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+                picker.addOnPositiveButtonClickListener{
+                    val dateFormatter = SimpleDateFormat("yyyy-MM-dd")
                     val s = dateFormatter.format(Date(it+86400000))
                     binding.dateAnswer.text = s
                 }

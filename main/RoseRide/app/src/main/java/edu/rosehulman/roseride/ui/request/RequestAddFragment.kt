@@ -31,6 +31,17 @@ import edu.rosehulman.roseride.model.RequestViewModel
 import java.sql.Date
 import java.text.SimpleDateFormat
 import java.util.*
+import com.google.android.material.datepicker.CompositeDateValidator
+
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.CalendarConstraints.DateValidator
+
+import com.google.android.material.datepicker.DateValidatorPointBackward
+
+import com.google.android.material.datepicker.DateValidatorPointForward
+
+
+
 
 class RequestAddFragment : Fragment() {
     private lateinit var model: RequestViewModel
@@ -38,8 +49,8 @@ class RequestAddFragment : Fragment() {
     private var title = ""
     private var pAddr = "enter address here"
     private var dAddr = "enter address here"
-    private var date = "2022-02-01"
-    private var time = "00:00"
+    private var date = SimpleDateFormat("yyyy-MM-dd").format(Date())
+    private var time = SimpleDateFormat("HH:mm").format(Date())
     private var minPrice = "-1"
     private var maxPrice = "-1"
     private var sharable = false
@@ -60,8 +71,9 @@ class RequestAddFragment : Fragment() {
     private fun setupButtons() {
         binding.requestEditSubmit
             .setOnClickListener(){
-                if(title == "" || pAddr == "enter address here" || dAddr == "enter address here"
-                    || Integer.parseInt(minPrice) < 0 || Integer.parseInt(maxPrice) < 0){
+                if(binding.requestName.text.toString() == "" || binding.pickUpAddressAnswer.text.toString() == "enter address here"
+                    || binding.destinationAddressAnswer.text.toString() == "enter address here"
+                    || Integer.parseInt(binding.minPrice.text.toString()) < 0|| Integer.parseInt(binding.maxPrice.text.toString()) < 0){
                     Toast.makeText(
                         context,
                         "Fill in all required!!",
@@ -103,8 +115,8 @@ class RequestAddFragment : Fragment() {
                 val picker =
                     MaterialTimePicker.Builder()
                         .setTimeFormat(TimeFormat.CLOCK_12H)
-                        .setHour(12)
-                        .setMinute(10)
+                        .setHour(Calendar.getInstance().get(Calendar.HOUR_OF_DAY))
+                        .setMinute(Calendar.getInstance().get(Calendar.MINUTE))
                         .setTitleText("Select Set-off time")
                         .build()
                 picker.addOnPositiveButtonClickListener{
@@ -124,8 +136,24 @@ class RequestAddFragment : Fragment() {
 
         binding.dateButton
             .setOnClickListener(){
+
+                val constraintsBuilderRange = CalendarConstraints.Builder()
+
+//....define min and max for example with LocalDateTime and ZonedDateTime or Calendar
+                val dateValidatorMin: DateValidator =
+                    DateValidatorPointForward.from(Calendar.getInstance().getTimeInMillis())
+                Calendar.getInstance().add(Calendar.YEAR, 1)
+//                val dateValidatorMax: DateValidator =
+//                    DateValidatorPointBackward.before(Calendar.getInstance().getTimeInMillis())
+//                Calendar.getInstance().add(Calendar.YEAR, -1)
+
+                val listValidators = ArrayList<DateValidator>()
+                listValidators.add(dateValidatorMin)
+                val validators = CompositeDateValidator.allOf(listValidators)
+                constraintsBuilderRange.setValidator(validators)
                 val picker =
                     MaterialDatePicker.Builder.datePicker()
+                        .setCalendarConstraints(constraintsBuilderRange.build())
                         .setTitleText("Select Set-off date")
                         .build()
                 picker.addOnPositiveButtonClickListener{
