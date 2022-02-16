@@ -243,17 +243,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sharable"
-        android:layout_centerHorizontal="true"
         android:textStyle="bold"
         android:textSize="20sp"
-        android:layout_below="@+id/double_price"/>
+        android:layout_below="@+id/double_price"
+        android:layout_alignParentLeft="true"/>
 
     <ToggleButton
         android:id="@+id/sharable_toggle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toggler"
-        android:layout_centerHorizontal="true"/>
+        android:layout_below="@id/toggler" />
 
     <Button
         android:layout_marginTop="20dp"
@@ -261,8 +260,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit"
-        android:layout_below="@id/sharable_toggle"
+        android:layout_below="@id/double_price"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"/>
+        android:layout_marginVertical="30dp" />
 
 </RelativeLayout>
