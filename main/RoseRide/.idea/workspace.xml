@@ -13,8 +13,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ffcf21c-cf6a-4651-8821-0912affbdef7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_baseline_history_24.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/values/arrays.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.0.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0.2/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.0.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0.2/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.0.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0.2/fileHashes/fileHashes.bin" afterDir="false" />
@@ -26,40 +24,26 @@
       <change beforePath="$PROJECT_DIR$/.gradle/7.0.2/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0.2/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/navEditor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/navEditor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/HistoryAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/HistoryAdapter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/RequestAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/RequestAdapter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/RideAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/RideAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/RideAddFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/ride/RideAddFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/RideDetailFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/ride/RideDetailFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/RideEditFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/ride/RideEditFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/model/Address.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/model/Address.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/model/History.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/model/History.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/model/HistoryViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/model/HistoryViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/model/Request.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/model/Request.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/model/RequestViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/model/RequestViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/model/Ride.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/model/Ride.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/model/RideViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/model/RideViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/model/User.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/model/User.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/model/UserViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/model/UserViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/request/RequestAddFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/request/RequestAddFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/request/RequestDetailFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/request/RequestDetailFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/request/RequestEditFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/request/RequestEditFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/model/RequestViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/model/RequestViewModel.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/requestList/RequestListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/requestList/RequestListFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/rideList/RideListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/rideList/RideListFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/user/UserEditFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/user/UserEditFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/user/UserFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/rosehulman/roseride/ui/user/UserFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_request_add.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_request_add.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_request_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_request_detail.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_ride_add.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_ride_add.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_ride_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_ride_detail.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/row_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/row_history.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/activity_bottom_navigation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/activity_bottom_navigation.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/navigation/mobile_navigation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/navigation/mobile_navigation.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_launcher_background.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -67,7 +51,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\imabi\.android\avd\Pixel_5_API_29.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\fengr\.android\avd\Pixel_3a_API_30.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -133,6 +117,7 @@
       <recent name="C:\Users\fengr\AndroidStudioProjects\RoseRide\app\src\main\res\drawable-v24" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\fengr\Documents\GitHub\RoseRide-Android\main\RoseRide\app\src\main\res\drawable-v24" />
       <recent name="C:\Users\fengr\Documents\GitHub\RoseRide-Android\main\RoseRide\app\src\main\java\edu\rosehulman\rosefire" />
       <recent name="C:\Users\imabi\AndroidStudioProjects\RoseRide Project\RoseRide-Android\main\RoseRide\app\src\main\java\edu\rosehulman\roseride" />
       <recent name="C:\Users\imabi\AndroidStudioProjects\RoseRide Project\RoseRide-Android\main\RoseRide\app\src\main\java\edu\rosehulman\" />

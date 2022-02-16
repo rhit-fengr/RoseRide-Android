@@ -9,11 +9,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import edu.rosehulman.roseride.MainActivity
 import edu.rosehulman.roseride.MainActivity.Companion.driverMode
 import edu.rosehulman.roseride.MainActivity.Companion.onlyUser
 import edu.rosehulman.roseride.R
 import edu.rosehulman.roseride.RequestAdapter
 import edu.rosehulman.roseride.databinding.FragmentRequestListBinding
+import edu.rosehulman.roseride.ui.rideList.RideListFragment
 
 class RequestListFragment : Fragment() {
 
@@ -52,7 +54,9 @@ class RequestListFragment : Fragment() {
 //        }
 
         checkFab()
-        checkOne()
+        if(!driverMode) {
+            checkOne()
+        }
 
         binding.fab.setOnClickListener{
             findNavController().navigate(R.id.nav_request_add)
@@ -64,6 +68,7 @@ class RequestListFragment : Fragment() {
     }
 
     fun checkOne() {
+        adapter.removeListener(fragmentName)
         if(!onlyUser){
             adapter.addAllListener(fragmentName)
         }else{
@@ -76,6 +81,14 @@ class RequestListFragment : Fragment() {
             binding.fab.visibility=View.GONE
         }else{
             binding.fab.visibility=View.VISIBLE
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkFab()
+        if(!driverMode) {
+            checkOne()
         }
     }
 

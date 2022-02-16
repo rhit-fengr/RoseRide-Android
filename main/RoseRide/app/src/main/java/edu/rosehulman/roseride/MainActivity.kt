@@ -37,11 +37,11 @@ class MainActivity : AppCompatActivity() {
     private val REGISTRY_TOKEN = "e015dafd-140f-4ea7-8b7c-c9a0f26c223f"
     private var mAuth: FirebaseAuth? = null
     private var mAuthListener: AuthStateListener? = null
-    private var checker: Boolean = false
 
     companion object {
         var driverMode: Boolean = false
         var onlyUser: Boolean = false
+        var checker: Boolean = false
         var namae = "Peter Joe"
         var email ="p.joe@gmail.com"
     }
@@ -169,7 +169,11 @@ class MainActivity : AppCompatActivity() {
 
             if(driverMode) {
                 menuItem!!.title="Switch to Passenger Mode"
-                my_posts.title="My Rides"
+                if(onlyUser) {
+                    my_posts.title = "ALL Rides"
+                }else{
+                    my_posts.title = "My Rides"
+                }
                 Toast.makeText(
                     applicationContext,
                     "Switched to Driver Mode!!",
@@ -177,7 +181,12 @@ class MainActivity : AppCompatActivity() {
                 ).show()
             }else{
                 menuItem!!.title="Switch to Driver Mode"
-                my_posts.title="My Requests"
+                if(onlyUser) {
+                    my_posts.title = "ALL Requests"
+                }else{
+                    my_posts.title="My Requests"
+                }
+
                 Toast.makeText(
                     applicationContext,
                     "Passenger Mode!",
@@ -193,10 +202,32 @@ class MainActivity : AppCompatActivity() {
         navView.menu!!.findItem(R.id.nav_my_posts).setOnMenuItemClickListener { menuItem: MenuItem? ->
             //write your implementation here
             //to close the navigation drawer
-            onlyUser = true
+            onlyUser = !onlyUser
             if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 drawerLayout.closeDrawer(GravityCompat.START)
             }
+
+            Toast.makeText(
+                applicationContext,
+                "View "+menuItem!!.title +"!!",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            if(onlyUser) {
+                if(driverMode)
+                menuItem!!.title="ALL Rides"
+                else{
+                    menuItem!!.title="ALL Requests"
+                }
+            }else{
+                if(driverMode)
+                    menuItem!!.title="My Rides"
+                else{
+                    menuItem!!.title="My Requests"
+                }
+            }
+
+
 
             if(driverMode){
                 navController.navigateUp()

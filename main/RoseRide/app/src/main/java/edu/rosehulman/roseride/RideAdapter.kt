@@ -86,7 +86,7 @@ class RideAdapter(fragment: RideListFragment) : RecyclerView.Adapter<RideAdapter
         fun bind(r: Ride) {
             editbtn.visibility=View.GONE
             if(MainActivity.driverMode && model.getCurrentRide().driver.equals(Firebase.auth.uid)){
-                Log.d("whatthe", model.getCurrentRide().driver)
+                Log.d(Constants.TAG, model.getCurrentRide().driver)
                 editbtn.visibility=View.VISIBLE
             }
 

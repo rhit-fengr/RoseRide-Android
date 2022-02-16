@@ -13,6 +13,7 @@ import coil.transform.CircleCropTransformation
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import edu.rosehulman.roseride.Constants
+import edu.rosehulman.roseride.MainActivity
 import edu.rosehulman.roseride.R
 import edu.rosehulman.roseride.databinding.FragmentUserBinding
 import edu.rosehulman.roseride.model.UserViewModel
@@ -38,7 +39,9 @@ class UserFragment : Fragment() {
         updateView()
         val logOutbtn = binding.logoutButton
         logOutbtn.setOnClickListener {
+            MainActivity.checker=false
             Firebase.auth.signOut()
+            findNavController().navigate(R.id.nav_splash)
         }
         binding.editButton.setOnClickListener {
             findNavController().navigate(R.id.nav_profile_edit)
