@@ -20,7 +20,7 @@ import edu.rosehulman.roseride.BuildConfig
 import edu.rosehulman.roseride.Constants
 import edu.rosehulman.roseride.R
 import edu.rosehulman.roseride.databinding.FragmentUserEditBinding
-import edu.rosehulman.roseride.ui.model.UserViewModel
+import edu.rosehulman.roseride.model.UserViewModel
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -92,19 +92,18 @@ class UserEditFragment : Fragment() {
 
     private fun showPictureDialog() {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Choose a photo source")
-        builder.setMessage("Would you like to take a new picture?\nOr choose an existing one?")
-        builder.setPositiveButton("Take Picture") { _, _ ->
-            binding.userEditDoneButton.isEnabled = false
-            binding.userEditDoneButton.text = "Loading image"
-            takeImage()
-        }
-
-        builder.setNegativeButton("Choose Picture") { _, _ ->
+        builder.setTitle("Select a Profile Picture")
+        builder.setPositiveButton("Choose") { _, _ ->
             binding.userEditDoneButton.isEnabled = false
             binding.userEditDoneButton.text = "Loading image"
             selectImageFromGallery()
         }
+
+//        builder.setNegativeButton("Choose Picture") { _, _ ->
+//            binding.userEditDoneButton.isEnabled = false
+//            binding.userEditDoneButton.text = "Loading image"
+//            takeImage()
+//        }
         builder.create().show()
     }
 

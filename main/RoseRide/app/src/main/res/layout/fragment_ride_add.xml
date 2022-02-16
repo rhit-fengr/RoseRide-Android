@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="20dp"
-    tools:context=".ui.RideAddFragment">
+    tools:context=".ui.ride.RideAddFragment">
 
     <TextView
         android:id="@+id/ride_name_title"

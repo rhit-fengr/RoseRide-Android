@@ -16,10 +16,6 @@
             android:icon="@drawable/ic_baseline_switch_account_24"
             android:title="@string/drawer_switch_mode" />
         <item
-            android:id="@+id/nav_appointments"
-            android:icon="@drawable/ic_baseline_edit_calendar_24"
-            android:title="@string/drawer_review_appointments" />
-        <item
             android:id="@+id/nav_my_posts"
             android:icon="@drawable/ic_baseline_bookmarks_24"
             android:title="@string/drawer_review_requests" />
@@ -27,9 +23,5 @@
             android:id="@+id/nav_location"
             android:icon="@drawable/ic_baseline_location_on_24"
             android:title="@string/drawer_location" />
-        <item
-            android:id="@+id/nav_history"
-            android:icon="@drawable/ic_baseline_favorite_24"
-            android:title="@string/drawer_review_history" />
     </group>
 </menu>

@@ -19,20 +19,17 @@ import edu.rosehulman.roseride.databinding.ActivityMainBinding
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
-import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.NavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.auth.FirebaseUser
 
-import androidx.annotation.NonNull
 import androidx.lifecycle.ViewModelProvider
 
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
 import edu.rosehulman.rosefire.Rosefire
-import edu.rosehulman.roseride.ui.model.UserViewModel
+import edu.rosehulman.roseride.model.UserViewModel
 
 
 class MainActivity : AppCompatActivity() {
@@ -41,6 +38,15 @@ class MainActivity : AppCompatActivity() {
     private var mAuth: FirebaseAuth? = null
     private var mAuthListener: AuthStateListener? = null
     private var checker: Boolean = false
+
+    companion object {
+        var driverMode: Boolean = false
+        var onlyUser: Boolean = false
+        var namae = "Peter Joe"
+        var email ="p.joe@gmail.com"
+    }
+
+
     private var resultLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
@@ -52,6 +58,9 @@ class MainActivity : AppCompatActivity() {
                 Log.d(Constants.TAG, "Name: ${rosefireResult.name}")
                 Log.d(Constants.TAG, "Email: ${rosefireResult.email}")
                 Log.d(Constants.TAG, "Group: ${rosefireResult.group}")
+
+                namae = rosefireResult.name
+                email = rosefireResult.email
             } else {
                 Log.d(Constants.TAG, "Rosefire failed")
             }
@@ -65,10 +74,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var drawerLayout: DrawerLayout
     lateinit var navView: NavigationView
     lateinit var navController: NavController
-
-    companion object {
-        var driverMode: Boolean = false
-    }
 
     override fun onStart() {
         super.onStart()
@@ -103,15 +108,18 @@ class MainActivity : AppCompatActivity() {
             val user = firebaseAuth.currentUser
             Log.d(Constants.TAG,"user: ${user?.uid}")
             if(user==null /*&& !checker*/){
-                val signInIntent = Rosefire.getSignInIntent(this, REGISTRY_TOKEN);
+                if(!checker) {
+                    val signInIntent = Rosefire.getSignInIntent(this, REGISTRY_TOKEN);
                     resultLauncher.launch(signInIntent)
+                }
             }
             else {
                 val userModel = ViewModelProvider(this).get(UserViewModel::class.java)
                 userModel.getOrMakeUser {
                     if (!userModel.hasCompletedSetup()) {
                         navController.navigate(R.id.nav_profile_edit)
-                    } else {
+                    }
+                    else {
                         navController.navigate(R.id.nav_profile)
                     }
                 }
@@ -132,11 +140,9 @@ class MainActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
 
-        setupDrawerMenuItems()
-
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_ride, R.id.nav_request, R.id.nav_profile, R.id.navigation_history
+                R.id.nav_ride, R.id.nav_request, R.id.nav_profile, R.id.nav_history
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -144,6 +150,8 @@ class MainActivity : AppCompatActivity() {
 
        val bottom_nav_view:BottomNavigationView = findViewById(R.id.bottom_nav_view)
         bottom_nav_view.setupWithNavController(navController)
+
+        setupDrawerMenuItems()
 
     }
 
@@ -176,27 +184,27 @@ class MainActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
+            navController.navigateUp()
             navController.navigate(R.id.nav_profile)
+
             true
         }
 
-//        navView.menu!!.findItem(R.id.nav_my_posts).setOnMenuItemClickListener { menuItem: MenuItem? ->
-//            //write your implementation here
-//            //to close the navigation drawer
-//
-//            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-//                drawerLayout.closeDrawer(GravityCompat.START)
-//            }
-//
-//            if(driverMode){
-//                navController.navigate(R.id.nav_ride)
-//            }else navController.navigate(R.id.nav_request)
-//
-//            true
-//        }
+        navView.menu!!.findItem(R.id.nav_my_posts).setOnMenuItemClickListener { menuItem: MenuItem? ->
+            //write your implementation here
+            //to close the navigation drawer
+            onlyUser = true
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                drawerLayout.closeDrawer(GravityCompat.START)
+            }
 
-        navView.menu!!.findItem(R.id.nav_history).setOnMenuItemClickListener { menuItem: MenuItem? ->
-            navController.navigate(R.id.navigation_history)
+            if(driverMode){
+                navController.navigateUp()
+                navController.navigate(R.id.nav_ride)
+            }else {
+                navController.navigateUp()
+                navController.navigate(R.id.nav_request)
+            }
             true
         }
 
@@ -217,7 +225,7 @@ class MainActivity : AppCompatActivity() {
                 "View Current Location in Map",
                 Toast.LENGTH_SHORT
             ).show()
-
+            navController.navigateUp()
             navController.navigate(R.id.nav_profile)
             true
         }

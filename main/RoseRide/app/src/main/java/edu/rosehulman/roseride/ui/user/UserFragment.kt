@@ -15,7 +15,7 @@ import com.google.firebase.ktx.Firebase
 import edu.rosehulman.roseride.Constants
 import edu.rosehulman.roseride.R
 import edu.rosehulman.roseride.databinding.FragmentUserBinding
-import edu.rosehulman.roseride.ui.model.UserViewModel
+import edu.rosehulman.roseride.model.UserViewModel
 
 
 class UserFragment : Fragment() {

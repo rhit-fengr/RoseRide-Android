@@ -14,7 +14,6 @@
     <fragment
         android:id="@+id/nav_splash"
         android:name="edu.rosehulman.roseride.ui.SplashFragment"
-        android:label="@string/menu_rides"
         tools:layout="@layout/fragment_splash" />
 
     <fragment
@@ -38,44 +37,44 @@
     //new
 
     <fragment
-        android:id="@+id/navigation_history"
+        android:id="@+id/nav_history"
         android:name="edu.rosehulman.roseride.ui.historyList.HistoryListFragment"
         android:label="History"
         tools:layout="@layout/fragment_history_list" />
 
     <fragment
-        android:id="@+id/navigation_request_add"
+        android:id="@+id/nav_request_add"
         android:name="edu.rosehulman.roseride.ui.request.RequestAddFragment"
         android:label="Add"
         tools:layout="@layout/fragment_request_add" />
 
     <fragment
-        android:id="@+id/navigation_request_edit"
+        android:id="@+id/nav_request_edit"
         android:name="edu.rosehulman.roseride.ui.request.RequestEditFragment"
         android:label="@string/menu_requests"
         tools:layout="@layout/fragment_request_edit" />
 
     <fragment
-        android:id="@+id/navigation_request_detail"
+        android:id="@+id/nav_request_detail"
         android:name="edu.rosehulman.roseride.ui.request.RequestDetailFragment"
         android:label="@string/menu_requests"
         tools:layout="@layout/fragment_request_edit" />
 
     <fragment
-        android:id="@+id/navigation_ride_add"
-        android:name="edu.rosehulman.roseride.ui.RideAddFragment"
+        android:id="@+id/nav_ride_add"
+        android:name="edu.rosehulman.roseride.ui.ride.RideAddFragment"
         android:label="@string/menu_rides"
         tools:layout="@layout/fragment_ride_add" />
 
     <fragment
-        android:id="@+id/navigation_ride_edit"
-        android:name="edu.rosehulman.roseride.ui.RideEditFragment"
+        android:id="@+id/nav_ride_edit"
+        android:name="edu.rosehulman.roseride.ui.ride.RideEditFragment"
         android:label="@string/menu_rides"
         tools:layout="@layout/fragment_ride_edit" />
 
     <fragment
-        android:id="@+id/navigation_ride_detail"
-        android:name="edu.rosehulman.roseride.ui.RideDetailFragment"
+        android:id="@+id/nav_ride_detail"
+        android:name="edu.rosehulman.roseride.ui.ride.RideDetailFragment"
         android:label="@string/menu_rides"
         tools:layout="@layout/fragment_ride_detail" />
 

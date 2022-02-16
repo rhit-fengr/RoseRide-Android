@@ -166,7 +166,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Driver:"/>
+                android:text="Sharable:"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -176,25 +176,30 @@
             android:layout_weight="50">
             <TextView
                 android:textSize="16sp"
-                android:id="@+id/driver_answer"
+                android:id="@+id/sharable_answer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Jordan McRonalds"/>
-
-            <ImageButton
-                android:id="@+id/driver_profile"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="3dp"
-                android:layout_marginRight="15dp"
-                android:src="@drawable/ic_baseline_person_24"/>
+                android:text="Off"/>
         </RelativeLayout>
     </LinearLayout>
 
+
+    <TextView
+        android:layout_marginTop="25dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="# of Passengers"/>
+    <Spinner
+
+        android:id="@+id/spinner2"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:entries="@array/city_list" />
+
     <Button
         android:id="@+id/request_accept_button"
-        android:layout_marginTop="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Accept"/>

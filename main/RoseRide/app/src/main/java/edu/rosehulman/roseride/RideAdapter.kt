@@ -12,10 +12,12 @@ import androidx.navigation.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.color.MaterialColors
-import edu.rosehulman.roseride.ui.model.History
-import edu.rosehulman.roseride.ui.model.HistoryViewModel
-import edu.rosehulman.roseride.ui.model.Ride
-import edu.rosehulman.roseride.ui.model.RideViewModel
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import edu.rosehulman.roseride.model.History
+import edu.rosehulman.roseride.model.HistoryViewModel
+import edu.rosehulman.roseride.model.Ride
+import edu.rosehulman.roseride.model.RideViewModel
 import edu.rosehulman.roseride.ui.rideList.RideListFragment
 import java.text.SimpleDateFormat
 import java.util.*
@@ -52,7 +54,7 @@ class RideAdapter(fragment: RideListFragment) : RecyclerView.Adapter<RideAdapter
             itemView.setOnClickListener{
                 // navigate
                 model.updateCurrentPos(adapterPosition)
-                itemView.findNavController().navigate(R.id.navigation_ride_detail, null,
+                itemView.findNavController().navigate(R.id.nav_ride_detail, null,
                     navOptions {
                         anim {
                             enter = android.R.anim.slide_in_left
@@ -62,7 +64,8 @@ class RideAdapter(fragment: RideListFragment) : RecyclerView.Adapter<RideAdapter
             }
 
             editbtn.setOnClickListener {
-                itemView.findNavController().navigate(R.id.navigation_ride_edit, null,
+                model.updateCurrentPos(adapterPosition)
+                itemView.findNavController().navigate(R.id.nav_ride_edit, null,
                     navOptions {
                         anim {
                             enter = android.R.anim.slide_in_left
@@ -81,11 +84,10 @@ class RideAdapter(fragment: RideListFragment) : RecyclerView.Adapter<RideAdapter
         }
 
         fun bind(r: Ride) {
-
-            if(MainActivity.driverMode && r.sharable){
+            editbtn.visibility=View.GONE
+            if(MainActivity.driverMode && model.getCurrentRide().driver.equals(Firebase.auth.uid)){
+                Log.d("whatthe", model.getCurrentRide().driver)
                 editbtn.visibility=View.VISIBLE
-            }else{
-                editbtn.visibility=View.GONE
             }
 
             title.text = r.title

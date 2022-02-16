@@ -15,10 +15,9 @@ import com.google.android.material.timepicker.TimeFormat
 import edu.rosehulman.roseride.Constants
 import edu.rosehulman.roseride.R
 import edu.rosehulman.roseride.databinding.FragmentRequestEditBinding
-import edu.rosehulman.roseride.ui.model.Address
-import edu.rosehulman.roseride.ui.model.RequestViewModel
+import edu.rosehulman.roseride.model.Address
+import edu.rosehulman.roseride.model.RequestViewModel
 import java.text.SimpleDateFormat
-import java.sql.Time
 import java.sql.Date
 
 
@@ -69,7 +68,7 @@ class RequestEditFragment : Fragment(){
                 )
 
                 updateView()
-                findNavController().navigate(R.id.navigation_request_detail)
+                findNavController().navigate(R.id.nav_request_detail)
             }
         binding.timeButton
             .setOnClickListener(){
@@ -91,7 +90,7 @@ class RequestEditFragment : Fragment(){
 
 //                    Toast.makeText(requireContext(), s, Toast.LENGTH_LONG).show()
                     Snackbar.make(requireView(), s, Snackbar.LENGTH_SHORT).setAction("continue"){
-                        findNavController().navigate(R.id.navigation_request_detail)
+                        findNavController().navigate(R.id.nav_request_detail)
                     }.setAnchorView(requireActivity().findViewById(R.id.nav_view))
                         .show()
 
@@ -112,7 +111,7 @@ class RequestEditFragment : Fragment(){
                     val s = dateFormatter.format(Date(it+86400000))
 //                    Toast.makeText(requireContext(), s, Toast.LENGTH_LONG).show()
                     Snackbar.make(requireView(), s, Snackbar.LENGTH_SHORT).setAction("continue"){
-                        findNavController().navigate(R.id.navigation_request_detail)
+                        findNavController().navigate(R.id.nav_request_detail)
                     }.setAnchorView(requireActivity().findViewById(R.id.nav_view))
                         .show()
                     binding.dateAnswer.text = s
@@ -124,12 +123,13 @@ class RequestEditFragment : Fragment(){
 
     private fun updateView() {
         Log.d(Constants.TAG,"in detail update view")
-        binding.requestName.setText(model.getCurrentRequest().title)
-        binding.pickUpAddressAnswer.setText(model.getCurrentRequest().pickUpAddr.toString())
-        binding.destinationAddressAnswer.setText(model.getCurrentRequest().destinationAddr.toString())
-        binding.dateAnswer.setText(model.getCurrentRequest().setOffDate)
-        binding.timeAnswer.setText(model.getCurrentRequest().setOffTime.substring(0,model.getCurrentRequest().setOffTime.length-3))
-        binding.minPrice.setText(model.getCurrentRequest().minPrice.toString())
-        binding.maxPrice.setText(model.getCurrentRequest().maxPrice.toString())
+        val current = model.getCurrentRequest()
+        binding.requestName.setText(current.title)
+        binding.pickUpAddressAnswer.setText(current.pickUpAddr.toString())
+        binding.destinationAddressAnswer.setText(current.destinationAddr.toString())
+        binding.dateAnswer.setText(current.setOffDate)
+        binding.timeAnswer.setText(current.setOffTime.substring(0,model.getCurrentRequest().setOffTime.length-3))
+        binding.minPrice.setText(current.minPrice.toString())
+        binding.maxPrice.setText(current.maxPrice.toString())
     }
 }

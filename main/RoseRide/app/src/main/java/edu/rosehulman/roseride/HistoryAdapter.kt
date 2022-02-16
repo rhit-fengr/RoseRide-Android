@@ -7,8 +7,8 @@ import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import edu.rosehulman.roseride.ui.historyList.HistoryListFragment
-import edu.rosehulman.roseride.ui.model.History
-import edu.rosehulman.roseride.ui.model.HistoryViewModel
+import edu.rosehulman.roseride.model.History
+import edu.rosehulman.roseride.model.HistoryViewModel
 
 class HistoryAdapter (fragment: HistoryListFragment) : RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
     val model = ViewModelProvider(fragment.requireActivity()).get(HistoryViewModel::class.java)

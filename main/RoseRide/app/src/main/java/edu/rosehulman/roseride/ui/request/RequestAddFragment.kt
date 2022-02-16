@@ -15,18 +15,17 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import edu.rosehulman.roseride.Constants
 import edu.rosehulman.roseride.R
+import edu.rosehulman.roseride.databinding.FragmentRequestAddBinding
 import edu.rosehulman.roseride.databinding.FragmentRequestEditBinding
-import edu.rosehulman.roseride.ui.model.Address
-import edu.rosehulman.roseride.ui.model.Request
-import edu.rosehulman.roseride.ui.model.RequestViewModel
-import edu.rosehulman.roseride.ui.model.User
+import edu.rosehulman.roseride.model.Address
+import edu.rosehulman.roseride.model.Request
+import edu.rosehulman.roseride.model.RequestViewModel
 import java.sql.Date
-import java.sql.Time
 import java.text.SimpleDateFormat
 
 class RequestAddFragment : Fragment() {
     private lateinit var model: RequestViewModel
-    private lateinit var binding: FragmentRequestEditBinding
+    private lateinit var binding: FragmentRequestAddBinding
     private var title = ""
     private var pAddr = "street, city, zip, state"
     private var dAddr = "street, city, zip, state"
@@ -34,16 +33,16 @@ class RequestAddFragment : Fragment() {
     private var time = "00:00"
     private var minPrice = "-1"
     private var maxPrice = "-1"
+    private var sharable = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        model =
-            ViewModelProvider(requireActivity()).get(RequestViewModel::class.java)
+        model = ViewModelProvider(requireActivity()).get(RequestViewModel::class.java)
 
-        binding = FragmentRequestEditBinding.inflate(inflater, container, false)
+        binding = FragmentRequestAddBinding.inflate(inflater, container, false)
         setupButtons()
         updateView()
         return binding.root
@@ -59,7 +58,7 @@ class RequestAddFragment : Fragment() {
                 time = binding.timeAnswer.text.toString() // might consider to add a timepicker here instead
                 minPrice = binding.minPrice.text.toString()
                 maxPrice = binding.maxPrice.text.toString()
-
+                sharable = binding.sharableToggle.isChecked
 
                 model.addRequest(
                     Request(
@@ -72,7 +71,7 @@ class RequestAddFragment : Fragment() {
                         Address(dAddr),
                         minPrice.toDouble(),
                         maxPrice.toDouble(),
-                        false
+                        sharable
                     )
                 )
 

@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
@@ -13,8 +12,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.color.MaterialColors
-import edu.rosehulman.roseride.ui.model.Request
-import edu.rosehulman.roseride.ui.model.RequestViewModel
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import edu.rosehulman.roseride.model.Request
+import edu.rosehulman.roseride.model.RequestViewModel
 import edu.rosehulman.roseride.ui.requestList.RequestListFragment
 
 class RequestAdapter(fragment: RequestListFragment) : RecyclerView.Adapter<RequestAdapter.RequestViewHolder>() {
@@ -33,16 +34,11 @@ class RequestAdapter(fragment: RequestListFragment) : RecyclerView.Adapter<Reque
 
 
         init {
-            if(MainActivity.driverMode){
-                editbtn.visibility=View.GONE
-            }else{
-                editbtn.visibility=View.VISIBLE
-            }
 
             itemView.setOnClickListener{
                 // navigate
                 model.updateCurrentPos(adapterPosition)
-                itemView.findNavController().navigate(R.id.navigation_request_detail, null,
+                itemView.findNavController().navigate(R.id.nav_request_detail, null,
                     navOptions {
                         anim {
                             enter = android.R.anim.slide_in_left
@@ -52,7 +48,8 @@ class RequestAdapter(fragment: RequestListFragment) : RecyclerView.Adapter<Reque
             }
 
             editbtn.setOnClickListener {
-                itemView.findNavController().navigate(R.id.navigation_request_edit, null,
+                model.updateCurrentPos(adapterPosition)
+                itemView.findNavController().navigate(R.id.nav_request_edit, null,
                     navOptions {
                         anim {
                             enter = android.R.anim.slide_in_left
@@ -71,6 +68,13 @@ class RequestAdapter(fragment: RequestListFragment) : RecyclerView.Adapter<Reque
         }
 
         fun bind(r: Request) {
+
+            if(MainActivity.driverMode || r.user != Firebase.auth.uid){
+                editbtn.visibility=View.GONE
+            }else{
+                editbtn.visibility=View.VISIBLE
+            }
+
             title.text = r.title
             address.text = "Address: "+r.destinationAddr.toString()
             time.text = "Set-off Time: "+ r.setOffDate.toString() + " " + r.setOffTime.toString().substring(0, r.setOffTime.toString().length-3)

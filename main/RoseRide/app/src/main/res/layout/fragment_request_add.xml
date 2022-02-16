@@ -198,7 +198,7 @@
         android:layout_height="wrap_content"
         android:weightSum="100"
         android:layout_below="@+id/price_title"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="10dp">
         <RelativeLayout
             android:layout_margin="5dp"
             android:layout_width="0dp"
@@ -238,13 +238,31 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/toggler"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sharable"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_below="@+id/double_price"/>
+
+    <ToggleButton
+        android:id="@+id/sharable_toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toggler"
+        android:layout_centerHorizontal="true"/>
+
     <Button
-        android:paddingHorizontal="50dp"
+        android:layout_marginTop="20dp"
         android:id="@+id/request_edit_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit"
-        android:layout_below="@id/double_price"
-        android:layout_centerHorizontal="true"/>
+        android:layout_below="@id/sharable_toggle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"/>
 
 </RelativeLayout>

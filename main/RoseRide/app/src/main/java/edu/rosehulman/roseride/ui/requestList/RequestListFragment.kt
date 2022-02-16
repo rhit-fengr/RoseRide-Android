@@ -9,12 +9,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import edu.rosehulman.roseride.MainActivity
 import edu.rosehulman.roseride.MainActivity.Companion.driverMode
+import edu.rosehulman.roseride.MainActivity.Companion.onlyUser
 import edu.rosehulman.roseride.R
 import edu.rosehulman.roseride.RequestAdapter
 import edu.rosehulman.roseride.databinding.FragmentRequestListBinding
-import edu.rosehulman.roseride.ui.model.Request
 
 class RequestListFragment : Fragment() {
 
@@ -44,21 +43,40 @@ class RequestListFragment : Fragment() {
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
 
-        if(driverMode){
-            adapter.addAllListener(fragmentName)
-            binding.fab.visibility=View.GONE
-        }else{
-            adapter.addOneListener(fragmentName)
-            binding.fab.visibility=View.VISIBLE
-        }
+//        if(driverMode){
+//            adapter.addAllListener(fragmentName)
+//            binding.fab.visibility=View.GONE
+//        }else{
+//            adapter.addOneListener(fragmentName)
+//            binding.fab.visibility=View.VISIBLE
+//        }
+
+        checkFab()
+        checkOne()
 
         binding.fab.setOnClickListener{
-            findNavController().navigate(R.id.navigation_request_add)
+            findNavController().navigate(R.id.nav_request_add)
         }
 
 
 
         return binding.root
+    }
+
+    fun checkOne() {
+        if(!onlyUser){
+            adapter.addAllListener(fragmentName)
+        }else{
+            adapter.addOneListener(fragmentName)
+        }
+    }
+
+    fun checkFab() {
+        if(driverMode){
+            binding.fab.visibility=View.GONE
+        }else{
+            binding.fab.visibility=View.VISIBLE
+        }
     }
 
     override fun onDestroyView() {

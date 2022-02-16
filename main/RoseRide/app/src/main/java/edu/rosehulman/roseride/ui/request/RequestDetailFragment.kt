@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -12,16 +13,16 @@ import com.google.firebase.ktx.Firebase
 import edu.rosehulman.roseride.MainActivity
 import edu.rosehulman.roseride.R
 import edu.rosehulman.roseride.databinding.FragmentRequestDetailBinding
-import edu.rosehulman.roseride.ui.model.RequestViewModel
-import edu.rosehulman.roseride.ui.model.Ride
-import edu.rosehulman.roseride.ui.model.RideViewModel
-import edu.rosehulman.roseride.ui.model.User
+import edu.rosehulman.roseride.model.RequestViewModel
+import edu.rosehulman.roseride.model.Ride
+import edu.rosehulman.roseride.model.RideViewModel
 
 
 class RequestDetailFragment : Fragment(){
     private lateinit var binding: FragmentRequestDetailBinding
     private lateinit var model: RequestViewModel
     private lateinit var rideModel: RideViewModel
+    var numberOfPassengers = 1;
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,10 +40,12 @@ class RequestDetailFragment : Fragment(){
 
     private fun updateView() {
         if(!MainActivity.driverMode){
+            binding.sharableAnswer.visibility=View.GONE
             binding.requestAcceptButton.visibility=View.GONE
             binding.requestDeleteBtn.visibility=View.VISIBLE
         }
         else{
+            binding.sharableAnswer.visibility=View.VISIBLE
             binding.requestAcceptButton.visibility=View.VISIBLE
             binding.requestDeleteBtn.visibility=View.GONE
         }
@@ -51,25 +54,34 @@ class RequestDetailFragment : Fragment(){
         binding.setOffTime.text = model.getCurrentRequest().setOffDate + "   " + model.getCurrentRequest().setOffTime.substring(0,  model.getCurrentRequest().setOffTime.length-3)
         binding.destinationAddressAnswer.text = model.getCurrentRequest().destinationAddr.toStringBeautified()
         binding.priceRangeAnswer.text = "$" + model.getCurrentRequest().minPrice + " ~ " + model.getCurrentRequest().maxPrice
-        binding.driverAnswer.text = "TBA"
+        binding.sharableAnswer.text = if (model.getCurrentRequest().sharable) "On" else "Off"
     }
 
     private fun setupButtons() {
+        binding.spinner2?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                numberOfPassengers = position + 1
+            }
+
+        }
         binding.requestAcceptButton.setOnClickListener {
             val request = model.getCurrentRequest()
             val passengers = listOf(request.user)
             var ride = Ride(
-                request.title,
-                Firebase.auth.uid!!,
-                request.setOffTime,
-                request.setOffDate,
-                request.pickUpAddr,
-                request.destinationAddr,
-                passengers,
-                request.minPrice,
-                request.numOfPassengers,
-                false,
-                false)
+                title = request.title,
+                driver = Firebase.auth.uid!!,
+                setOffTime = request.setOffTime,
+                setOffDate =  request.setOffDate,
+                pickUpAddr = request.pickUpAddr,
+                destinationAddr = request.destinationAddr,
+                passengers = passengers,
+                costPerPerson = request.minPrice,
+                numOfSlots = numberOfPassengers,
+                sharable = request.sharable,
+                isSelected = false)
             rideModel.addRide(ride)
             model.removeCurrentRequest()
             findNavController().navigate(R.id.nav_request)

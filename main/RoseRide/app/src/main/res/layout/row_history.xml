@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
-    android:layout_margin="4dp">
+    android:layout_margin="4dp"
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/row_history_title"
@@ -61,15 +62,6 @@
             android:textStyle="bold"/>
 
     </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/row_history_rightImage"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:contentDescription="@string/user_icon_description"
-        android:src="@drawable/ic_baseline_edit_24" />
 
 
 </RelativeLayout>

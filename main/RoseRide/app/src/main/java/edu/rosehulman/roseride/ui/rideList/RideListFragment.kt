@@ -15,6 +15,7 @@ import edu.rosehulman.roseride.MainActivity
 import edu.rosehulman.roseride.R
 import edu.rosehulman.roseride.RideAdapter
 import edu.rosehulman.roseride.databinding.FragmentRideListBinding
+import edu.rosehulman.roseride.ui.requestList.RequestListFragment
 
 class RideListFragment : Fragment() {
 
@@ -41,19 +42,36 @@ class RideListFragment : Fragment() {
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
 
-        if(MainActivity.driverMode){
-            binding.fab.visibility=View.VISIBLE
-            adapter.addOneListener(fragmentName)
-        }else{
-            binding.fab.visibility=View.GONE
-            adapter.addAllListener(fragmentName)
-        }
+//        if(MainActivity.driverMode){
+//            binding.fab.visibility=View.VISIBLE
+//        }else{
+//            binding.fab.visibility=View.GONE
+//        }
+
+        checkFab()
+        checkOne()
 
         binding.fab.setOnClickListener{
-            findNavController().navigate(R.id.navigation_ride_add)
+            findNavController().navigate(R.id.nav_ride_add)
         }
 
         return binding.root
+    }
+
+    fun checkOne() {
+        if(!MainActivity.onlyUser){
+            adapter.addAllListener(RequestListFragment.fragmentName)
+        }else{
+            adapter.addOneListener(RequestListFragment.fragmentName)
+        }
+    }
+
+    fun checkFab() {
+        if(MainActivity.driverMode){
+            binding.fab.visibility=View.VISIBLE
+        }else{
+            binding.fab.visibility=View.GONE
+        }
     }
 
     override fun onDestroyView() {
