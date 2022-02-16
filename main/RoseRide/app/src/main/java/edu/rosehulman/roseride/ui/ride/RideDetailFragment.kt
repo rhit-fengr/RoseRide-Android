@@ -43,7 +43,17 @@ class RideDetailFragment : Fragment(){
 
         binding.rideRequestBtn.setOnClickListener {
             val ride = model.getCurrentRide()
-//            model.updateCurrentRide(ride.title,ride.setOffTime,ride.setOffDate,ride.pickUpAddr,ride.addr,ride.passengers.plus(current user here),ride.costPerPerson,ride.numOfSlots,ride.isSelected)
+            model.updateCurrentRide(
+                title = ride.title,
+                setOffTime = ride.setOffTime,
+                setOffDate = ride.setOffDate,
+                pickUpAddr = ride.pickUpAddr,
+                addr = ride.destinationAddr,
+                passengers = ride.passengers.plus(Firebase.auth.uid) as List<String>,
+                cost = ride.costPerPerson,
+                numOfSlots = ride.numOfSlots,
+                isSelected = ride.isSelected,
+                isSharable = ride.isSelected)
             findNavController().navigate(R.id.nav_ride)
         }
 
@@ -59,7 +69,12 @@ class RideDetailFragment : Fragment(){
     }
 
     private fun updateView() {
-        if(!MainActivity.driverMode && model.getCurrentRide().numOfSlots > model.getCurrentRide().passengers.size){
+        if(!MainActivity.driverMode && model.getCurrentRide().driver.equals(Firebase.auth.uid)){
+            binding.rideDeleteBtn.visibility=View.GONE
+            binding.rideRequestBtn.visibility=View.GONE
+            binding.rideLeaveBtn.visibility=View.GONE
+        }
+        else if(!MainActivity.driverMode && !model.getCurrentRide().passengers.contains(Firebase.auth.uid) && model.getCurrentRide().numOfSlots > model.getCurrentRide().passengers.size){
             binding.rideDeleteBtn.visibility=View.GONE
             binding.rideRequestBtn.visibility=View.VISIBLE
             binding.rideLeaveBtn.visibility=View.GONE
@@ -69,7 +84,7 @@ class RideDetailFragment : Fragment(){
             binding.rideRequestBtn.visibility=View.GONE
             binding.rideLeaveBtn.visibility=View.GONE
         }
-        else if (!MainActivity.driverMode && model.getCurrentRide().sharable && model.getCurrentRide().passengers.contains(Firebase.auth.uid)){
+        else if (!MainActivity.driverMode && model.getCurrentRide().passengers.contains(Firebase.auth.uid)){
             binding.rideDeleteBtn.visibility=View.GONE
             binding.rideRequestBtn.visibility=View.GONE
             binding.rideLeaveBtn.visibility=View.VISIBLE

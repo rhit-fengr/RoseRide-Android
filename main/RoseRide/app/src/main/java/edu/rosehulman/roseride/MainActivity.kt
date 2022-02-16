@@ -197,6 +197,7 @@ class MainActivity : AppCompatActivity() {
                 ).show()
             }
             navController.navigateUp()
+            navController.navigateUp()
             navController.navigate(R.id.nav_profile)
 
             true

@@ -120,9 +120,10 @@ class RideViewModel : ViewModel() {
     }
 
     fun removeUserFromRide() {
-        rides[currentPos].passengers.filter {
-            it == Firebase.auth.uid
+        rides[currentPos].passengers = rides[currentPos].passengers.filter {
+            it != Firebase.auth.uid
         }
+        ref.document(getCurrentRide().id).set(getCurrentRide())
     }
 
     fun size() = rides.size
