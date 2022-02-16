@@ -37,6 +37,11 @@
     //new
 
     <fragment
+        android:id="@+id/nav_other_user"
+        android:name="edu.rosehulman.roseride.ui.user.UserOtherFragment"
+        tools:layout="@layout/fragment_user_other" />
+
+    <fragment
         android:id="@+id/nav_history"
         android:name="edu.rosehulman.roseride.ui.historyList.HistoryListFragment"
         android:label="History"

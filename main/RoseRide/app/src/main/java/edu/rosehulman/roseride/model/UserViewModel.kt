@@ -14,6 +14,8 @@ class UserViewModel: ViewModel() {
 
     var user: User? = null
 
+    var checkingUser = ""
+
     fun hasCompletedSetup() = user?.hasCompletedSetup?: false
 
 

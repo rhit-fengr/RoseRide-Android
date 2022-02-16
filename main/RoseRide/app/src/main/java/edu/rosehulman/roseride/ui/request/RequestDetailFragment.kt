@@ -39,10 +39,20 @@ class RequestDetailFragment : Fragment(){
     }
 
     private fun updateView() {
-        if(!MainActivity.driverMode){
+        if(!MainActivity.driverMode && model.getCurrentRequest().user.equals(Firebase.auth.uid)){
             binding.sharableAnswer.visibility=View.GONE
             binding.requestAcceptButton.visibility=View.GONE
             binding.requestDeleteBtn.visibility=View.VISIBLE
+        }
+        else if(!MainActivity.driverMode && !model.getCurrentRequest().user.equals(Firebase.auth.uid)){
+            binding.sharableAnswer.visibility=View.GONE
+            binding.requestAcceptButton.visibility=View.GONE
+            binding.requestDeleteBtn.visibility=View.GONE
+        }
+        else if(MainActivity.driverMode && !model.getCurrentRequest().sharable){
+            binding.sharableAnswer.visibility=View.GONE
+            binding.requestAcceptButton.visibility=View.VISIBLE
+            binding.requestDeleteBtn.visibility=View.GONE
         }
         else{
             binding.sharableAnswer.visibility=View.VISIBLE

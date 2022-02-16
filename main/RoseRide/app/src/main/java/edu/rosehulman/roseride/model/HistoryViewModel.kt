@@ -59,7 +59,6 @@ class HistoryViewModel : ViewModel() {
                     Log.d(Constants.TAG, "Error: $error")
                     return@addSnapshotListener
                 }
-                histories.clear()
                 snapshot?.documents?.forEach{
                     histories.add(History.from(it))
 
