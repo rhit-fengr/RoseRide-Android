@@ -85,14 +85,15 @@ class RideAdapter(fragment: RideListFragment) : RecyclerView.Adapter<RideAdapter
 
         fun bind(r: Ride) {
             editbtn.visibility=View.GONE
-            if(MainActivity.driverMode && model.getCurrentRide().driver.equals(Firebase.auth.uid)){
+            if(MainActivity.driverMode){
                 Log.d(Constants.TAG, model.getCurrentRide().driver)
-                editbtn.visibility=View.VISIBLE
+                      if(model.size()>model.currentPos && model.getCurrentRide().driver == Firebase.auth.uid)
+                        editbtn.visibility=View.VISIBLE
             }
 
             title.text = r.title
             dAddr.text = "Address: "+r.destinationAddr.toString()
-            time.text = "Set-off Time: "+ r.setOffDate.toString() + " " + r.setOffTime.toString().substring(0, r.setOffTime.toString().length-3)
+            time.text = "Set-off Time: "+ r.setOffDate + " " + r.setOffTime.substring(0, r.setOffTime.length-3)
             sAddr.text = "Set-off Address: "+r.pickUpAddr.toString()
             cost.text = "Cost/Person ($): "+r.costPerPerson.toString()
             numOfSlots.text = "Available slots: "+r.numOfSlots.toString()

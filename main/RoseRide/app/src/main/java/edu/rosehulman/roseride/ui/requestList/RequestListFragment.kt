@@ -66,7 +66,6 @@ class RequestListFragment : Fragment() {
     }
 
     fun checkOne() {
-        adapter.removeListener(fragmentName)
         if(!onlyUser){
             adapter.addAllListener(fragmentName)
         }else{

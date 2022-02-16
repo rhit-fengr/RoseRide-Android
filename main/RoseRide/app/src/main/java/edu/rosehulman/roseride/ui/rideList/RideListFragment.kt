@@ -60,7 +60,6 @@ class RideListFragment : Fragment() {
     }
 
     fun checkOne() {
-        adapter.removeListener(fragmentName)
         if(!MainActivity.onlyUser){
             adapter.addAllListener(fragmentName)
         }else{
