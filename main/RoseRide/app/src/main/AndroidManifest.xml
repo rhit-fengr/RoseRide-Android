@@ -29,6 +29,24 @@
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
+        <activity android:name=".SearchResultsActivity"
+            android:exported="false">
+        <intent-filter>
+            <action android:name="android.intent.action.SEARCH" />
+        </intent-filter>
+        </activity>
+        <activity android:name=".SearchResultsActivity"
+            android:exported="false">
+        <intent-filter>
+            <action android:name="android.intent.action.SEARCH" />
+        </intent-filter>
+        </activity>
+        <activity android:name=".SearchResultsActivity"
+            android:exported="false">
+        <intent-filter>
+            <action android:name="android.intent.action.SEARCH" />
+        </intent-filter>
+        </activity>
         <activity android:name="edu.rosehulman.rosefire.WebLoginActivity"></activity>
 
         <meta-data

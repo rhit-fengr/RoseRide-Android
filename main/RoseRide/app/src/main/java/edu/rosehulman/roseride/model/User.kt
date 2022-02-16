@@ -1,7 +1,5 @@
 package edu.rosehulman.roseride.model
 
-import com.google.firebase.firestore.DocumentSnapshot
-
 data class User(var name: String="",
                 var phone: String="",
                 var email: String="",
@@ -13,9 +11,5 @@ data class User(var name: String="",
 
     companion object {
         const val COLLECTION_PATH = "users"
-        fun from(snapshot: DocumentSnapshot):User {
-            val r = snapshot.toObject(User::class.java)!! // data only
-            return r
-        }
     }
 }
